@@ -19,6 +19,10 @@ public class Scripture {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    Scripture() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getBook() {
         return book;
     }
@@ -48,4 +52,16 @@ public class Scripture {
         return book + " " + chapter + ":" + verse;
     }
 
+    public String toFileString() {
+        return book + "," + chapter + "," + verse;
+    }
+
+    public void loadFromFileString(String str) {
+        // TODO: Validation should be done here
+        String[] parts = str.split(",");
+
+        book = parts[0];
+        chapter = Integer.parseInt(parts[1]);
+        verse = Integer.parseInt(parts[2]);
+    }
 }
