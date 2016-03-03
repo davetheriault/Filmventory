@@ -46,7 +46,7 @@ public class FileScriptureHandler implements ScriptureDataHandler {
                String line;
 
                while ((line = reader.readLine()) != null) {
-                    Scripture scripture = new Scripture();
+                    Scripture scripture = new Scripture(null, 0, 0);
                     scripture.loadFromFileString(line);
                     list.add(scripture);
                }

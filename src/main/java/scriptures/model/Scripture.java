@@ -11,17 +11,16 @@ package scriptures.model;
  */
 public class Scripture {
 
+    public Scripture(String book, int chapter, int verse) {
+        this.book = book;
+        this.chapter = chapter;
+        this.verse = verse;
+    }
+
     private String book;
     private int chapter;
     private int verse;
 
-    public Scripture(String proverbs, int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    Scripture() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public String getBook() {
         return book;
