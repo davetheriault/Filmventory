@@ -3,6 +3,9 @@
     Created on : Mar 2, 2016, 8:51:09 PM
     Author     : Theriault
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
+
 <%@ page import="java.util.List" %>
 
 <%@ page import="java.util.ArrayList" %>
@@ -22,12 +25,11 @@
 
             Scriptures:<br /><br />
 
-            <%
-                for (String scripture : 
-                        (List<String>) request.getAttribute("scriptures")) {
-                    out.println(scripture + "<br />");
-                }
-            %>
+            <c:forEach var="scripture" items="${scriptures}">
+
+                ${scripture}<br />
+
+            </c:forEach>
         </div>
     </body>
 </html>
