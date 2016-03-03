@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import scriptures.model.Scripture;
 
 /**
  *
@@ -60,11 +61,11 @@ public class ShowList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<String> scriptures = new ArrayList<String>();
-        scriptures.add("Proverbs 3:5");
-        scriptures.add("Doc. &amp; Cov. 112:10");
-        scriptures.add("John 7:17");
+
+        List<Scripture> scriptures = new ArrayList<>();
+        scriptures.add(new Scripture("Proverbs", 3, 5));
+        scriptures.add(new Scripture("Doc. & Cov.", 112, 10));
+        scriptures.add(new Scripture("John", 7, 17));
 
         request.setAttribute("scriptures", scriptures);
 
@@ -72,7 +73,6 @@ public class ShowList extends HttpServlet {
 
     }
 
-    
     /**
      * Returns a short description of the servlet.
      *
