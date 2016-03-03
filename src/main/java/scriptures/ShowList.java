@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import scriptures.model.HardCodedScriptureHandler;
 import scriptures.model.Scripture;
+import scriptures.model.ScriptureDataHandler;
 
 /**
  *
@@ -62,12 +64,8 @@ public class ShowList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Scripture> scriptures = new ArrayList<>();
-        scriptures.add(new Scripture("Proverbs", 3, 5));
-        scriptures.add(new Scripture("Doc. & Cov.", 112, 10));
-        scriptures.add(new Scripture("John", 7, 17));
-
-        request.setAttribute("scriptures", scriptures);
+        ScriptureDataHandler handler = new HardCodedScriptureHandler();
+        request.setAttribute("scriptures", handler.getFavoriteScriptures());
 
         request.getRequestDispatcher("scripturelist.jsp").forward(request, response);
 
