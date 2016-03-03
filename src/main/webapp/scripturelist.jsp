@@ -23,7 +23,8 @@
             Scriptures:<br /><br />
 
             <%
-                for (String scripture : (List<String>) request.getAttribute("scriptures")) {
+                for (String scripture : 
+                        (List<String>) request.getAttribute("scriptures")) {
                     out.println(scripture + "<br />");
                 }
             %>
