@@ -17,22 +17,15 @@
     <body>
         <h1>Scripture List</h1>
 
-        <%
-            List<String> scriptures = new ArrayList<String>();
-            scriptures.add("Proverbs 3:5");
-            scriptures.add("Doc. &amp; Cov. 112:10");
-            scriptures.add("John 7:17");
-        %>
 
         <div>
 
             Scriptures:<br /><br />
 
             <%
-                for (String scripture : scriptures) {
+                for (String scripture : (List<String>) request.getAttribute("scriptures")) {
                     out.println(scripture + "<br />");
                 }
-
             %>
         </div>
     </body>
