@@ -7,11 +7,15 @@ package sessions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sessions.model.HardCodedPasswordHandler;
+import sessions.model.PasswordDataHandler;
+import sessions.model.User;
 
 /**
  *
@@ -51,14 +55,25 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if ((username.equals("david") && password.equals("password"))) {
+        PasswordDataHandler handler = new HardCodedPasswordHandler();
+
+        List<User> pwlist = handler.getAllPasswords();
+
+        Boolean valid = false;
+
+        for (User i : pwlist) {
+            if (i.getUsername() == username && i.getPassword() == password) {
+                valid = true;
+                break;
+            }
+        }
+        if (valid) {
             request.getSession().setAttribute("username", username);
             response.sendRedirect("home.jsp");
         } else {
-            String message = "Invalid Login";
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-
+        String message = "Invalid Login";
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 
