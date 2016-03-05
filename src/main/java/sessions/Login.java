@@ -67,12 +67,13 @@ public class Login extends HttpServlet {
                 break;
             }
         }
-        if (valid) {
+        if (valid == true) {
             request.getSession().setAttribute("username", username);
             response.sendRedirect("home.jsp");
         } else {
             String message = "Invalid Login";
             request.setAttribute("message", message);
+            request.setAttribute("valid", valid);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }

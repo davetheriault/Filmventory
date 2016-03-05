@@ -8,7 +8,8 @@
         <h1>Login Page</h1> 
         <center> 
             <h2>Sign in Details</h2> 
-            ${message}
+            ${message}<br>
+            ${valid}
             <form action="Login" method="post"> 
                 <br/>Username:<input type="text" name="username"> 
                 <br/>Password:<input type="password" name="password"> 
