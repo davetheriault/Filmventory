@@ -71,9 +71,9 @@ public class Login extends HttpServlet {
             request.getSession().setAttribute("username", username);
             response.sendRedirect("home.jsp");
         } else {
-        String message = "Invalid Login";
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+            String message = "Invalid Login";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 
