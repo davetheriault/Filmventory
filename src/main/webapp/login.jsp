@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html> 
     <head> 
@@ -9,7 +10,10 @@
         <center> 
             <h2>Sign in Details</h2> 
             ${message}<br>
-            ${valid}
+            ${valid}<br>
+            <c:forEach var="user" items="${pwlist}" >
+                ${user}<br>
+            </c:forEach>
             <form action="Login" method="post"> 
                 <br/>Username:<input type="text" name="username"> 
                 <br/>Password:<input type="password" name="password"> 

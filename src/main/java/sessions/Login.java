@@ -74,6 +74,7 @@ public class Login extends HttpServlet {
             String message = "Invalid Login";
             request.setAttribute("message", message);
             request.setAttribute("valid", valid);
+            request.setAttribute("pwlist", pwlist);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
