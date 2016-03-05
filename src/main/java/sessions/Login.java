@@ -68,7 +68,7 @@ public class Login extends HttpServlet {
         for (User i : pwlist) {
             names.add(i.getUsername());
             pwds.add(i.getPassword());
-            if (i.getUsername() == username && i.getPassword() == password) {
+            if (username.equals(i.getUsername()) && password.equals(i.getPassword())) {
                 valid = true;
                 break;
             }
