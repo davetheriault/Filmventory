@@ -62,12 +62,8 @@ public class Login extends HttpServlet {
         List<User> pwlist = handler.getAllPasswords();
 
         Boolean valid = false;
-        List<String> names = new ArrayList<>();
-        List<String> pwds = new ArrayList<>();
-        
+                
         for (User i : pwlist) {
-            names.add(i.getUsername());
-            pwds.add(i.getPassword());
             if (username.equals(i.getUsername()) && password.equals(i.getPassword())) {
                 valid = true;
                 break;
@@ -80,8 +76,6 @@ public class Login extends HttpServlet {
             String message = "Invalid Login";
             request.setAttribute("message", message);
             request.setAttribute("valid", valid);
-            request.setAttribute("users", names);
-            request.setAttribute("pws", pwds);
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
