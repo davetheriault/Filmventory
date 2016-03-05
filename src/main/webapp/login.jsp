@@ -11,8 +11,11 @@
             <h2>Sign in Details</h2> 
             ${message}<br>
             ${valid}<br>
-            <c:forEach var="user" items="${pwlist}" >
+            <c:forEach var="user" items="${users}" >
                 ${user}<br>
+            </c:forEach>
+            <c:forEach var="pw" items="${pws}" >
+                ${pw}<br>
             </c:forEach>
             <form action="Login" method="post"> 
                 <br/>Username:<input type="text" name="username"> 
