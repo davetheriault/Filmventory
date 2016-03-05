@@ -8,6 +8,8 @@ package sessions;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,8 +62,8 @@ public class Login extends HttpServlet {
         List<User> pwlist = handler.getAllPasswords();
 
         Boolean valid = false;
-        List<String> names = null;
-        List<String> pwds = null;
+        List<String> names = new ArrayList<>();
+        List<String> pwds = new ArrayList<>();
         
         for (User i : pwlist) {
             names.add(i.getUsername());
