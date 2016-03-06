@@ -12,7 +12,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
@@ -94,6 +96,8 @@ public class CreateUser extends HttpServlet {
                 SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
                 Cipher cipher = Cipher.getInstance("Blowfish");
                 cipher.init(Cipher.ENCRYPT_MODE, KS);
+                cipher.doFinal();
+                String pw = cipher.toString();
                 
                 PasswordHandler handler = new PasswordHandler("users.txt");
                 List<User> userlist = handler.getAllPasswords();
@@ -106,7 +110,7 @@ public class CreateUser extends HttpServlet {
                     }
                 }
                 if (exist.equals(true)) {
-                    User newUser = new User(username, cipher.toString());
+                    User newUser = new User(username, pw);
                     
                     handler.addUser(newUser);
                     
@@ -121,6 +125,10 @@ public class CreateUser extends HttpServlet {
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchPaddingException ex) {
+                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalBlockSizeException ex) {
+                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (BadPaddingException ex) {
                 Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
 

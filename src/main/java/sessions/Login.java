@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
@@ -69,6 +71,8 @@ public class Login extends HttpServlet {
             SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
             Cipher cipher = Cipher.getInstance("Blowfish");
             cipher.init(Cipher.ENCRYPT_MODE, KS);
+            cipher.doFinal();
+            String pass = cipher.toString();
             
             PasswordDataHandler handler = new PasswordHandler("users.txt");
             
@@ -91,7 +95,7 @@ public class Login extends HttpServlet {
                 response.sendRedirect("home.jsp");
             } else {
                 request.setAttribute("pw", pw);
-                request.setAttribute("cipher", cipher);
+                request.setAttribute("cipher", pass);
                 request.setAttribute("cipherString", cipher.toString());
                 String message = "Invalid Login";
                 request.setAttribute("message", message);
@@ -102,6 +106,10 @@ public class Login extends HttpServlet {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
