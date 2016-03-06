@@ -11,7 +11,7 @@
     </head>
     <body>
         <header class="w3-navbar w3-orange">
-            <div class="w3-lobster w3-large w3-padding">Java App-Nappimus</div>
+            <div class="w3-lobster w3-xlarge w3-padding">Java App-Nappimus</div>
             <nav>
                 
             </nav>
