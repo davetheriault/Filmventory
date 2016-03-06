@@ -1,8 +1,3 @@
-<%-- 
-    Document   : result
-    Created on : Mar 2, 2016, 7:16:58 PM
-    Author     : Theriault
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

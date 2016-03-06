@@ -1,4 +1,7 @@
-<% String title = "Register"; %>
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="title" scope="request" value="Register"/>
 <%@include file="includes/header.jsp" %>
         <h1>Sign Up</h1>
         <div>
