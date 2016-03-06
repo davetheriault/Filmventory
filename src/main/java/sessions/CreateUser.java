@@ -91,45 +91,27 @@ public class CreateUser extends HttpServlet {
 
         if (password.equals(confirm)) {
 
-            try {
-                
-                SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
-                Cipher cipher = Cipher.getInstance("Blowfish");
-                cipher.init(Cipher.ENCRYPT_MODE, KS);
-                cipher.doFinal();
-                String pw = cipher.toString();
-                
-                PasswordHandler handler = new PasswordHandler("users.txt");
-                List<User> userlist = handler.getAllPasswords();
-                Boolean exist = false;
-                
-                for (User i : userlist) {
-                    if (username.equals(i.getUsername())) {
-                        exist = true;
-                        break;
-                    }
+            PasswordHandler handler = new PasswordHandler("users.txt");
+            List<User> userlist = handler.getAllPasswords();
+            Boolean exist = false;
+            
+            for (User i : userlist) {
+                if (username.equals(i.getUsername())) {
+                    exist = true;
+                    break;
                 }
-                if (exist.equals(true)) {
-                    User newUser = new User(username, pw);
-                    
-                    handler.addUser(newUser);
-                    
-                    response.sendRedirect("login.jsp");
-                } else {
-                    String message = "Username Not Available";
-                    request.setAttribute("message", message);
-                    request.getRequestDispatcher("/register.jsp").forward(request, response);
-                }
-            } catch (InvalidKeyException ex) {
-                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchPaddingException ex) {
-                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalBlockSizeException ex) {
-                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BadPaddingException ex) {
-                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (exist.equals(false)) {
+                User newUser = new User(username, password);
+                
+                handler.addUser(newUser);
+                
+                response.sendRedirect("login.jsp");
+                
+            } else {
+                String message = "Username Not Available";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
 
         } else {

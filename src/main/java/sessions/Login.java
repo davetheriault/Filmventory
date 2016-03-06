@@ -64,53 +64,28 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
-            Cipher cipher = Cipher.getInstance("Blowfish");
-            cipher.init(Cipher.ENCRYPT_MODE, KS);
-            cipher.doFinal();
-            String pass = cipher.toString();
-            
-            PasswordDataHandler handler = new PasswordHandler("users.txt");
-            
-            List<User> pwlist = handler.getAllPasswords();
-            
-            Boolean valid = false;
-            String pw = "";
-            
-            for (User i : pwlist) {
-                if (username.equals(i.getUsername())) {
-                    pw = i.getPassword();
-                }
-                if (username.equals(i.getUsername()) && cipher.toString().equals(i.getPassword())) {
-                    valid = true;
-                    break;
-                }
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        PasswordDataHandler handler = new PasswordHandler("users.txt");
+        List<User> pwlist = handler.getAllPasswords();
+        Boolean valid = false;
+
+        for (User i : pwlist) {
+
+            if (username.equals(i.getUsername()) && password.equals(i.getPassword())) {
+                valid = true;
+                break;
             }
-            if (valid == true) {
-                request.getSession().setAttribute("username", username);
-                response.sendRedirect("home.jsp");
-            } else {
-                request.setAttribute("pw", pw);
-                request.setAttribute("cipher", pass);
-                request.setAttribute("cipherString", cipher.toString());
-                String message = "Invalid Login";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchPaddingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalBlockSizeException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (BadPaddingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (valid == true) {
+            request.getSession().setAttribute("username", username);
+            response.sendRedirect("home.jsp");
+        } else {
+
+            String message = "Invalid Login";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 
