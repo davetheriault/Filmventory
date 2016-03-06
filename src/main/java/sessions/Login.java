@@ -7,8 +7,15 @@ package sessions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,27 +62,40 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        PasswordDataHandler handler = new PasswordHandler("users.txt");
-
-        List<User> pwlist = handler.getAllPasswords();
-
-        Boolean valid = false;
-                
-        for (User i : pwlist) {
-            if (username.equals(i.getUsername()) && password.equals(i.getPassword())) {
-                valid = true;
-                break;
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            
+            SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
+            Cipher cipher = Cipher.getInstance("Blowfish");
+            cipher.init(Cipher.ENCRYPT_MODE, KS);
+            
+            PasswordDataHandler handler = new PasswordHandler("users.txt");
+            
+            List<User> pwlist = handler.getAllPasswords();
+            
+            Boolean valid = false;
+            
+            for (User i : pwlist) {
+                if (username.equals(i.getUsername()) && cipher.toString().equals(i.getPassword())) {
+                    valid = true;
+                    break;
+                }
             }
-        }
-        if (valid == true) {
-            request.getSession().setAttribute("username", username);
-            response.sendRedirect("home.jsp");
-        } else {
-            String message = "Invalid Login";
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            if (valid == true) {
+                request.getSession().setAttribute("username", username);
+                response.sendRedirect("home.jsp");
+            } else {
+                String message = "Invalid Login";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            }
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

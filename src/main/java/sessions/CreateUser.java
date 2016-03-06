@@ -7,7 +7,14 @@ package sessions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,26 +89,39 @@ public class CreateUser extends HttpServlet {
 
         if (password.equals(confirm)) {
 
-            PasswordHandler handler = new PasswordHandler("users.txt");
-            List<User> userlist = handler.getAllPasswords();
-            Boolean exist = false;
-
-            for (User i : userlist) {
-                if (username.equals(i.getUsername())) {
-                    exist = true;
-                    break;
+            try {
+                
+                SecretKeySpec KS = new SecretKeySpec(password.getBytes(), "Blowfish");
+                Cipher cipher = Cipher.getInstance("Blowfish");
+                cipher.init(Cipher.ENCRYPT_MODE, KS);
+                
+                PasswordHandler handler = new PasswordHandler("users.txt");
+                List<User> userlist = handler.getAllPasswords();
+                Boolean exist = false;
+                
+                for (User i : userlist) {
+                    if (username.equals(i.getUsername())) {
+                        exist = true;
+                        break;
+                    }
                 }
-            }
-            if (exist.equals(true)) {
-                User newUser = new User(username, password);
-
-                handler.addUser(newUser);
-
-                response.sendRedirect("login.jsp");
-            } else {
-                String message = "Username Not Available";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                if (exist.equals(true)) {
+                    User newUser = new User(username, cipher.toString());
+                    
+                    handler.addUser(newUser);
+                    
+                    response.sendRedirect("login.jsp");
+                } else {
+                    String message = "Username Not Available";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("/register.jsp").forward(request, response);
+                }
+            } catch (InvalidKeyException ex) {
+                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchPaddingException ex) {
+                Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else {
