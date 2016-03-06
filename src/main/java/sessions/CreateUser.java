@@ -7,6 +7,7 @@ package sessions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,13 +82,28 @@ public class CreateUser extends HttpServlet {
 
         if (password.equals(confirm)) {
 
-            User newUser = new User(username, password);
-
             PasswordHandler handler = new PasswordHandler("users.txt");
-            handler.addUser(newUser);
+            List<User> userlist = handler.getAllPasswords();
+            Boolean exist = false;
 
-            response.sendRedirect("login.jsp");
-            
+            for (User i : userlist) {
+                if (username.equals(i.getUsername())) {
+                    exist = true;
+                    break;
+                }
+            }
+            if (exist.equals(true)) {
+                User newUser = new User(username, password);
+
+                handler.addUser(newUser);
+
+                response.sendRedirect("login.jsp");
+            } else {
+                String message = "Username Not Available";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
+
         } else {
 
             String message = "Password and Confirm Password Do Not Match.";

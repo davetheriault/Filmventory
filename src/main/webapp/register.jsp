@@ -4,13 +4,13 @@
 <c:set var="title" scope="request" value="Register"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <h2 class="w3-lobster w3-amber"></h2>
-    <div>
+    <div class="w3-card">
+    <h2 class="w3-lobster w3-amber w3-padding">Register</h2>
+    
         <form class="w3-form" method="POST" action="CreateUser">
-            Username: <input class="w3-input" type="text" name="username" /><br />
-            Password: <input class="w3-input" type="password" name="password" /><br />
+            Username: <input class="w3-input" type="text" name="username" />
+            Password: <input class="w3-input" type="password" name="password" />
             Confirm Password: <input class="w3-input" type="password" name="confpass" />
-            <br />
             <input type="submit" value="Submit" />
         </form>
     </div>
