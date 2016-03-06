@@ -1,3 +1,4 @@
+<% String title = "Register"; %>
 <%@include file="includes/header.jsp" %>
         <h1>Sign Up</h1>
         <div>
