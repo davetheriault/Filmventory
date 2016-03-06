@@ -11,9 +11,9 @@
     </head>
     <body>
         <header class="w3-topbar w3-orange">
-            <div class="w3-lobster w3-xxlarge w3-padding">Java App-Nappimus</div>
             <nav class="w3-lobster w3-xlarge">
                 <ul class="w3-navbar">
+                    <li class="w3-xxlarge"><a href="index.html">Java App-Mania</a></li>
                     <li><a href="login.jsp">Login</a></li>
                     <li><a href="newcripture.html">Scripture</a></li>
                     <li><a href="submit.jsp">Adding Form</a></li>
