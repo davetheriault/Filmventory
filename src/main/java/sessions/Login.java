@@ -75,8 +75,12 @@ public class Login extends HttpServlet {
             List<User> pwlist = handler.getAllPasswords();
             
             Boolean valid = false;
+            String pw = "";
             
             for (User i : pwlist) {
+                if (username.equals(i.getUsername())) {
+                    pw = i.getPassword();
+                }
                 if (username.equals(i.getUsername()) && cipher.toString().equals(i.getPassword())) {
                     valid = true;
                     break;
@@ -86,6 +90,9 @@ public class Login extends HttpServlet {
                 request.getSession().setAttribute("username", username);
                 response.sendRedirect("home.jsp");
             } else {
+                request.setAttribute("pw", pw);
+                request.setAttribute("cipher", cipher);
+                request.setAttribute("cipherString", cipher.toString());
                 String message = "Invalid Login";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
