@@ -10,6 +10,7 @@
     </head>
     <body>
         <header class="w3-navbar w3-orange">
+            <div class="w3-title">Java App-Nappimus</div>
             <nav>
                 
             </nav>
