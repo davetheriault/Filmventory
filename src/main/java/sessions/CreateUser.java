@@ -7,15 +7,11 @@ package sessions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sessions.model.HardCodedPasswordHandler;
-import sessions.model.PasswordDataHandler;
 import sessions.model.PasswordHandler;
 import sessions.model.User;
 
@@ -23,8 +19,8 @@ import sessions.model.User;
  *
  * @author Theriault
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "CreateUser", urlPatterns = {"/CreateUser"})
+public class CreateUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,40 +39,63 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet CreateUser</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreateUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        PasswordDataHandler handler = new PasswordHandler("users.txt");
+        String confirm = request.getParameter("confpass");
 
-        List<User> pwlist = handler.getAllPasswords();
+        if (password.equals(confirm)) {
 
-        Boolean valid = false;
-                
-        for (User i : pwlist) {
-            if (username.equals(i.getUsername()) && password.equals(i.getPassword())) {
-                valid = true;
-                break;
-            }
-        }
-        if (valid == true) {
-            request.getSession().setAttribute("username", username);
-            response.sendRedirect("home.jsp");
+            User newUser = new User(username, password);
+
+            PasswordHandler handler = new PasswordHandler("users.txt");
+            handler.addUser(newUser);
+
+            response.sendRedirect("login.jsp");
+            
         } else {
-            String message = "Invalid Login";
+
+            String message = "Password and Confirm Password Do Not Match.";
             request.setAttribute("message", message);
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+
         }
+
     }
 
     /**

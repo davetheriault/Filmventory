@@ -37,10 +37,10 @@ public class PasswordHandler implements PasswordDataHandler {
           this.fileName = fileName;
      }
  
-     public void addPassword(Scripture scripture) {
+     public void addUser(User user) {
           try {
               try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFileName(), true))) {
-                  writer.write(scripture.toFileString() + "\n");
+                  writer.write(user.toFileString() + "\n");
               } 
 
           } catch (IOException e) { 

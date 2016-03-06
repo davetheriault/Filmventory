@@ -17,11 +17,13 @@ public class HardCodedPasswordHandler implements PasswordDataHandler {
     
   @Override
   public List getAllPasswords() {
+      
     List<User> pws = new ArrayList();
 
     pws.add(new User("david", "password"));
     pws.add(new User("jordan", "password"));
     pws.add(new User("dave", "password"));
+    pws.add(new User("john", "secret"));
 
     return pws;
   }

@@ -8,20 +8,13 @@
     <body> 
         <h1>Login Page</h1> 
         <center> 
-            <h2>Sign in Details</h2> 
-            ${message}<br>
-            ${valid}<br>
-            <c:forEach var="user" items="${users}" >
-                ${user}<br>
-            </c:forEach>
-            <c:forEach var="pw" items="${pws}" >
-                ${pw}<br>
-            </c:forEach>
+            ${message}
             <form action="Login" method="post"> 
                 <br/>Username:<input type="text" name="username"> 
                 <br/>Password:<input type="password" name="password"> 
                 <br/><input type="submit" value="Submit"> 
             </form> 
+            <a href="register.jsp">Register</a>
         </center> 
     </body> 
 </html>
