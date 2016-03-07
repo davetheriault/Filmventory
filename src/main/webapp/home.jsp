@@ -1,18 +1,29 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html> 
-    <head> 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <title>Success</title> 
-    </head> 
-    <body> 
-    <br/><br/><br/><br/><br/> 
-    <center> 
-        <h2> <% String a=session.getAttribute("username").toString(); out.println("Hello "+a); %> </h2> 
-        <br/> <br/> <br/><br/><br/><br/><br/> 
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="title" scope="request" value="Welcome"/>
+<%@include file="includes/header.jsp" %>
+<main class="w3-container">
+    <div class="w3-card-2 w3-padding-top-0">
+        <h2 class="w3-lobster w3-amber w3-padding">Welcome ${username}!</h2>
+        ${message}
+        <div class="w3-card w3-padding w3-red">
+            <h3>
+                <a href="viewposts.jsp">View Posts</a>
+            </h3>
+        </div>
+        <div class="w3-card">
+            <h3 class="w3-red">Create New Post</h3>
+        <form class="w3-form" method="POST" action="CreatePost">
+            Title: <input class="w3-input" type="text" name="title" />
+            Post: <textarea class="w3-input" rows="5" cols="90" name="post" >
+            <input type="submit" value="Submit" />
+        </form>
+        </div>
         <form action="Logout" method="post">
             <input type="submit" value="Log Out">
         </form>
-    </center>  
-</body> 
+    </div>
+</main>
+</body>
 </html>

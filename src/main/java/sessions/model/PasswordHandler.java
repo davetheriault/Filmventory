@@ -12,8 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import scriptures.model.Scripture;
-import scriptures.model.ScriptureDataHandler;
 
 /**
  *
@@ -60,6 +58,7 @@ public class PasswordHandler implements PasswordDataHandler {
                     User user = new User(null, null);
                     user.loadFromFileString(line);
                     list.add(user);
+
                }
 
           } catch (IOException e) { 
