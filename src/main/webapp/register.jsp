@@ -4,9 +4,9 @@
 <c:set var="title" scope="request" value="Register"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <div class="w3-card">
+    <div class="w3-card-2 w3-padding-top-0">
     <h2 class="w3-lobster w3-amber w3-padding">Register</h2>
-    
+    ${message}
         <form class="w3-form" method="POST" action="CreateUser">
             Username: <input class="w3-input" type="text" name="username" />
             Password: <input class="w3-input" type="password" name="password" />
