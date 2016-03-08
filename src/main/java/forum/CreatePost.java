@@ -92,7 +92,7 @@ public class CreatePost extends HttpServlet {
         calendar.setTimeInMillis(timeStamp);
 
         int mYear = calendar.get(Calendar.YEAR);
-        int mMonth = calendar.get(Calendar.MONTH);
+        int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
         request.setAttribute("title", escTitle);

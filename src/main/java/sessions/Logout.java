@@ -37,7 +37,7 @@ public class Logout extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Logout</title>");            
+            out.println("<title>Servlet Logout</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
@@ -73,11 +73,11 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getSession().removeAttribute("username"); 
-           request.getSession().removeAttribute("password"); 
-           request.getSession().invalidate();
-           
-           response.sendRedirect("login.jsp");
+        request.getSession().removeAttribute("username");
+        request.getSession().removeAttribute("password");
+        request.getSession().invalidate();
+
+        response.sendRedirect("login.jsp");
     }
 
     /**
