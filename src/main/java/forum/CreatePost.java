@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -82,7 +83,8 @@ public class CreatePost extends HttpServlet {
         String escTitle = StringEscapeUtils.escapeHtml(title);
         String escPost = StringEscapeUtils.escapeHtml(post);
 
-        String user = (String) request.getSession().getAttribute("username");
+        HttpSession session = request.getSession(true);
+        String user = (String)session.getAttribute("username");
 
         long timeStamp = System.currentTimeMillis();
 
@@ -93,8 +95,8 @@ public class CreatePost extends HttpServlet {
         int mMonth = calendar.get(Calendar.MONTH);
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        request.setAttribute("title", title);
-        request.setAttribute("post", post);
+        request.setAttribute("title", escTitle);
+        request.setAttribute("post", escPost);
         request.setAttribute("user", user);
         request.setAttribute("year", mYear);
         request.setAttribute("month", mMonth);
