@@ -2,7 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
-    if( request.getSession().getAttribute("username").equals(null) ){
+    if( session.getAttribute("username").equals(null) ){
         response.sendRedirect("login.jsp");
     }
 %>
