@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
     String sesh = (String) request.getSession().getAttribute("username");
-    if( sesh.equals("") || sesh.equals(null) ){
+    if( sesh.equals(null) ){
         response.sendRedirect("login.jsp");
     }
 %>
