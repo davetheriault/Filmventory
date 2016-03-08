@@ -17,11 +17,11 @@
         <form class="w3-form" method="POST" action="CreatePost">
             Title: <input class="w3-input" type="text" name="title" />
             Post: <textarea class="w3-input" rows="5" cols="90" name="post" ></textarea>
-            <input type="submit" value="Post" />
+            <input class="w3-input" type="submit" value="Post" />
         </form>
         </div>
-        <form action="Logout" method="post">
-            <input type="submit" value="Log Out">
+        <form class="w3-form" action="Logout" method="post">
+            <input class="w3-input" type="submit" value="Log Out">
         </form>
     </div>
 </main>
