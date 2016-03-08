@@ -100,7 +100,7 @@ public class CreatePost extends HttpServlet {
         request.setAttribute("month", mMonth);
         request.setAttribute("day", mDay);
 
-        request.getRequestDispatcher("scripturelist.jsp").forward(request, response);
+        request.getRequestDispatcher("viewposts.jsp").forward(request, response);
 
     }
 
