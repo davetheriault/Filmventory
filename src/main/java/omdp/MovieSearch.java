@@ -51,7 +51,6 @@ public class MovieSearch extends HttpServlet {
 
             String urltitle = encode(title, "UTF-8");
 
-            out.println(urltitle);
 
             URL url = new URL("http://www.omdbapi.com/?t=" + urltitle);
 
