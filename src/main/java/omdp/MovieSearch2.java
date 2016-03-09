@@ -64,7 +64,7 @@ public class MovieSearch2 extends HttpServlet {
                 out.println("<br>");
                 for (String key : innerMap.keySet()) {
                     if (key.equals("Poster")) {
-                        out.println("<img src='" + innerMap.get(key) + "' width='200px' /> <br>");
+                        out.println("<img src='" + innerMap.get(key) + "' width='200px' alt='' /> <br>");
                     } else {
                         if (key.equals("Title")) {
                             out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
