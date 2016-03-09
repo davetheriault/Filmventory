@@ -16,10 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import scriptures.model.FileScriptureHandler;
-import scriptures.model.HardCodedScriptureHandler;
-import scriptures.model.Scripture;
-import scriptures.model.ScriptureDataHandler;
+
 
 /**
  *
