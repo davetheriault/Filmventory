@@ -151,7 +151,6 @@ public class CreatePost extends HttpServlet {
         }
 
         PostFileHandler handler = new PostFileHandler("posts.txt");
-        List<Post> postlist = handler.getAllPosts();
 
         Post newPost = new Post(escTitle, escPost, mYear, monthString, mDay, hour, minute, am_pm, user);
 
