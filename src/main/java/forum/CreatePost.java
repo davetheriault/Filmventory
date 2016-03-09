@@ -94,6 +94,10 @@ public class CreatePost extends HttpServlet {
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int ampm = calendar.get(Calendar.AM_PM);
 
         request.setAttribute("title", escTitle);
         request.setAttribute("post", escPost);
@@ -101,6 +105,9 @@ public class CreatePost extends HttpServlet {
         request.setAttribute("year", mYear);
         request.setAttribute("month", mMonth);
         request.setAttribute("day", mDay);
+        request.setAttribute("hour", hour);
+        request.setAttribute("min", minute);
+        request.setAttribute("ampm", ampm);
 
         request.getRequestDispatcher("viewposts.jsp").forward(request, response);
 

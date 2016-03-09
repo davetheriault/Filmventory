@@ -5,6 +5,7 @@
  */
 package forum;
 
+
 /**
  *
  * @author Theriault
@@ -12,9 +13,11 @@ package forum;
 public class Post {
     
     
-    private String title;
-    
-    private String post;
-    
+    private String title;    
+    private String post;    
+    private int year;
+    private String month;
+    private int day;
+    private int hour;
     
 }
