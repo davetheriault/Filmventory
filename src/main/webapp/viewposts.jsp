@@ -8,6 +8,16 @@
         ${message}<br>
         Title: ${title} - Post: ${post} - User: ${user} - Year: ${year} - Month: ${month} - Day: ${day}<br>
         Hour: ${hour} - Min: ${min} - AM/PM: ${ampm}
+        <div>
+
+            Posts:<br /><br />
+
+            <c:forEach var="post" items="${posts}">
+
+                ${post}<br />
+
+            </c:forEach>
+        </div>
     </div>
 </main>
 </body>

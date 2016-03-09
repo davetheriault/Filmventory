@@ -3,21 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forum;
+package forum.model;
 
+import java.util.List;
 
 /**
  *
  * @author Theriault
  */
-public class Post {
+public interface PostDataHandler {
     
-    
-    private String title;    
-    private String post;    
-    private int year;
-    private String month;
-    private int day;
-    private int hour;
+    List<Post> getAllPosts();
     
 }

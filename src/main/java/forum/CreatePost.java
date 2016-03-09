@@ -5,6 +5,8 @@
  */
 package forum;
 
+import forum.model.Post;
+import forum.model.PostFileHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -84,7 +87,7 @@ public class CreatePost extends HttpServlet {
         String escPost = StringEscapeUtils.escapeHtml(post);
 
         HttpSession session = request.getSession(true);
-        String user = (String)session.getAttribute("username");
+        String user = (String) session.getAttribute("username");
 
         long timeStamp = System.currentTimeMillis();
 
@@ -93,12 +96,69 @@ public class CreatePost extends HttpServlet {
 
         int mYear = calendar.get(Calendar.YEAR);
         int mMonth = calendar.get(Calendar.MONTH) + 1;
+        String monthString;
+        switch (mMonth) {
+            case 1:
+                monthString = "January";
+                break;
+            case 2:
+                monthString = "February";
+                break;
+            case 3:
+                monthString = "March";
+                break;
+            case 4:
+                monthString = "April";
+                break;
+            case 5:
+                monthString = "May";
+                break;
+            case 6:
+                monthString = "June";
+                break;
+            case 7:
+                monthString = "July";
+                break;
+            case 8:
+                monthString = "August";
+                break;
+            case 9:
+                monthString = "September";
+                break;
+            case 10:
+                monthString = "October";
+                break;
+            case 11:
+                monthString = "November";
+                break;
+            case 12:
+                monthString = "December";
+                break;
+            default:
+                monthString = "Invalid month";
+                break;
+        }
         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        
+
         int hour = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
         int ampm = calendar.get(Calendar.AM_PM);
+        String am_pm;
+        if (ampm == 1) {
+            am_pm = "PM";
+        } else {
+            am_pm = "AM";
+        }
 
+        PostFileHandler handler = new PostFileHandler("posts.txt");
+        List<Post> postlist = handler.getAllPosts();
+
+        Post newPost = new Post(escTitle, escPost, mYear, monthString, mDay, hour, minute, am_pm, user);
+
+        handler.addPost(newPost);
+
+        response.sendRedirect("viewposts.jsp");
+        
         request.setAttribute("title", escTitle);
         request.setAttribute("post", escPost);
         request.setAttribute("user", user);
