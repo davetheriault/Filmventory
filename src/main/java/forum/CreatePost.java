@@ -157,8 +157,8 @@ public class CreatePost extends HttpServlet {
 
         handler.addPost(newPost);
 
-        response.sendRedirect("viewposts.jsp");
-        
+        response.sendRedirect("ShowPosts");
+    /*
         request.setAttribute("title", escTitle);
         request.setAttribute("post", escPost);
         request.setAttribute("user", user);
@@ -170,7 +170,7 @@ public class CreatePost extends HttpServlet {
         request.setAttribute("ampm", ampm);
 
         request.getRequestDispatcher("viewposts.jsp").forward(request, response);
-
+    */
     }
 
     /**
