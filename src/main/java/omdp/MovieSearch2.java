@@ -22,8 +22,8 @@ import java.util.Map;
  *
  * @author Theriault
  */
-@WebServlet(name = "MovieSearch", urlPatterns = {"/MovieSearch"})
-public class MovieSearch extends HttpServlet {
+@WebServlet(name = "MovieSearch2", urlPatterns = {"/MovieSearch2"})
+public class MovieSearch2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,21 +51,29 @@ public class MovieSearch extends HttpServlet {
 
             String urltitle = encode(title, "UTF-8");
 
-            out.println(urltitle);
-
-            URL url = new URL("http://www.omdbapi.com/?t=" + urltitle);
+            URL url = new URL("http://www.omdbapi.com/?s=" + urltitle);
 
             ObjectMapper mapper = new ObjectMapper();
+
             Map<String, Object> map = mapper.readValue(url, Map.class);
 
-            out.println("<img src='" + map.get("Poster") + "' /> <br>");
+            List list = (List) map.get("Search");
 
-            for (String key : map.keySet()) {
-                if (key.equals("Poster")) {
-                    
+            for (Object item : list) {
+                Map<String, Object> innerMap = (Map<String, Object>) item;
+                out.println("<br>");
+                for (String key : innerMap.keySet()) {
+                    if (key.equals("Poster")) {
+                        out.println("<img src='" + innerMap.get(key) + "' width='200px' /> <br>");
+                    } else {
+                        if (key.equals("Title")) {
+                            out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
+                        }
+                        if (key.equals("Year")) {
+                            out.println(key + ": " + innerMap.get(key) + "<br>");
+                        }
+                    }
 
-                } else {
-                    out.println(key + ": " + map.get(key) + "<br>");
                 }
             }
             out.println("</body>");

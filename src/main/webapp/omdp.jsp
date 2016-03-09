@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>OMDP Search</h1>
-        <form action="MovieSearch" method="get" id="moviesearch">
+        <form action="MovieSearch2" method="get" id="moviesearch">
             <input type="text" name="title" placeholder="Search Movies by Title..." required />
             <input type="submit" value="Search" form="moviesearch" name="movSubmit" />
         </form>
