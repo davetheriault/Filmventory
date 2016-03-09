@@ -9,20 +9,17 @@ import forum.model.PostDataHandler;
 import forum.model.PostFileHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Theriault
  */
-@WebServlet(name = "ShowList", urlPatterns = {"/ShowList"})
+@WebServlet(name = "ShowPosts", urlPatterns = {"/ShowPosts"})
 public class ShowPosts extends HttpServlet {
 
     /**
@@ -42,10 +39,10 @@ public class ShowPosts extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowList</title>");
+            out.println("<title>Servlet ShowPosts</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShowPosts at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,13 +60,25 @@ public class ShowPosts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         PostDataHandler handler = new PostFileHandler("posts.txt");
 
         request.setAttribute("posts", handler.getAllPosts());
 
         request.getRequestDispatcher("viewposts.jsp").forward(request, response);
+    }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
