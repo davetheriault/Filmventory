@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,13 +63,19 @@ public class MovieSearch extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        URL url = new URL("http://www.omdbapi.com/?t=True%20Grit&y=1969");
+        URL url = new URL("http://www.omdbapi.com/?s=Park");
 
         ObjectMapper mapper = new ObjectMapper();
+
         Map<String, Object> map = mapper.readValue(url, Map.class);
 
-        for (String key : map.keySet()) {
-            System.out.println(key + ": " + map.get(key));
+        List list = (List) map.get("Search");
+
+        for (Object item : list) {
+            Map<String, Object> innerMap = (Map<String, Object>) item;
+            for (String key : innerMap.keySet()) {
+                System.out.println(key + ": " + innerMap.get(key));
+            }
         }
 
     }
