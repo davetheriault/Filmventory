@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>OMDP Search</title>
+        <title>OMDB Search</title>
     </head>
     <body>
-        <h1>OMDP Search</h1>
+        <h1>OMDB Search</h1>
         <form action="MovieSearch2" method="get" id="moviesearch">
             <input type="text" name="title" placeholder="Search Movies by Title..." required />
             <input type="submit" value="Search" form="moviesearch" name="movSubmit" />
