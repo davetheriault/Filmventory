@@ -43,6 +43,7 @@ public class MovieSearch2 extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet MovieSearch</title>");
+            out.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MovieSearch at " + request.getContextPath() + "</h1>");
@@ -64,7 +65,10 @@ public class MovieSearch2 extends HttpServlet {
                 out.println("<br>");
                 for (String key : innerMap.keySet()) {
                     if (key.equals("Poster")) {
-                        out.println("<a href='" + innerMap.get(key) + "' >View Poster</a> <br>");
+                        String keystr = (String) innerMap.get(key);
+                        String id = keystr.substring(44, 50);
+                        out.println("<a href='#' id='"+id+"' >View Poster</a> <br>");
+                        out.println("<script>$('#"+id+"').click(function(){ location.href = '"+innerMap.get(key)+"';});</script>");
                     } else {
                         if (key.equals("Title")) {
                             out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
