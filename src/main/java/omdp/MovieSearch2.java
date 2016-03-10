@@ -68,7 +68,7 @@ public class MovieSearch2 extends HttpServlet {
                         String keystr = (String) innerMap.get(key);
                         String id = keystr.substring(44, 50);
                         out.println("<a href='#' id='"+id+"' >View Poster</a> <br>");
-                        out.println("<script>$('#"+id+"').click(function(){ location.href = '"+innerMap.get(key)+"'; location.reload(); });</script>");
+                        out.println("<script>$('#"+id+"').click(function(){ window.location.assign(\""+innerMap.get(key)+"\"); });</script>");
                     } else {
                         if (key.equals("Title")) {
                             out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
