@@ -57,16 +57,15 @@ public class MovieSearch extends HttpServlet {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(url, Map.class);
 
-            out.println("<img src='" + map.get("Poster") + "' alt='' /> <br>");
-
             for (String key : map.keySet()) {
                 if (key.equals("Poster")) {
                     
-
                 } else {
                     out.println(key + ": " + map.get(key) + "<br>");
                 }
             }
+            out.println("<a href='" + map.get("Poster") + "' >View Poster</a> <br>");
+            
             out.println("</body>");
             out.println("</html>");
         }

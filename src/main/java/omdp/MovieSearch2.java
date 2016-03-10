@@ -64,7 +64,7 @@ public class MovieSearch2 extends HttpServlet {
                 out.println("<br>");
                 for (String key : innerMap.keySet()) {
                     if (key.equals("Poster")) {
-                        out.println("<iframe src='" + innerMap.get(key) + "' width='200px' ></iframe> <br>");
+                        out.println("<a href='" + innerMap.get(key) + "' >View Poster</a> <br>");
                     } else {
                         if (key.equals("Title")) {
                             out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
@@ -122,3 +122,6 @@ public class MovieSearch2 extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+// https://api.themoviedb.org/3/movie/550?api_key=485892eacda398b32d06aa04114b3974
