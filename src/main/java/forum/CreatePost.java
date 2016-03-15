@@ -150,7 +150,7 @@ public class CreatePost extends HttpServlet {
             am_pm = "AM";
         }
 
-        PostFileHandler handler = new PostFileHandler("posts.txt");
+        PostFileHandler handler = new PostFileHandler("posts2.txt");
 
         Post newPost = new Post(escTitle, escPost, mYear, monthString, mDay, hour, minute, am_pm, user);
 

@@ -60,7 +60,7 @@ public class ShowPosts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostFileHandler handler = new PostFileHandler("posts.txt");
+        PostFileHandler handler = new PostFileHandler("posts2.txt");
 
         request.setAttribute("posts", handler.getAllPosts());
 
