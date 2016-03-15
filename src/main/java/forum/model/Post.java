@@ -111,12 +111,12 @@ public class Post {
     }
 */
     public String toFileString() {
-        return title + "," + post + "," + year + "," + month + "," + day + "," + hour + "," + min + "," + ampm + "," + user;
+        return title + ";," + post + ";," + year + ";," + month + ";," + day + ";," + hour + ";," + min + ";," + ampm + ";," + user;
     }
 
     public void loadFromFileString(String str) {
         // TODO: Validation should be done here
-        String[] parts = str.split(",");
+        String[] parts = str.split(";,");
 
         title = parts[0];
         post = parts[1];
