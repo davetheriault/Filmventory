@@ -6,7 +6,7 @@
     <div class="w3-card-2 w3-padding-top-0">
         <h2 class="w3-lobster w3-amber w3-padding">View Posts</h2>
         ${message}<br>
-        Title: ${title} - Post: ${post} - User: ${user} - Year: ${year} - Month: ${month} - Day: ${day}<br>
+        Title: - Post: ${post} - User: ${user} - Year: ${year} - Month: ${month} - Day: ${day}<br>
         Hour: ${hour} - Min: ${min} - AM/PM: ${ampm}
         <div>
 
@@ -14,7 +14,7 @@
 
             <c:forEach var="post" items="${posts}">
 
-                ${post}<br />
+                ${post.title}<br />${post.user}
 
             </c:forEach>
         </div>
