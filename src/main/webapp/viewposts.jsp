@@ -13,8 +13,9 @@
             Posts:<br /><br />
 
             <c:forEach var="post" items="${posts}">
+                <c:set var="this" value="${post}" />
 
-                ${post.title}<br />${post.user}
+                ${this.title}<br />${this.user}
 
             </c:forEach>
         </div>

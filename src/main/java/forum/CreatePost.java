@@ -157,8 +157,8 @@ public class CreatePost extends HttpServlet {
         handler.addPost(newPost);
 
         response.sendRedirect("ShowPosts");
-    /*
-        request.setAttribute("title", escTitle);
+    
+     /*   request.setAttribute("title", escTitle);
         request.setAttribute("post", escPost);
         request.setAttribute("user", user);
         request.setAttribute("year", mYear);

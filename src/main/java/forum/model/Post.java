@@ -105,7 +105,7 @@ public class Post {
         this.user = user;
     }
     
-   /* @Override
+   /*@Override
     public String toString() {
         return book + " " + chapter + ":" + verse;
     }
