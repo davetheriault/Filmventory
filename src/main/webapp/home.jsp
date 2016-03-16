@@ -20,8 +20,8 @@
         <div class="w3-card">
             <h3 class="w3-red w3-padding">Create New Post</h3>
         <form class="w3-form" method="POST" action="CreatePost">
-            Title: <input class="w3-input" type="text" name="title" />
-            Post: <textarea class="w3-input" rows="5" cols="90" name="post" ></textarea>
+            Title: <input class="w3-input" type="text" name="title" required/>
+            Post: <textarea class="w3-input" rows="5" cols="90" name="post" required></textarea>
             <input class="w3-input" type="submit" value="Post" />
         </form>
         </div>
