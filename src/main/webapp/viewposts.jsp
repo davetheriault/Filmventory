@@ -7,9 +7,6 @@
         <h2 class="w3-lobster w3-amber w3-padding">View Posts</h2>
         ${message}
         <div>
-
-            Posts:<br /><br />
-
             <c:forEach var="post" items="${posts}">
 
                 <div class="w3-card-2" >
