@@ -13,9 +13,11 @@
             <c:forEach var="post" items="${posts}">
 
                 <div class="w3-card-2" >
-                    <h3 class="w3-blue w3-padding w3-lobster"> &quot;${post.title}&quot; </h3>
+                    <h3 class="w3-blue w3-padding w3-lobster" style="display: inline-block;"> &quot;${post.title}&quot; </h3>
                     <div class="w3-padding w3-large">
-                        <p class="w3-leftbar">${post.post}</p>
+                        <div class="w3-leftbar">
+                        <p>${post.post}</p>
+                        </div>
                         <p class="w3-small">Posted by: ${post.user} ${post.month} ${post.day}, ${post.year} - ${post.hour}:<c:if test="${post.min < 10}" >0</c:if>${post.min} ${post.ampm} </p>
                     </div>
                 </div>
