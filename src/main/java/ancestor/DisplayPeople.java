@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Theriault
  */
-@WebServlet(name = "displayPeople", urlPatterns = {"/displayPeople"})
+@WebServlet(name = "DisplayPeople", urlPatterns = {"/DisplayPeople"})
 public class DisplayPeople extends HttpServlet {
 
     /**

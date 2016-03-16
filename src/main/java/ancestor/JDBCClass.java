@@ -24,10 +24,12 @@ public class JDBCClass {
     private String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
     private String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
     private String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+    private String DB_NAME = System.getenv("OPENSHIFT_APP_NAME");
+
 
     // JDBC driver name and database URL
     private String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private String DB_URL = "jdbc:mysql://" + host + ":" + port + "/ancestor";
+    private String DB_URL = "jdbc:mysql://" + host + ":" + port + DB_NAME;
 
     //  Database credentials
     private String USER = username;
@@ -54,13 +56,7 @@ public class JDBCClass {
         List<Person> people = new ArrayList<>();
         try {
             //connect
-            if (host == null) {
-                host = "localhost";
-                port = "3306";
-                USER = "root";
-                PASS = "homestar";
-                DB_URL = "jdbc:mysql://" + host + ":" + port + "/ancestor";
-            }
+            
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             System.out.println("Connected!");
