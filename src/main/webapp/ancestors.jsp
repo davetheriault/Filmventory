@@ -19,7 +19,7 @@
         <div>
             <c:forEach var="person" items="${people}">
                 <p>
-                    <a href="DisplayPerson?firstName=${person.firstName}&lastName=${person.lastName}&birthday=${person.birthday}&id=${person.id}">${person.firstName} - ${person.lastName}</a>
+                    <a href="DisplayPerson?firstName=${person.firstName}&lastName=${person.lastName}&birthday=${person.birthday}&id=${person.id}">${person.firstName} ${person.lastName}</a>
                 </p>
             </c:forEach>
         </div>
