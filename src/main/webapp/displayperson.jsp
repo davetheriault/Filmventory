@@ -21,10 +21,10 @@
             <p><c:forEach var="parent" items="${parents}">
                     <c:choose>
                     <c:when test="${parent.gender == 'male'}" >
-                        Father: ${parent.FirstName} ${parent.LastName} <br>
+                        Father: ${parent.firstName} ${parent.lastName} <br>
                     </c:when>
                     <c:otherwise>
-                        Mother: ${parent.FirstName} ${parent.LastName} <br>
+                        Mother: ${parent.firstName} ${parent.lastName} <br>
                     </c:otherwise>
                     </c:choose>
                 </c:forEach></p>
