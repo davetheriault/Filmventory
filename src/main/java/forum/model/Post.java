@@ -118,9 +118,6 @@ public class Post {
         // TODO: Validation should be done here
         String[] parts = str.split(";,");
         
-        
-        
-        /*
 
         title = parts[0];
         post = parts[1];
@@ -131,7 +128,7 @@ public class Post {
         min = Integer.parseInt(parts[6]);
         ampm = parts[7];
         user = parts[8];
-                */
+        
     }
 
 }

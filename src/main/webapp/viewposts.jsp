@@ -13,10 +13,14 @@
             Posts:<br /><br />
 
             <c:forEach var="post" items="${posts}">
-                <c:set var="this" value="${post}" />
 
-                ${this.title}<br />${this.user}
-
+                <div class="w3-card-2" >
+                    <h3 class="w3-blue w3-padding">${post.title}</h3>
+                    <div class="w3-padding w3-large">
+                        <p>${post.post}</p>
+                        <p>Posted by: ${post.user} ${post.month} ${post.day}, ${post.year} - ${post.hour}:<c:if test="${post.min < 10}" >0</c:if>${post.min} ${post.ampm} </p>
+                    </div>
+                </div>
             </c:forEach>
         </div>
     </div>
