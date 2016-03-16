@@ -3,7 +3,7 @@
 <c:set var="title" scope="request" value="View Posts"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <div class="w3-card-2 w3-padding-top-0">
+    <div class="w3-card-2 w3-padding-top-0" style="max-width: 1000px;">
         <h2 class="w3-lobster w3-amber w3-padding">View Posts</h2>
         ${message}
         <div>
