@@ -24,12 +24,11 @@ public class JDBCClass {
     private String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
     private String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
     private String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
-    private String DB_NAME = System.getenv("OPENSHIFT_APP_NAME");
 
 
     // JDBC driver name and database URL
     private String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private String DB_URL = "jdbc:mysql://" + host + ":" + port + DB_NAME;
+    private String DB_URL = "jdbc:mysql://" + host + ":" + port + "/java";
 
     //  Database credentials
     private String USER = username;
