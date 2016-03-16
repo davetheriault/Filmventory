@@ -67,8 +67,10 @@ public class DisplayPerson extends HttpServlet {
         
         JDBCClass db = new JDBCClass();
         List<Person> parents = db.getParents(id);
+        List<Person> kids = db.getKids(id);
         
         request.setAttribute("parents", parents);
+        request.setAttribute("kids", kids);
         
         request.setAttribute("firstName", firstName);
         request.setAttribute("birthday", birthday);

@@ -148,4 +148,54 @@ public class JDBCClass {
 
         return parents;
     }
+    
+    public List<Person> getKids(String parent) {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<Person> kids = new ArrayList<>();
+        try {
+            //connect
+            
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.child_id WHERE relationship.parent_id = " + parent + " ORDER BY birthday;";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println(rs.getString("first_name"));
+                System.out.println(rs.getString("last_name"));
+                System.out.println(rs.getDate("birthday"));
+                System.out.println(rs.getInt("id"));
+                Person person = new Person();
+                person.setFirstName(rs.getString("first_name"));
+                person.setLastName(rs.getString("last_name"));
+                person.setId(rs.getInt("id"));
+                person.setBirthday(rs.getDate("birthday"));
+                person.setGender(rs.getString("gender"));
+
+                kids.add(person);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return kids;
+    }
 }

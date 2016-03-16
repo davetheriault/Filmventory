@@ -28,6 +28,10 @@
                     </c:otherwise>
                     </c:choose>
                 </c:forEach></p>
+            <p>Children:<br>
+                <c:forEach var="kid" items="${kids}">
+                    ${kid.firstName} ${kid.lastName} Born: ${kid.birthday} <br>
+                </c:forEach></p>
         </div>
     </body>
 </html>
