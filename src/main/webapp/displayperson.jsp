@@ -21,16 +21,16 @@
             <p><c:forEach var="parent" items="${parents}">
                     <c:choose>
                     <c:when test="${parent.gender == 'male'}" >
-                        Father: ${parent.firstName} ${parent.lastName} <br>
+                        Father: <a href="DisplayPerson?firstName=${parent.firstName}&lastName=${parent.lastName}&birthday=${parent.birthday}&id=${parent.id}">${parent.firstName} ${parent.lastName}</a> <br>
                     </c:when>
                     <c:otherwise>
-                        Mother: ${parent.firstName} ${parent.lastName} <br>
+                        Mother: <a href="DisplayPerson?firstName=${parent.firstName}&lastName=${parent.lastName}&birthday=${parent.birthday}&id=${parent.id}">${parent.firstName} ${parent.lastName}</a> <br>
                     </c:otherwise>
                     </c:choose>
                 </c:forEach></p>
             <p>Children:<br>
                 <c:forEach var="kid" items="${kids}">
-                    ${kid.firstName} ${kid.lastName} Born: ${kid.birthday} <br>
+                    <a href="DisplayPerson?firstName=${kid.firstName}&lastName=${kid.lastName}&birthday=${kid.birthday}&id=${kid.id}">${kid.firstName} ${kid.lastName}</a> Born: ${kid.birthday} <br>
                 </c:forEach></p>
         </div>
     </body>
