@@ -4,6 +4,7 @@
     Author     : Theriault
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,16 @@
         <h1>Displaying ${firstName} ${lastName}'s Information</h1>
         <div>
             <p>Birthday: ${birthday}</p>
+            <p><c:forEach var="parent" items="${parents}">
+                    <c:choose>
+                    <c:when test="${parent.gender == 'male'}" >
+                        Father: ${parent.FirstName} ${parent.LastName} <br>
+                    </c:when>
+                    <c:otherwise>
+                        Mother: ${parent.FirstName} ${parent.LastName} <br>
+                    </c:otherwise>
+                    </c:choose>
+                </c:forEach></p>
         </div>
     </body>
 </html>

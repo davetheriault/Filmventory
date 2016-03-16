@@ -72,6 +72,7 @@ public class JDBCClass {
                 person.setLastName(rs.getString("last_name"));
                 person.setId(rs.getInt("id"));
                 person.setBirthday(rs.getDate("birthday"));
+                person.setGender(rs.getString("gender"));
 
                 people.add(person);
             }
@@ -98,7 +99,53 @@ public class JDBCClass {
         return people;
     }
 
-    public void getParents(String child) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Person> getParents(String child) {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<Person> parents = new ArrayList<>();
+        try {
+            //connect
+            
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.parent_id WHERE relationship.child_id = " + child + ";";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println(rs.getString("first_name"));
+                System.out.println(rs.getString("last_name"));
+                System.out.println(rs.getDate("birthday"));
+                System.out.println(rs.getInt("id"));
+                Person person = new Person();
+                person.setFirstName(rs.getString("first_name"));
+                person.setLastName(rs.getString("last_name"));
+                person.setId(rs.getInt("id"));
+                person.setBirthday(rs.getDate("birthday"));
+                person.setGender(rs.getString("gender"));
+
+                parents.add(person);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBCClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return parents;
     }
 }

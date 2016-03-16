@@ -8,6 +8,7 @@ package ancestor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,6 +64,11 @@ public class DisplayPerson extends HttpServlet {
         String lastName  = request.getParameter("lastName");
         String birthday  = request.getParameter("birthday");
         String id        = request.getParameter("id");
+        
+        JDBCClass db = new JDBCClass();
+        List<Person> parents = db.getParents(id);
+        
+        request.setAttribute("parents", parents);
         
         request.setAttribute("firstName", firstName);
         request.setAttribute("birthday", birthday);

@@ -19,6 +19,8 @@ public class Person {
     
     private Date Birthday;
     
+    private String Gender;
+    
     private int Id;
 
     public String getFirstName() {
@@ -51,6 +53,14 @@ public class Person {
 
     public void setId(int Id) {
         this.Id = Id;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
     
 }
