@@ -3,30 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ancestors;
+package ancestor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.DB;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author Theriault
+ * @author Grant
  */
-@WebServlet(name = "ShowAncestors", urlPatterns = {"/ShowAncestors"})
-public class ShowAncestors extends HttpServlet {
+@WebServlet(name = "DisplayPerson", urlPatterns = {"/DisplayPerson"})
+public class DisplayPerson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,39 +31,17 @@ public class ShowAncestors extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        Connection conn = DB.getConnect();
-        Statement stmt = null;
-        String query = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.child_id UNION "
-                + "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.parent_id";
-
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowAncestors</title>");
+            out.println("<title>Servlet DisplayPerson</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ShowAncestors at " + request.getContextPath() + "</h1>");
-            try {
-                stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    String firstname = rs.getString("first_name");
-                    String lastname = rs.getString("last_name");
-                    Date bday = rs.getDate("birthday");
-                    String gender = rs.getString("gender");
-                    out.println("<p>" + firstname + " " + lastname + "<br>" + bday + "<br>" + gender + "</p>");
-                }
-            } catch (SQLException e) {
-            } finally {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            }
-            out.println("");
+            out.println("<h1>Servlet DisplayPerson at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -88,11 +59,16 @@ public class ShowAncestors extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowAncestors.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String firstName = request.getParameter("firstName");
+        String lastName  = request.getParameter("lastName");
+        String birthday  = request.getParameter("birthday");
+        String id        = request.getParameter("id");
+        
+        request.setAttribute("firstName", firstName);
+        request.setAttribute("birthday", birthday);
+        request.setAttribute("lastName", lastName);
+        request.setAttribute("id", id);
+        request.getRequestDispatcher("displayperson.jsp").forward(request, response);
     }
 
     /**
@@ -106,11 +82,7 @@ public class ShowAncestors extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowAncestors.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
