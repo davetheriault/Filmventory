@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ancestor;
 
 import java.sql.Connection;
@@ -58,15 +54,10 @@ public class JDBCClass {
             
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            System.out.println("Connected!");
             sql = "SELECT * FROM ancestor;";
             rs = stmt.executeQuery(sql);
-            System.out.println("Executed!");
             while (rs.next()) {
-                System.out.println(rs.getString("first_name"));
-                System.out.println(rs.getString("last_name"));
-                System.out.println(rs.getDate("birthday"));
-                System.out.println(rs.getInt("id"));
+                
                 Person person = new Person();
                 person.setFirstName(rs.getString("first_name"));
                 person.setLastName(rs.getString("last_name"));
@@ -113,10 +104,7 @@ public class JDBCClass {
             sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.parent_id WHERE relationship.child_id = " + child + ";";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                System.out.println(rs.getString("first_name"));
-                System.out.println(rs.getString("last_name"));
-                System.out.println(rs.getDate("birthday"));
-                System.out.println(rs.getInt("id"));
+                
                 Person person = new Person();
                 person.setFirstName(rs.getString("first_name"));
                 person.setLastName(rs.getString("last_name"));
@@ -163,10 +151,7 @@ public class JDBCClass {
             sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.child_id WHERE relationship.parent_id = " + parent + " ORDER BY birthday;";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                System.out.println(rs.getString("first_name"));
-                System.out.println(rs.getString("last_name"));
-                System.out.println(rs.getDate("birthday"));
-                System.out.println(rs.getInt("id"));
+                
                 Person person = new Person();
                 person.setFirstName(rs.getString("first_name"));
                 person.setLastName(rs.getString("last_name"));
