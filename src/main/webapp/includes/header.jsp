@@ -15,6 +15,7 @@
                 <ul class="w3-navbar">
                     <li class="w3-deep-orange"><a href="index.html">Java App-Mania</a></li>
                     <li><a href="login.jsp">Login</a></li>
+                    <li><a href="DisplayPeople">Ancestors</a></li>
                     <li><a href="newscripture.html">Scripture</a></li>
                     <li><a href="submit.jsp">Adding Form</a></li>
                 </ul>
