@@ -12,7 +12,7 @@
             Password:<input class="w3-input" type="password" name="password"> 
             <input type="submit" value="Sign In"> 
         </form> 
-        <div class="w3-padding w3-text-blue w3-lobster w3-large"><a href="register.jsp">Register</a></div>
+        <div class="w3-padding w3-text-blue w3-lobster w3-xlarge"><a href="register.jsp">Register</a></div>
     </div>
 </main>
 </body> 
