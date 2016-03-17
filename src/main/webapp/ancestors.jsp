@@ -1,12 +1,7 @@
-<%-- 
-    Document   : ancestors
-    Created on : Mar 15, 2016, 9:28:57 PM
-    Author     : Theriault
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:set var="title" scope="request" value="Welcome"/>
+<c:set var="title" scope="request" value="Ancestor Database"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
     <div class="w3-card-2 w3-padding-top-0">
