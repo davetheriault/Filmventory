@@ -19,6 +19,7 @@
                     <li><a href="DisplayPeople">Ancestors</a></li>
                     <li><a href="newscripture.html">Scripture</a></li>
                     <li><a href="submit.jsp">Adding Form</a></li>
+                    <li><a href="filmventory.jsp">Filmventory</a></li>
                 </ul>
             </nav>
         </header>
