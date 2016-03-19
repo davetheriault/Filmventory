@@ -14,7 +14,7 @@
         ${message}
         <div class="w3-card w3-padding w3-red">
             <h3>
-                <a href="viewposts.jsp">View Posts</a>
+                <a href="ShowPosts">View Posts</a>
             </h3>
         </div>
         <div class="w3-card">
