@@ -5,8 +5,14 @@
  */
 package facebook;
 
+import facebook4j.Facebook;
+import facebook4j.FacebookException;
+import facebook4j.Friend;
+import facebook4j.ResponseList;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +43,7 @@ public class ShowFriends extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ShowFriends</title>");            
+            out.println("<title>Servlet ShowFriends</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShowFriends at " + request.getContextPath() + "</h1>");
@@ -58,7 +64,23 @@ public class ShowFriends extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
+
+        PrintWriter out = response.getWriter();
+
+        try {
+            out.write("Your name is: " + facebook.getName() + "\n\n");
+            ResponseList<Friend> list = facebook.getFriends();
+            for (Friend friend : list) {
+                out.write(friend.getName() + "\n");
+            }
+
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (FacebookException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

@@ -74,6 +74,10 @@ public class CallBack extends HttpServlet {
         } catch (FacebookException e) {
             e.printStackTrace();
         }
+        
+        response.sendRedirect("fbdemo.jsp");
+
+
     }
 
     /**
