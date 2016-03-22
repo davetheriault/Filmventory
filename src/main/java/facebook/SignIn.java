@@ -58,6 +58,9 @@ public class SignIn extends HttpServlet {
             throws ServletException, IOException {
         //create a new Facebook object and put it on the session for future use
         Facebook facebook = new FacebookFactory().getInstance();
+        
+        facebook.setOAuthAppId("1531801267115904", "0f343922e4d10aba83a18bafc6c4f743");
+
         request.getSession().setAttribute("facebook", facebook);
         
         //build the CallBack URL by taking the current request URL (for the SignIn servlet), 
