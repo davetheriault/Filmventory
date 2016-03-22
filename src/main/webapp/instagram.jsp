@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Instagram</h1>
-        <a href="InstaAPI">Log In</a>
+        <a href="/InstaAPI">Log In</a>
     </body>
 </html>
