@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jorda
  */
-@WebServlet(name = "instaAPI", urlPatterns = {"/instaAPI"})
+@WebServlet(name = "InstaAPI", urlPatterns = {"/InstaAPI"})
 public class InstaAPI extends HttpServlet {
 
     /**
