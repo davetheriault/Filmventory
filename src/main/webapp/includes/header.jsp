@@ -7,6 +7,7 @@
         <title>${title}</title>
         <link rel="stylesheet" href="css/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+        <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 
     </head>
     <body>
