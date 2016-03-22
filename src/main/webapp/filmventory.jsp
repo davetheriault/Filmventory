@@ -7,9 +7,11 @@
 <main class="w3-container">
     <div class="w3-card" style="max-width: 500px;">
         <h3 class="w3-green w3-padding-left w3-margin-0 w3-play">Log In To Filmventory</h3>
-        <form action="SignIn" id="fblogin">
-            <button class="w3-blue" form="fblogin" type="submit"><i class="fa fa-facebook"></i> | Log In With Facebook</button>
-        </form>
+        <div class="w3-container w3-center">
+            <form action="SignIn" id="fblogin" class="w3-center">
+                <button class="w3-blue" form="fblogin" type="submit"><i class="fa fa-facebook"></i> | Log In With Facebook</button>
+            </form>
+        </div>
     </div>
     <br>
     <div
