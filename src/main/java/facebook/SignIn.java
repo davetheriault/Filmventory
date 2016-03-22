@@ -60,6 +60,7 @@ public class SignIn extends HttpServlet {
         Facebook facebook = new FacebookFactory().getInstance();
         
         facebook.setOAuthAppId("1531801267115904", "0f343922e4d10aba83a18bafc6c4f743");
+        facebook.setOAuthPermissions("public_profile,email,user_friends");
 
         request.getSession().setAttribute("facebook", facebook);
         
