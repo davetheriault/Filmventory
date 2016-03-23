@@ -27,5 +27,5 @@
 
                 </ul>
             </nav>
-            <div style="float: right;"><a href="index.html">Back to Java</a></div>
+            <div class="w3-padding w3-red" style="position: fixed; bottom: 0; right: 0;"><a href="index.html">Back to Java</a></div>
         </header>
