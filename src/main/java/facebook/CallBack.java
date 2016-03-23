@@ -75,7 +75,7 @@ public class CallBack extends HttpServlet {
             e.printStackTrace();
         }
         
-        response.sendRedirect("fbdemo.jsp");
+        response.sendRedirect("fvhome.jsp");
 
 
     }
