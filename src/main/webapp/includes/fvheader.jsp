@@ -19,10 +19,10 @@
 
     </head>
     <body>
-        <header class="w3-topbar w3-red w3-text-yellow">
+        <header class="w3-topbar w3-red">
             <nav class="w3-play w3-xlarge">
                 <ul class="w3-navbar">
-                    <li class="w3-yellow w3-text-red"><a href="filmventory.jsp">Filmventory</a></li>
+                    <li class="w3-yellow w3-text-red"><a class="w3-text-red" href="filmventory.jsp">Filmventory</a></li>
                     <li><a href="">Options</a></li>
 
                 </ul>
