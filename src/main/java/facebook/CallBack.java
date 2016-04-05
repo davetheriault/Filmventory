@@ -1,4 +1,3 @@
-
 package facebook;
 
 import facebook4j.Facebook;
@@ -73,43 +72,42 @@ public class CallBack extends HttpServlet {
         } catch (FacebookException e) {
             e.printStackTrace();
         }
-        
+
         JDBC db = new JDBC();
         String fbid;
         String fname;
         String lname;
         String email;
-        
+
         try {
             fbid = facebook.getMe().getId();
             fname = facebook.getMe().getFirstName();
             lname = facebook.getMe().getLastName();
             email = facebook.getMe().getEmail();
-            
+
             if (db.checkUser(fbid)) {
                 User existU = db.getUser(fbid);
                 request.getSession().setAttribute("user", existU);
                 request.getSession().setAttribute("id", existU.getFbId());
                 request.getSession().setAttribute("fname", existU.getFirstName());
-            }  else {
+                request.getSession().setAttribute("exist", "UserExists");
+            } else {
                 db.addUser(fbid, fname, lname, email);
-                if(db.checkUser(fbid)) {
+                if (db.checkUser(fbid)) {
                     User newU = db.getUser(fbid);
                     request.getSession().setAttribute("user", newU);
                     request.getSession().setAttribute("id", newU.getFbId());
                     request.getSession().setAttribute("fname", newU.getFirstName());
+                    request.getSession().setAttribute("exist", "Not Existed");
                 }
             }
-            
+
         } catch (FacebookException ex) {
             Logger.getLogger(CallBack.class.getName()).log(Level.SEVERE, null, ex);
             request.getSession().setAttribute("exception", ex);
         }
-        
-        
-        
+        request.getSession().setAttribute("test", "Test attribute");
         response.sendRedirect("fvhome.jsp");
-
 
     }
 
