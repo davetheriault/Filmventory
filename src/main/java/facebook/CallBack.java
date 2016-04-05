@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package facebook;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,6 +73,37 @@ public class CallBack extends HttpServlet {
         } catch (FacebookException e) {
             e.printStackTrace();
         }
+        
+        JDBC db = new JDBC();
+        String fbid;
+        String fname;
+        String lname;
+        String email;
+        
+        try {
+            fbid = facebook.getMe().getId();
+            fname = facebook.getMe().getFirstName();
+            lname = facebook.getMe().getLastName();
+            email = facebook.getMe().getEmail();
+            
+            if (db.checkUser(fbid)) {
+                User existU = db.getUser(fbid);
+                request.getSession().setAttribute("user", existU);
+                request.getSession().setAttribute("id", existU.getFbId());
+            }  else {
+                db.addUser(fbid, fname, lname, email);
+                if(db.checkUser(fbid)) {
+                    User newU = db.getUser(fbid);
+                    request.getSession().setAttribute("user", newU);
+                    request.getSession().setAttribute("id", newU.getFbId());
+                }
+            }
+            
+        } catch (FacebookException ex) {
+            Logger.getLogger(CallBack.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         
         response.sendRedirect("fvhome.jsp");
 
