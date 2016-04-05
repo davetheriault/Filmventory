@@ -6,7 +6,7 @@
 <%@include file="includes/fbsdk.html" %>
 <main class="w3-container w3-play w3-center">
     <div class="w3-card">
-        <h3 class="w3-green w3-padding-left w3-margin-0 w3-play">Welcome To Filmventory</h3>
+        <h3 class="w3-green w3-padding-left w3-margin-0 w3-play">Welcome ${id} To Filmventory</h3>
         <div class="w3-container w3-center">
             
             <p>Content Here</p>
