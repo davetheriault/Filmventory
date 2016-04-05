@@ -15,7 +15,7 @@
             <% out.print(session.getAttribute("test")); %><br>
             <% out.print(session.getAttribute("exception"));%><br>
             <c:forEach items="${sessionScope}" var="attr">
-                ${attr.key}=${attr.value}<br>
+                ${attr.key}=${attr.value}<br><br>
             </c:forEach>
         </div>
     </div>
