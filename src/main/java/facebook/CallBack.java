@@ -70,7 +70,7 @@ public class CallBack extends HttpServlet {
         try {
             facebook.getOAuthAccessToken(oauthCode);
         } catch (FacebookException e) {
-            e.printStackTrace();
+            request.getSession().setAttribute("exception", e);
         }
 
         JDBC db = new JDBC();
