@@ -90,12 +90,14 @@ public class CallBack extends HttpServlet {
                 User existU = db.getUser(fbid);
                 request.getSession().setAttribute("user", existU);
                 request.getSession().setAttribute("id", existU.getFbId());
+                request.getSession().setAttribute("fname", existU.getFirstName());
             }  else {
                 db.addUser(fbid, fname, lname, email);
                 if(db.checkUser(fbid)) {
                     User newU = db.getUser(fbid);
                     request.getSession().setAttribute("user", newU);
                     request.getSession().setAttribute("id", newU.getFbId());
+                    request.getSession().setAttribute("fname", newU.getFirstName());
                 }
             }
             
