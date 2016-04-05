@@ -12,7 +12,7 @@
             
             <p>Content Here</p>
             <% out.print( session.getAttribute("user")); %><br>
-            <% out.print( session.getAttribute("id")); %>
+            <% out.print( session.getAttribute("exception")); %>
         </div>
     </div>
     <br>
