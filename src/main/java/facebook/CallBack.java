@@ -103,6 +103,7 @@ public class CallBack extends HttpServlet {
             
         } catch (FacebookException ex) {
             Logger.getLogger(CallBack.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         
         
