@@ -74,12 +74,13 @@ public class CallBack extends HttpServlet {
         }
 
         JDBC db = new JDBC();
-        String fbid;
-        String fname;
-        String lname;
+        String fbid = null;
+        String fname = null;
+        String lname = null;
         String email;
 
         try {
+            
             fbid = facebook.getMe().getId();
             fname = facebook.getMe().getFirstName();
             lname = facebook.getMe().getLastName();
@@ -108,6 +109,10 @@ public class CallBack extends HttpServlet {
         }
         request.getSession().setAttribute("test", "Test attribute");
        // response.sendRedirect("fvhome.jsp");
+        System.out.println(oauthCode);
+        System.out.println(fbid);
+        System.out.println(lname);
+        System.out.println(fname);
 
     }
 
