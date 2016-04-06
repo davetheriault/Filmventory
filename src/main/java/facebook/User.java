@@ -17,8 +17,6 @@ class User {
     
     String firstName;
     
-    String email;
-
     public String getFbId() {
         return fbId;
     }
@@ -43,13 +41,7 @@ class User {
         this.firstName = firstName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  
     
     
 }

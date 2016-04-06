@@ -78,7 +78,7 @@ public class CallBack extends HttpServlet {
         String fbid = null;
         String fname = null;
         String lname = null;
-        String email = null;
+       // String email = null;
         String name = null;
         String exist = null;
 
@@ -90,7 +90,7 @@ public class CallBack extends HttpServlet {
             fbid = facebook.getMe().getId();
             fname = names[0];
             lname = names[1];
-            email = facebook.getMe().getEmail();
+          //  email = facebook.getMe().getEmail();
 
             if (db.checkUser(fbid) == true) {
                 User existU = db.getUser(fbid);
@@ -100,7 +100,7 @@ public class CallBack extends HttpServlet {
                 request.getSession().setAttribute("exist", "UserExists");
                 exist = "exists";
             } else {
-                db.addUser(fbid, fname, lname, email);
+                db.addUser(fbid, fname, lname);
                 if (db.checkUser(fbid) == true) {
                     User newU = db.getUser(fbid);
                     request.getSession().setAttribute("user", newU);
@@ -138,9 +138,6 @@ public class CallBack extends HttpServlet {
             out.println("<br>");
             out.println("<br>");
             out.println(name);
-            out.println("<br>");
-            out.println("<br>");
-            out.println(email);
             out.println("<br>");
             out.println("<br>");
             out.println(exist);

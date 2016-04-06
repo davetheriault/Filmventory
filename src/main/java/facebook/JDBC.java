@@ -179,7 +179,7 @@ public class JDBC {
         return kids;
     }
 */
-    public void addUser(String fbid, String f_name, String l_name, String email) {
+    public void addUser(String fbid, String f_name, String l_name) {
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
@@ -189,10 +189,9 @@ public class JDBC {
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "INSERT INTO user (fb_id,first_name,last_name,email) "
-                    + "VALUES ('" + fbid + "','" + f_name + "','" + l_name + "','" + email + "') ;";
+            sql = "INSERT INTO user (fb_id,first_name,last_name) VALUES ('" + fbid + "','" + f_name + "','" + l_name + "') ;";
 
-            stmt.executeQuery(sql);
+            stmt.executeUpdate(sql);
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,7 +217,6 @@ public class JDBC {
                 user.setFbId(rs.getString("fb_id"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
-                user.setEmail(rs.getString("email"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
