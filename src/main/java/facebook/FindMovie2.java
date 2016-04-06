@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 /**
  *
@@ -35,6 +36,12 @@ public class FindMovie2 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        JDBC db = new JDBC();
+
+        if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
+                response.sendRedirect("filmventory.jsp");
+        }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -99,12 +106,17 @@ public class FindMovie2 extends HttpServlet {
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(url, Map.class);
-            
+
             out.println("<ul class=\"w3-ul\">");
             for (String key : map.keySet()) {
                 if (key.equals("Poster")) {
 
-                } else {
+                } else if (key.equals("Title")) {
+                    out.println("<li>" + key + ": " + map.get(key) + " ");
+                    
+                    out.println("</li>");
+                } 
+                else {
                     out.println("<li>" + key + ": " + map.get(key) + "</li>");
                 }
             }
