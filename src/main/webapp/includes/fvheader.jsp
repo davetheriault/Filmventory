@@ -25,7 +25,7 @@
                 <ul class="w3-navbar">
                     <li class="w3-yellow w3-text-red">
                         <span class="w3-opennav w3-hide-large w3-xlarge" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-                        <a class="w3-text-red" href="filmventory.jsp">Filmventory</a>
+                        <a class="w3-text-red" href="filmventory.jsp" style="margin-left: 50px;">Filmventory</a>
                     </li>
                     <li><a href="">Options</a></li>
 
