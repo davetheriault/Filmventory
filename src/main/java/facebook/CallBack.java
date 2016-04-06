@@ -5,6 +5,7 @@ import facebook4j.FacebookException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -77,15 +78,19 @@ public class CallBack extends HttpServlet {
         String fbid = null;
         String fname = null;
         String lname = null;
-        String email;
+        String email = null;
+        String name = null;
+        String exist = null;
 
         try {
-            
+
+            name = facebook.getMe().getName();
+            String[] names = name.split(" ", 2);
+
             fbid = facebook.getMe().getId();
-            fname = facebook.getMe().getFirstName();
-            lname = facebook.getMe().getLastName();
+            fname = names[0];
+            lname = names[1];
             email = facebook.getMe().getEmail();
-            fname = facebook.getMe().getName();
 
             if (db.checkUser(fbid) == true) {
                 User existU = db.getUser(fbid);
@@ -93,6 +98,7 @@ public class CallBack extends HttpServlet {
                 request.getSession().setAttribute("id", existU.getFbId());
                 request.getSession().setAttribute("fname", existU.getFirstName());
                 request.getSession().setAttribute("exist", "UserExists");
+                exist = "exists";
             } else {
                 db.addUser(fbid, fname, lname, email);
                 if (db.checkUser(fbid) == true) {
@@ -101,6 +107,7 @@ public class CallBack extends HttpServlet {
                     request.getSession().setAttribute("id", newU.getFbId());
                     request.getSession().setAttribute("fname", newU.getFirstName());
                     request.getSession().setAttribute("exist", "Not Existed");
+                    exist = "not exists";
                 }
             }
 
@@ -110,7 +117,7 @@ public class CallBack extends HttpServlet {
         }
         request.getSession().setAttribute("test", "Test attribute");
        // response.sendRedirect("fvhome.jsp");
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -122,17 +129,21 @@ public class CallBack extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet CallBack at " + request.getContextPath() + "</h1>");
             out.println(oauthCode);
-            out.println("<br>");  
+            out.println("<br>");
             out.println("<br>");
             out.println(fbid);
             out.println("<br>");
             out.println("<br>");
             out.println(fname);
+            out.println("<br>");
+            out.println("<br>");
+            out.println(name);
+            out.println("<br>");
+            out.println("<br>");
+            out.println(email);
             out.println("</body>");
             out.println("</html>");
         }
-        
-       
 
     }
 
