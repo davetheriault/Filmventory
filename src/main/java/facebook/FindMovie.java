@@ -39,14 +39,66 @@ public class FindMovie extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MovieSearch</title>");
-            out.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MovieSearch at " + request.getContextPath() + "</h1>");
+            out.println("\n"
+                    + "<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\n"
+                    + "<%@page contentType=\"text/html\" pageEncoding=\"UTF-8\"%>\n"
+                    + "<% if (request.getSession().getAttribute(\"facebook\") == null || request.getSession().getAttribute(\"facebook\") == \"\") {\n"
+                    + "        if (request.getAttribute(\"title\") != \"filmventory\") {\n"
+                    + "            response.sendRedirect(\"filmventory.jsp\");\n"
+                    + "        }\n"
+                    + "    }\n"
+                    + "%>\n"
+                    + "<!DOCTYPE html>\n"
+                    + "<html>\n"
+                    + "    <head>\n"
+                    + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n"
+                    + "        <title>Movie Search</title>\n"
+                    + "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"></script>"
+                    + "        <link rel=\"stylesheet\" href=\"css/w3.css\">\n"
+                    + "        <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lobster\">\n"
+                    + "        <link href='https://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>\n"
+                    + "        <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>\n"
+                    + "        <link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css\">\n"
+                    + "\n"
+                    + "    </head>\n"
+                    + "    <body>\n"
+                    + "        <header class=\"w3-topbar w3-red\">\n"
+                    + "            <nav class=\"w3-play w3-xlarge\">\n"
+                    + "                <ul class=\"w3-navbar\">\n"
+                    + "                    <li class=\"w3-yellow w3-text-red\"><a class=\"w3-text-red\" href=\"filmventory.jsp\">Filmventory</a></li>\n"
+                    + "                    <li><a href=\"\">Options</a></li>\n"
+                    + "\n"
+                    + "                </ul>\n"
+                    + "            </nav>\n"
+                    + "            <div class=\"w3-padding w3-red\" style=\"position: fixed; bottom: 0; right: 0;\"><a href=\"index.html\">Back to Java</a></div>\n"
+                    + "        </header>\n"
+                    + "");
+            out.println("\n"
+                    + "<div class=\"w3-sidenav w3-collapse w3-red w3-card-2 w3-animate-left\">\n"
+                    + "    <a href=\"#\" onclick=\"w3_close()\" class=\"w3-closenav w3-hide-large\">Close X</a> \n"
+                    + "    <ul class=\"w3-ul\">\n"
+                    + "        <li><a href=\"mymovies.jsp\">My Movies</a></li>\n"
+                    + "        <li><a href=\"addmovies.jsp\">Add Movies</a></li>\n"
+                    + "        <li><a href=\"/LogOut\">Log Out</a></li>\n"
+                    + "    </ul>\n"
+                    + "</div>\n"
+                    + "\n"
+                    + "<div class=\"w3-opennav w3-hide-large w3-xxlarge w3-padding-left\" onclick=\"w3_open()\" style=\"position: absolute; z-index: 200;\"><i class=\"fa fa-bars\"></i></div>\n"
+                    + "\n"
+                    + "<script>\n"
+                    + "    function w3_open() {\n"
+                    + "        document.getElementsByClassName(\"w3-sidenav\")[0].style.display = \"block\";\n"
+                    + "    }\n"
+                    + "    function w3_close() {\n"
+                    + "        document.getElementsByClassName(\"w3-sidenav\")[0].style.display = \"none\";\n"
+                    + "    }\n"
+                    + "</script>");
+            out.println("<main class=\"w3-main w3-play\" style=\"margin-left:200px\">\n"
+                    + "\n"
+                    + "    <div class=\"w3-card-4 w3-margin\">\n"
+                    + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-play\">\n"
+                    + "            Results for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
+                    + "        <div class=\"w3-container\">");
 
             String title = request.getParameter("title");
 
@@ -64,16 +116,19 @@ public class FindMovie extends HttpServlet {
                 Map<String, Object> innerMap = (Map<String, Object>) item;
                 out.println("<br>");
                 for (String key : innerMap.keySet()) {
-
+                    
+                    out.println("<div class=\"w3-card-2\">"
+                            + "       <ul class=\"w3-ul\">");
                     if (key.equals("Title")) {
-                        out.println(key + ": <a href='MovieSearch?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a><br>");
+                        out.println("<li>" + key + ": <a href='FindMovie2?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a></li>");
                     }
                     if (key.equals("Year")) {
-                        out.println(key + ": " + innerMap.get(key) + "<br>");
+                        out.println("<li>" + key + ": " + innerMap.get(key) + "</li>");
                     }
-
+                    out.println("</ul></div>");
                 }
             }
+            out.println("</div></div></main>");
             out.println("</body>");
             out.println("</html>");
         }
