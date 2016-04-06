@@ -10,8 +10,12 @@
 
     <div class="w3-card-4 w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-play">
-            Welcome <% out.print(session.getAttribute("fname"));%> To Filmventory</h3>
+            Add Movies</h3>
         <div class="w3-container">
+            <form class="w3-form" id="findmov" action="FindMovie" method="get">
+                <input type="text" name="title" placeholder="Search Movies by Title..." required />
+                <input type="submit" value="Search" form="findmov" name="movSubmit" />
+            </form>
             <div
                 class="fb-like"
                 data-share="true"
