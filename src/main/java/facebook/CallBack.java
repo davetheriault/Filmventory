@@ -141,6 +141,9 @@ public class CallBack extends HttpServlet {
             out.println("<br>");
             out.println("<br>");
             out.println(email);
+            out.println("<br>");
+            out.println("<br>");
+            out.println(exist);
             out.println("</body>");
             out.println("</html>");
         }
