@@ -89,7 +89,7 @@ public class FindMovie2 extends HttpServlet {
                     + "    <div class=\"w3-card-4 w3-margin\">\n"
                     + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-play\">\n"
                     + "            Details for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
-                    + "        <div class=\"w3-container\">");
+                    + "        <div class=\"w3-container w3-padding\">");
 
             String title = request.getParameter("title");
 
@@ -99,16 +99,17 @@ public class FindMovie2 extends HttpServlet {
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(url, Map.class);
-
+            
+            out.println("<ul class=\"w3-ul\">");
             for (String key : map.keySet()) {
                 if (key.equals("Poster")) {
 
                 } else {
-                    out.println(key + ": " + map.get(key) + "<br>");
+                    out.println("<li>" + key + ": " + map.get(key) + "</li>");
                 }
             }
-            out.println("<a href='" + map.get("Poster") + "' >View Poster</a> <br>");
-
+            out.println("<li><a href='" + map.get("Poster") + "' >View Poster</a></li> ");
+            out.println("</ul>");
             out.println("</div></div></main>");
 
             out.println("</body>");
