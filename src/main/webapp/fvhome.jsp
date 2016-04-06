@@ -10,13 +10,12 @@
             Welcome <% out.print(session.getAttribute("fname")); %> To Filmventory</h3>
         <div class="w3-container w3-center">
 
-            <p>Content Here</p>
-            <% out.print(session.getAttribute("user")); %><br>
-            <% out.print(session.getAttribute("test")); %><br>
-            <% out.print(session.getAttribute("exception"));%><br>
-            <c:forEach items="${sessionScope}" var="attr">
-                ${attr.key}=${attr.value}<br><br>
-            </c:forEach>
+            <div class="w3-sidenav w3-collapse w3-black w3-card-2 w3-animate-left">
+                <a href="mymovies.jsp">My Movies</a>
+                <a href="addmovies.jsp">Add Movies</a>
+                <a href="/LogOut">Log Out</a>
+            </div>
+            
         </div>
     </div>
     <br>
