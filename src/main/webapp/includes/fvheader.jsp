@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
-        if (request.getAttribute("title") != "filmventory" ) {
+        if (request.getAttribute("title") != "filmventory") {
             response.sendRedirect("filmventory.jsp");
         }
     }
@@ -14,6 +14,7 @@
         <title>${title}</title>
         <link rel="stylesheet" href="css/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+        <link href='https://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
