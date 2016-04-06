@@ -85,6 +85,7 @@ public class CallBack extends HttpServlet {
             fname = facebook.getMe().getFirstName();
             lname = facebook.getMe().getLastName();
             email = facebook.getMe().getEmail();
+            fname = facebook.getMe().getName();
 
             if (db.checkUser(fbid) == true) {
                 User existU = db.getUser(fbid);
