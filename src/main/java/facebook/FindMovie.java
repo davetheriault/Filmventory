@@ -40,14 +40,7 @@ public class FindMovie extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("\n"
-                    + "<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\n"
-                    + "<%@page contentType=\"text/html\" pageEncoding=\"UTF-8\"%>\n"
-                    + "<% if (request.getSession().getAttribute(\"facebook\") == null || request.getSession().getAttribute(\"facebook\") == \"\") {\n"
-                    + "        if (request.getAttribute(\"title\") != \"filmventory\") {\n"
-                    + "            response.sendRedirect(\"filmventory.jsp\");\n"
-                    + "        }\n"
-                    + "    }\n"
-                    + "%>\n"
+                    
                     + "<!DOCTYPE html>\n"
                     + "<html>\n"
                     + "    <head>\n"
@@ -83,7 +76,7 @@ public class FindMovie extends HttpServlet {
                     + "    </ul>\n"
                     + "</div>\n"
                     + "\n"
-                    + "<div class=\"w3-opennav w3-hide-large w3-xxlarge w3-padding-left\" onclick=\"w3_open()\" style=\"position: absolute; z-index: 200;\"><i class=\"fa fa-bars\"></i></div>\n"
+                    + "<div class=\"w3-text-red w3-opennav w3-hide-large w3-xxlarge w3-padding-left\" onclick=\"w3_open()\"><i class=\"fa fa-bars\"></i></div>\n"
                     + "\n"
                     + "<script>\n"
                     + "    function w3_open() {\n"
@@ -115,18 +108,19 @@ public class FindMovie extends HttpServlet {
             for (Object item : list) {
                 Map<String, Object> innerMap = (Map<String, Object>) item;
                 out.println("<br>");
+                out.println("<div class=\"w3-card-2\">"
+                        + "       <ul class=\"w3-ul\">");
                 for (String key : innerMap.keySet()) {
-                    
-                    out.println("<div class=\"w3-card-2\">"
-                            + "       <ul class=\"w3-ul\">");
+
                     if (key.equals("Title")) {
                         out.println("<li>" + key + ": <a href='FindMovie2?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a></li>");
                     }
                     if (key.equals("Year")) {
                         out.println("<li>" + key + ": " + innerMap.get(key) + "</li>");
                     }
-                    out.println("</ul></div>");
                 }
+                out.println("</ul></div>");
+
             }
             out.println("</div></div></main>");
             out.println("</body>");
