@@ -121,7 +121,11 @@ public class CallBack extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet CallBack at " + request.getContextPath() + "</h1>");
             out.println(oauthCode);
+            out.println("<br");  
+            out.println("<br");
             out.println(fbid);
+            out.println("<br");
+            out.println("<br");
             out.println(fname);
             out.println("</body>");
             out.println("</html>");
