@@ -80,7 +80,7 @@ public class CallBack extends HttpServlet {
         String lname = null;
        // String email = null;
         String name = null;
-        String exist = null;
+       // String exist = null;
 
         try {
 
@@ -98,7 +98,7 @@ public class CallBack extends HttpServlet {
                 request.getSession().setAttribute("id", existU.getFbId());
                 request.getSession().setAttribute("fname", existU.getFirstName());
                 request.getSession().setAttribute("exist", "UserExists");
-                exist = "exists";
+          //      exist = "exists";
             } else {
                 db.addUser(fbid, fname, lname);
                 if (db.checkUser(fbid) == true) {
@@ -107,7 +107,7 @@ public class CallBack extends HttpServlet {
                     request.getSession().setAttribute("id", newU.getFbId());
                     request.getSession().setAttribute("fname", newU.getFirstName());
                     request.getSession().setAttribute("exist", "Not Existed");
-                    exist = "not exists";
+           //         exist = "not exists";
                 }
             }
 
@@ -115,12 +115,12 @@ public class CallBack extends HttpServlet {
             Logger.getLogger(CallBack.class.getName()).log(Level.SEVERE, null, ex);
             request.getSession().setAttribute("exception", ex);
         }
-        request.getSession().setAttribute("test", "Test attribute");
-       // response.sendRedirect("fvhome.jsp");
 
+        response.sendRedirect("fvhome.jsp");
+        /*
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -146,7 +146,7 @@ public class CallBack extends HttpServlet {
             out.println(request.getSession().getAttribute("fname"));
             out.println("</body>");
             out.println("</html>");
-        }
+        }*/
 
     }
 
