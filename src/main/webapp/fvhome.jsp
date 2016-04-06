@@ -5,13 +5,13 @@
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
 <main class="w3-container w3-play w3-center">
+    <%@include file="includes/sidenav.html" %>
+
     <div class="w3-card-4 w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-play">
-            Welcome <% out.print(session.getAttribute("fname")); %> To Filmventory</h3>
+            Welcome <% out.print(session.getAttribute("fname"));%> To Filmventory</h3>
         <div class="w3-container w3-center">
 
-            <%@include file="includes/sidenav.html" %>
-            
         </div>
     </div>
     <br>
