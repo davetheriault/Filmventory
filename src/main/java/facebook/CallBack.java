@@ -109,10 +109,25 @@ public class CallBack extends HttpServlet {
         }
         request.getSession().setAttribute("test", "Test attribute");
        // response.sendRedirect("fvhome.jsp");
-        System.out.println(oauthCode);
-        System.out.println(fbid);
-        System.out.println(lname);
-        System.out.println(fname);
+        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CallBack</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CallBack at " + request.getContextPath() + "</h1>");
+            out.println(oauthCode);
+            out.println(fbid);
+            out.println(fname);
+            out.println("</body>");
+            out.println("</html>");
+        }
+        
+       
 
     }
 
