@@ -107,7 +107,7 @@ public class CallBack extends HttpServlet {
             request.getSession().setAttribute("exception", ex);
         }
         request.getSession().setAttribute("test", "Test attribute");
-        response.sendRedirect("fvhome.jsp");
+       // response.sendRedirect("fvhome.jsp");
 
     }
 
