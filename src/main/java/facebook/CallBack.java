@@ -141,6 +141,9 @@ public class CallBack extends HttpServlet {
             out.println("<br>");
             out.println("<br>");
             out.println(exist);
+            out.println("<br>");
+            out.println("<br>");
+            out.println(request.getSession().getAttribute("fname"));
             out.println("</body>");
             out.println("</html>");
         }
