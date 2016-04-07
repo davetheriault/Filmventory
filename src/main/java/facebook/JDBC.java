@@ -269,17 +269,17 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
+            //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
 
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                if ("".equals(rs.getString("title")) || rs.getString("title") == null) {
+            //rs = stmt.executeQuery(sql);
+            //while (rs.next()) {
+            //    if ("".equals(rs.getString("title")) || rs.getString("title") == null) {
                     sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
                             + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
                             + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
                     stmt.executeUpdate(sql);
-                }
-            }
+            //    }
+            //}
             int mov_id = getMovieId(title, year);
             int use_id = getUserId(fb_id);
             sql = "INSERT INTO movie2user (movie_id,user_id) VALUES ('"+mov_id+"','"+use_id+"')";
