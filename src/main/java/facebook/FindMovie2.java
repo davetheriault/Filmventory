@@ -38,6 +38,25 @@ public class FindMovie2 extends HttpServlet {
             throws ServletException, IOException {
         
         JDBC db = new JDBC();
+        
+        if ("yes".equals(request.getParameter("add"))) {
+            String titl = request.getParameter("tit");
+            String year = request.getParameter("yea");
+            String rate = request.getParameter("rat");
+            String rele = request.getParameter("rel");
+            String runt = request.getParameter("run");
+            String genr = request.getParameter("gen");
+            String dire = request.getParameter("dir");
+            String writ = request.getParameter("wri");
+            String acto = request.getParameter("act");
+            String plot = request.getParameter("plo");
+            String lang = request.getParameter("lan");
+            String coun = request.getParameter("cou");
+            String meta = request.getParameter("met");
+            String fbid = (String) request.getSession().getAttribute("id");
+            db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+            
+        }
 
         if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
                 response.sendRedirect("filmventory.jsp");
@@ -114,6 +133,16 @@ public class FindMovie2 extends HttpServlet {
                 } else if (key.equals("Title")) {
                     out.println("<li>" + key + ": " + map.get(key) + " ");
                     
+                    boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
+                    if (own == false) {
+                        out.println("<a href=\"/FindMovie2?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
+                                   +"&yea="+(String)map.get("Year")+"&rel="+encode((String)map.get("Released"), "UTF-8")
+                                   +"&rat="+encode((String)map.get("Rated"), "UTF-8")+"&run="+encode((String)map.get("Runtime"), "UTF-8")
+                                   +"&gen="+encode((String)map.get("Genre"), "UTF-8")+"&dir="+encode((String)map.get("Director"), "UTF-8")
+                                   +"&wri="+encode((String)map.get("Writer"), "UTF-8")+"&act="+encode((String)map.get("Actors"), "UTF-8")
+                                   +"&plo="+encode((String)map.get("Plot"), "UTF-8")+"&lan="+encode((String)map.get("Language"), "UTF-8")
+                                   +"&cou="+encode((String)map.get("Country"), "UTF-8")+"&met="+encode((String)map.get("Metascore"), "UTF-8"));
+                    }
                     out.println("</li>");
                 } 
                 else {
