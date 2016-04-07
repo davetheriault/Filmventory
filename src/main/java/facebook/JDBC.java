@@ -39,153 +39,6 @@ public class JDBC {
         //db.getPeople();
     }
 
-    /*public List getPeople() {
-     Connection conn = null;
-     Statement stmt = null;
-     String sql = null;
-     ResultSet rs = null;
-     List people = new ArrayList<>();
-     try {
-     //connect
-
-     conn = DriverManager.getConnection(DB_URL, USER, PASS);
-     stmt = conn.createStatement();
-     sql = "SELECT * FROM ancestor;";
-     rs = stmt.executeQuery(sql);
-     while (rs.next()) {
-
-     Person person = new Person();
-     person.setFirstName(rs.getString("first_name"));
-     person.setLastName(rs.getString("last_name"));
-     person.setId(rs.getInt("id"));
-     person.setBirthday(rs.getDate("birthday"));
-     person.setGender(rs.getString("gender"));
-
-     people.add(person);
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     } finally {
-     try {
-     if (conn != null) {
-     conn.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-
-     try {
-     if (stmt != null) {
-     stmt.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-
-     return people;
-     }
-
-     public List<Person> getParents(String child) {
-     Connection conn = null;
-     Statement stmt = null;
-     String sql = null;
-     ResultSet rs = null;
-     List<Person> parents = new ArrayList<>();
-     try {
-     //connect
-
-     conn = DriverManager.getConnection(DB_URL, USER, PASS);
-     stmt = conn.createStatement();
-     sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.parent_id WHERE relationship.child_id = " + child + ";";
-     rs = stmt.executeQuery(sql);
-     while (rs.next()) {
-
-     Person person = new Person();
-     person.setFirstName(rs.getString("first_name"));
-     person.setLastName(rs.getString("last_name"));
-     person.setId(rs.getInt("id"));
-     person.setBirthday(rs.getDate("birthday"));
-     person.setGender(rs.getString("gender"));
-
-     parents.add(person);
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     } finally {
-     try {
-     if (conn != null) {
-     conn.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-
-     try {
-     if (stmt != null) {
-     stmt.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-
-     return parents;
-     }
-
-     public List<Person> getKids(String parent) {
-     Connection conn = null;
-     Statement stmt = null;
-     String sql = null;
-     ResultSet rs = null;
-     List<Person> kids = new ArrayList<>();
-     try {
-     //connect
-
-     conn = DriverManager.getConnection(DB_URL, USER, PASS);
-     stmt = conn.createStatement();
-     sql = "SELECT * FROM ancestor INNER JOIN relationship ON ancestor.id=relationship.child_id WHERE relationship.parent_id = " + parent + " ORDER BY birthday;";
-     rs = stmt.executeQuery(sql);
-     while (rs.next()) {
-
-     //   Person person = new Person();
-     person.setFirstName(rs.getString("first_name"));
-     person.setLastName(rs.getString("last_name"));
-     person.setId(rs.getInt("id"));
-     person.setBirthday(rs.getDate("birthday"));
-     person.setGender(rs.getString("gender"));
-
-     kids.add(person);
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     } finally {
-     try {
-     if (conn != null) {
-     conn.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-
-     try {
-     if (stmt != null) {
-     stmt.close();
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-
-     return kids;
-     }
-    
-     */
-    Connection conn = null;
-    Statement stmt = null;
-    String sql = null;
-    ResultSet rs = null;
-
     public void addUser(String fbid, String f_name, String l_name) {
         Connection conn = null;
         Statement stmt = null;
@@ -202,6 +55,11 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
     }
 
@@ -227,6 +85,11 @@ public class JDBC {
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return user;
     }
@@ -253,6 +116,11 @@ public class JDBC {
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return check;
     }
@@ -286,17 +154,25 @@ public class JDBC {
             stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
     }
 
     private int getMovieId(String title, String year) {
         int mov_id = 0;
-
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT id FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1";
-            ResultSet rs = stmt.executeQuery(sql);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT id FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1";
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 mov_id = rs.getInt("id");
@@ -304,18 +180,26 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return mov_id;
     }
 
     private int getUserId(String fb_id) {
         int use_id = 0;
-
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1";
-            ResultSet rs = stmt.executeQuery(sql);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1";
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 use_id = rs.getInt("id");
@@ -323,19 +207,28 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return use_id;
     }
     
     public boolean checkMovie2User(String fb_id, String title, String year) {
         boolean m2u = false;
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            Statement stmt = conn.createStatement();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
             int mov = getMovieId(title, year);
             int user = getUserId(fb_id);
-            String sql = "SELECT id FROM movie2user WHERE movie_id = '" + mov + "' AND user_id = '" + user + "' LIMIT 1";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT id FROM movie2user WHERE movie_id = '" + mov + "' AND user_id = '" + user + "' LIMIT 1";
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
 
@@ -343,9 +236,13 @@ public class JDBC {
                     m2u = true;
                 }
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return m2u;
     }
@@ -364,15 +261,30 @@ public class JDBC {
             sql = "SELECT * movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '"+fb_id+"' ORDER BY movie.title";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                Movie mov = new Movie(rs.getString("title"), rs.getString("year"), rs.getString("rated"), 
-                                rs.getString("released"), rs.getString("runtime"), rs.getString("genre"),
-                                rs.getString("director"), rs.getString("writer"), rs.getString("actors"),
-                                rs.getString("plot"), rs.getString("language"), rs.getString("country"),
-                                rs.getString("metascore"));
+                Movie mov = new Movie();
+                mov.setTitle(rs.getString("title"));
+                mov.setYear(rs.getString("year"));
+                mov.setRated(rs.getString("rated"));
+                mov.setReleased(rs.getString("released"));
+                mov.setRuntime(rs.getString("runtime"));
+                mov.setGenre(rs.getString("genre"));
+                mov.setDirector(rs.getString("director"));
+                mov.setWriter(rs.getString("writer"));
+                mov.setActors(rs.getString("actors"));
+                mov.setPlot(rs.getString("plot"));
+                mov.setLanguage(rs.getString("language"));
+                mov.setCountry(rs.getString("country"));
+                mov.setMetascore(rs.getString("metascore"));
+                                               
                 list.add(mov);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
         }
         return list;
     }

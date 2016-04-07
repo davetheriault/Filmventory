@@ -13,7 +13,7 @@
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
         <div class="w3-container">
 
-            <c:forEach var="movie" items="${inventory}">
+            <c:forEach var="movie" items="${movies}">
                 <div class="w3-card-2">
                     <ul class="w3-ul">
                         <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
@@ -22,13 +22,9 @@
                 </div>
             </c:forEach>
 
-            <div
-                class="fb-like"
-                data-share="true"
-                data-width="450"
-                data-show-faces="true">
-            </div>
+            
         </div>
+        
     </div>
     <br>
 
