@@ -39,7 +39,7 @@ public class MyMovies extends HttpServlet {
 
         List<Movie> movies = db.getInventory(fb_id);
 
-        request.getSession().setAttribute("movies", movies);
+        request.setAttribute("movies", movies);
 
         request.getRequestDispatcher("fvmymovies.jsp").forward(request, response);
     }
