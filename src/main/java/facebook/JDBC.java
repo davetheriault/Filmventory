@@ -258,7 +258,7 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '"+fb_id+"' ORDER BY movie.title";
+            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '"+fb_id+"' ORDER BY movie.title";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
