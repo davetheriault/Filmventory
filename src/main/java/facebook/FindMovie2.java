@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import static java.net.URLEncoder.encode;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,6 +40,8 @@ public class FindMovie2 extends HttpServlet {
         
         JDBC db = new JDBC();
         
+        List<String> messages = new List();
+        
         if ("yes".equals(request.getParameter("add"))) {
             String titl = request.getParameter("tit");
             String year = request.getParameter("yea");
@@ -56,6 +59,7 @@ public class FindMovie2 extends HttpServlet {
             String fbid = (String) request.getSession().getAttribute("id");
             db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
             
+            messages.add("Add equals yes.");
         }
 
         if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
@@ -116,6 +120,9 @@ public class FindMovie2 extends HttpServlet {
                     + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-play\">\n"
                     + "            Details for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
                     + "        <div class=\"w3-container w3-padding\">");
+            for (String mess : messages) {
+                out.println("messages: "+mess);
+            }
 
             String title = request.getParameter("title");
 
