@@ -349,4 +349,33 @@ public class JDBC {
         }
         return m2u;
     }
+
+    public List getInventory(String fb_id) {
+
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<Movie> list = new ArrayList<>();
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT * movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '"+fb_id+"' ORDER BY movie.title";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Movie mov = new Movie(rs.getString("title"), rs.getString("year"), rs.getString("rated"), 
+                                rs.getString("released"), rs.getString("runtime"), rs.getString("genre"),
+                                rs.getString("director"), rs.getString("writer"), rs.getString("actors"),
+                                rs.getString("plot"), rs.getString("language"), rs.getString("country"),
+                                rs.getString("metascore"));
+                list.add(mov);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    
 }
