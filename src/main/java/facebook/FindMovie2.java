@@ -142,7 +142,7 @@ public class FindMovie2 extends HttpServlet {
                                    +"&wri="+encode((String)map.get("Writer"), "UTF-8")+"&act="+encode((String)map.get("Actors"), "UTF-8")
                                    +"&plo="+encode((String)map.get("Plot"), "UTF-8")+"&lan="+encode((String)map.get("Language"), "UTF-8")
                                    +"&cou="+encode((String)map.get("Country"), "UTF-8")+"&met="+encode((String)map.get("Metascore"), "UTF-8")
-                                   +"\">Add Movie</a>");
+                                   +"&title="+urltitle+"\">Add Movie</a>");
                     }
                     out.println("</li>");
                 } 
