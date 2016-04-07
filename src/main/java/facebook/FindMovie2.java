@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import static java.net.URLEncoder.encode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class FindMovie2 extends HttpServlet {
         
         JDBC db = new JDBC();
         
-        List<String> messages = new List();
+        List<String> messages = new ArrayList();
         
         if ("yes".equals(request.getParameter("add"))) {
             String titl = request.getParameter("tit");
