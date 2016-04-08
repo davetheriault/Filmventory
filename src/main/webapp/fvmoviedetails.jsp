@@ -11,7 +11,7 @@
     <div class="w3-card-4 w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-play">
             ${movie.title}</h3>
-        <div class="w3-container">
+        <div class="w3-container w3-padding">
 
             <div class="w3-card-2">
                 <ul class="w3-ul">
@@ -20,6 +20,14 @@
                     <li> Rated: ${movie.rated} </li>
                     <li> Released: ${movie.released} </li>
                     <li> Runtime: ${movie.runtime} </li>
+                    <li> Genre: ${movie.genre} </li>
+                    <li> Director: ${movie.director} </li>
+                    <li> Writer: ${movie.writer} </li>
+                    <li> Actors: ${movie.actors} </li>
+                    <li> Plot: ${movie.plot} </li>
+                    <li> Language: ${movie.language} </li>
+                    <li> Country: ${movie.country} </li>
+                    <li> Metascore: ${movie.metascore} </li>
                 </ul>
             </div>
 

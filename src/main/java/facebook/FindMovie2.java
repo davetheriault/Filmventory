@@ -125,7 +125,7 @@ public class FindMovie2 extends HttpServlet {
                     
                     boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
                     if (own == false) {
-                        out.println("<a href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
+                        out.println("<a class=\"w3-button w3-right\" href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
                                    +"&yea="+(String)map.get("Year")+"&rel="+encode((String)map.get("Released"), "UTF-8")
                                    +"&rat="+encode((String)map.get("Rated"), "UTF-8")+"&run="+encode((String)map.get("Runtime"), "UTF-8")
                                    +"&gen="+encode((String)map.get("Genre"), "UTF-8")+"&dir="+encode((String)map.get("Director"), "UTF-8")

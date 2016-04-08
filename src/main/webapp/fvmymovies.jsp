@@ -11,7 +11,7 @@
     <div class="w3-card-4 w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-play">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
-        <div class="w3-container">
+        <div class="w3-container w3-padding">
 
             <c:forEach var="movie" items="${movies}">
                 <div class="w3-card-2">
