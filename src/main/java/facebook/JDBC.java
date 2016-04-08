@@ -289,6 +289,48 @@ public class JDBC {
         }
         return list;
     }
+
+    Movie getMovie(String title, String year) {
+
+        int movid = getMovieId(title, year);
+        
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        Movie mov = new Movie();
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "SELECT * FROM movie WHERE id = '"+movid+"' LIMIT 1";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                mov.setTitle(rs.getString("title"));
+                mov.setYear(rs.getString("year"));
+                mov.setRated(rs.getString("rated"));
+                mov.setReleased(rs.getString("released"));
+                mov.setRuntime(rs.getString("runtime"));
+                mov.setGenre(rs.getString("genre"));
+                mov.setDirector(rs.getString("director"));
+                mov.setWriter(rs.getString("writer"));
+                mov.setActors(rs.getString("actors"));
+                mov.setPlot(rs.getString("plot"));
+                mov.setLanguage(rs.getString("language"));
+                mov.setCountry(rs.getString("country"));
+                mov.setMetascore(rs.getString("metascore"));
+                                               
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try { if (conn != null) { conn.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); }
+            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        return mov;
+    }
     
     
 }
