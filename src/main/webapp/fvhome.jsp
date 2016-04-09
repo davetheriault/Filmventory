@@ -16,7 +16,7 @@
                 movies that you own. Simply select 'Add Movies' to search for titles to add to your inventory. 
                 Select 'My Movies' to view your list. </p>
             <div
-                class="w3-card-2 fb-like"
+                class="w3-card-2 w3-padding w3-center fb-like"
                 data-share="true"
                 data-width="450"
                 data-show-faces="true">
