@@ -77,7 +77,7 @@ public class AddMovie extends HttpServlet {
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
         
-        response.sendRedirect("fvhome.jsp");
+        response.sendRedirect("/MyMovies");
 
     }
 
