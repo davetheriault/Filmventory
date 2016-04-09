@@ -60,7 +60,7 @@ public class AddMovie extends HttpServlet {
             throws ServletException, IOException {
 
         JDBC db = new JDBC();
-        
+
         String titl = request.getParameter("tit");
         String year = request.getParameter("yea");
         String rate = request.getParameter("rat");
@@ -76,7 +76,7 @@ public class AddMovie extends HttpServlet {
         String meta = request.getParameter("met");
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
-        
+
         response.sendRedirect("/MyMovies");
 
     }
@@ -92,7 +92,26 @@ public class AddMovie extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        JDBC db = new JDBC();
+
+        String titl = request.getParameter("tit");
+        String year = request.getParameter("yea");
+        String rate = request.getParameter("rat");
+        String rele = request.getParameter("rel");
+        String runt = request.getParameter("run");
+        String genr = request.getParameter("gen");
+        String dire = request.getParameter("dir");
+        String writ = request.getParameter("wri");
+        String acto = request.getParameter("act");
+        String plot = request.getParameter("plo");
+        String lang = request.getParameter("lan");
+        String coun = request.getParameter("cou");
+        String meta = request.getParameter("met");
+        String fbid = (String) request.getSession().getAttribute("id");
+        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+
+        response.sendRedirect("/MyMovies");
     }
 
     /**
