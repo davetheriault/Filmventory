@@ -19,7 +19,7 @@
             
         </div>
         <div
-                class="fb-like"
+                class="w3-card-2 fb-like"
                 data-share="true"
                 data-width="450"
                 data-show-faces="true">
