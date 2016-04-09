@@ -125,14 +125,30 @@ public class FindMovie2 extends HttpServlet {
                     
                     boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
                     if (own == false) {
-                        out.println("<a class=\"w3-button w3-right\" href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
+                      /*  out.println("<a class=\"w3-button w3-right\" href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
                                    +"&yea="+(String)map.get("Year")+"&rel="+encode((String)map.get("Released"), "UTF-8")
                                    +"&rat="+encode((String)map.get("Rated"), "UTF-8")+"&run="+encode((String)map.get("Runtime"), "UTF-8")
                                    +"&gen="+encode((String)map.get("Genre"), "UTF-8")+"&dir="+encode((String)map.get("Director"), "UTF-8")
                                    +"&wri="+encode((String)map.get("Writer"), "UTF-8")+"&act="+encode((String)map.get("Actors"), "UTF-8")
                                    +"&plo="+encode((String)map.get("Plot"), "UTF-8")+"&lan="+encode((String)map.get("Language"), "UTF-8")
                                    +"&cou="+encode((String)map.get("Country"), "UTF-8")+"&met="+encode((String)map.get("Metascore"), "UTF-8")
-                                   +"&title="+urltitle+"\">Add Movie</a>");
+                                   +"&title="+urltitle+"\">Add Movie</a>"); */
+                        out.println("<form id=\"addFilm\" method=\"post\" action=\"AddMovie\">"
+                                  + "<input type=\"hidden\" name=\"tit\" value=\""+map.get("Title")+"\" />"
+                                  + "<input type=\"hidden\" name=\"yea\" value=\""+map.get("Year")+"\" />"
+                                  + "<input type=\"hidden\" name=\"rat\" value=\""+map.get("Rated")+"\" />"
+                                  + "<input type=\"hidden\" name=\"rel\" value=\""+map.get("Released")+"\" />"
+                                  + "<input type=\"hidden\" name=\"run\" value=\""+map.get("Runtime")+"\" />"
+                                  + "<input type=\"hidden\" name=\"gen\" value=\""+map.get("Genre")+"\" />"
+                                  + "<input type=\"hidden\" name=\"dir\" value=\""+map.get("Director")+"\" />"
+                                  + "<input type=\"hidden\" name=\"wri\" value=\""+map.get("Writer")+"\" />"
+                                  + "<input type=\"hidden\" name=\"act\" value=\""+map.get("Actors")+"\" />"
+                                  + "<input type=\"hidden\" name=\"plo\" value=\""+map.get("Plot")+"\" />"
+                                  + "<input type=\"hidden\" name=\"lan\" value=\""+map.get("Language")+"\" />"
+                                  + "<input type=\"hidden\" name=\"cou\" value=\""+map.get("Country")+"\" />"
+                                  + "<input type=\"hidden\" name=\"met\" value=\""+map.get("Metascore")+"\" />"
+                                  + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
+                                  + "</form>");
                     }
                     out.println("</li>");
                 } 
