@@ -24,7 +24,7 @@
             <nav class="w3-play w3-xlarge">
                 <ul class="w3-navbar">
                     <li class="w3-yellow w3-text-red"><a class="w3-text-red" href="filmventory.jsp">Filmventory</a></li>
-                    <li class="w3-medium"><em>The Movie Inventory Web App</em></li>
+                    <li class="w3-medium w3-padding w3-bottom"><em>The Movie Inventory Web App</em></li>
 
                 </ul>
             </nav>
