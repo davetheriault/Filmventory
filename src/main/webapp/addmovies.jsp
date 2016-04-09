@@ -13,16 +13,17 @@
             Add Movies</h3>
         <div class="w3-container">
             <form class="w3-form" id="findmov" action="FindMovie" method="get">
-                <input type="text" name="title" placeholder="Search Movies by Title..." required />
+                <input class="w3-input" type="text" name="title" placeholder="Search Movies by Title..." required />
                 <input type="submit" value="Search" form="findmov" name="movSubmit" />
             </form>
-            <div
+            
+        </div>
+        <div
                 class="fb-like"
                 data-share="true"
                 data-width="450"
                 data-show-faces="true">
             </div>
-        </div>
     </div>
     <br>
 
