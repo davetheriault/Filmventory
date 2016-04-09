@@ -15,13 +15,14 @@
         <link rel="stylesheet" href="css/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
         <link href='https://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     </head>
     <body>
         <header class="w3-topbar w3-red">
-            <nav class="w3-play w3-xlarge">
+            <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
                     <li class="w3-yellow w3-text-red"><a class="w3-text-red" href="filmventory.jsp">Filmventory</a></li>
                     <li class="w3-medium w3-padding w3-bottom"><em>The Movie Inventory Web App</em></li>
