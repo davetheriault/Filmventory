@@ -57,10 +57,20 @@ public class JDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -87,10 +97,20 @@ public class JDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return user;
     }
@@ -118,10 +138,20 @@ public class JDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return check;
     }
@@ -133,34 +163,49 @@ public class JDBC {
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
+        title = title.replace("'", "\\'");
+        director = director.replace("'", "\\'");
+        writer = writer.replace("'", "\\'");
+        actors = actors.replace("'", "\\'");
+        plot = plot.replace("'", "\\'");
+        country = country.replace("'", "\\'");
+
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
-            //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
 
+            //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
             //rs = stmt.executeQuery(sql);
             //while (rs.next()) {
             //    if ("".equals(rs.getString("title")) || rs.getString("title") == null) {
-                    sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
-                            + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
-                            + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
-                    sql = sql.replace("'", "\\'");
-                    stmt = conn.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
+            sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
+                    + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
+                    + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+            stmt = conn.prepareStatement(sql);
+            stmt.executeUpdate(sql);
             //    }
             //}
             int mov_id = getMovieId(title, year);
             int use_id = getUserId(fb_id);
-            sql = "INSERT INTO movie2user (movie_id,user_id) VALUES ('"+mov_id+"','"+use_id+"')";
+            sql = "INSERT INTO movie2user (movie_id,user_id) VALUES ('" + mov_id + "','" + use_id + "')";
             stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -183,10 +228,20 @@ public class JDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return mov_id;
     }
@@ -210,14 +265,24 @@ public class JDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return use_id;
     }
-    
+
     public boolean checkMovie2User(String fb_id, String title, String year) {
         boolean m2u = false;
         Connection conn = null;
@@ -234,17 +299,27 @@ public class JDBC {
 
             while (rs.next()) {
 
-                if ( rs.getInt("id") >= 1 ) {
+                if (rs.getInt("id") >= 1) {
                     m2u = true;
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return m2u;
     }
@@ -261,7 +336,7 @@ public class JDBC {
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '"+user_id+"' ORDER BY movie.title";
+            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY movie.title";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
@@ -278,16 +353,26 @@ public class JDBC {
                 mov.setLanguage(rs.getString("language"));
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
-                                               
+
                 list.add(mov);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return list;
     }
@@ -295,17 +380,17 @@ public class JDBC {
     Movie getMovie(String title, String year) {
 
         int movid = getMovieId(title, year);
-        
+
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
         ResultSet rs = null;
         Movie mov = new Movie();
-        
+
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM movie WHERE id = '"+movid+"' LIMIT 1";
+            sql = "SELECT * FROM movie WHERE id = '" + movid + "' LIMIT 1";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 mov.setTitle(rs.getString("title"));
@@ -321,18 +406,27 @@ public class JDBC {
                 mov.setLanguage(rs.getString("language"));
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
-                                               
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try { if (conn != null) { conn.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
-            try { if (stmt != null) { stmt.close(); }
-            } catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return mov;
     }
-    
-    
+
 }
