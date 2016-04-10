@@ -2,6 +2,7 @@ package facebook;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -130,13 +131,13 @@ public class JDBC {
             String language, String country, String metascore) {
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+            stmt = (PreparedStatement) conn.createStatement();
             //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
 
             //rs = stmt.executeQuery(sql);
@@ -145,6 +146,7 @@ public class JDBC {
                     sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
                             + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
                             + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+                    
                     stmt.executeUpdate(sql);
             //    }
             //}
