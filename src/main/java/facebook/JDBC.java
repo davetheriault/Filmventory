@@ -145,6 +145,7 @@ public class JDBC {
                     sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
                             + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
                             + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+                    sql = sql.replace("'", "\\'");
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
             //    }
