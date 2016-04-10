@@ -133,11 +133,10 @@ public class JDBC {
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
-        ResultSet rs = null;
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = (PreparedStatement) conn.createStatement();
+            
             //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
 
             //rs = stmt.executeQuery(sql);
@@ -146,7 +145,7 @@ public class JDBC {
                     sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
                             + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
                             + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
-                    
+                    stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
             //    }
             //}
