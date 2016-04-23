@@ -24,7 +24,7 @@
         <header class="w3-topbar w3-red">
             <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
-                    <li class="w3-yellow w3-text-red"><a class="w3-text-red" href="filmventory.jsp">Filmventory</a></li>
+                    <li class="w3-white"><a href="filmventory.jsp"><img src="images/filmventory400.png" alt="filmventory home" /></a></li>
                     <li class="w3-medium w3-padding w3-bottom"><em>The Movie Inventory Web App</em></li>
 
                 </ul>
