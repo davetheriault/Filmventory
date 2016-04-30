@@ -14,7 +14,7 @@
         <div class="w3-container w3-padding">
 
             <c:forEach var="movie" items="${movies}">
-                <div class="w3-card-2">
+                <div class="w3-card w3-margin">
                     <ul class="w3-ul">
                         <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
                         <li> Year: ${movie.year} </li>
