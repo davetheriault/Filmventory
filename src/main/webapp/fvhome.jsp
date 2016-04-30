@@ -6,10 +6,10 @@
 <%@include file="includes/fbsdk.html" %>
 <%@include file="includes/sidenav.html" %>
 
-<main class="w3-main w3-play" style="margin-left:200px">
+<main class="w3-main w3-paytone" style="margin-left:200px">
 
     <div class="w3-card-4 w3-margin">
-        <h3 class="w3-red w3-padding-left w3-margin-0 w3-play">
+        <h3 class="w3-red w3-padding-left w3-margin-0 w3-paytone">
             Welcome <% out.print(session.getAttribute("fname"));%> To Filmventory</h3>
         <div class="w3-container w3-padding">
             <p>Welcome to Filmventory! This application allows you to create your personal inventory list of
