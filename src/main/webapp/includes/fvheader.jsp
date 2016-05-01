@@ -25,7 +25,7 @@
             <nav class="w3-paytone w3-xlarge">
                 <ul class="w3-navbar">
                     <li class="w3-white"><a href="filmventory.jsp"><img src="images/filmventory300.png" width="275" alt="filmventory home" /></a></li>
-                    <li class="w3-medium w3-padding w3-bottom"><em>The Movie Inventory Web App</em></li>
+                    <li class="w3-medium w3-padding"><em>The Movie Inventory Web App</em></li>
 
                 </ul>
             </nav>
