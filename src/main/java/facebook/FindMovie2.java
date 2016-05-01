@@ -67,7 +67,7 @@ public class FindMovie2 extends HttpServlet {
                     + "    </head>\n"
                     + "    <body>\n"
                     + "        <header class=\"w3-topbar w3-red\">\n"
-                    + "            <nav class=\"w3-paytone w3-xlarge\">\n"
+                    + "            <nav class=\"w3-roboto w3-xlarge\">\n"
                     + "                <ul class=\"w3-navbar\">\n"
                     + "                    <li class=\"w3-yellow w3-text-red\"><a class=\"w3-text-red\" href=\"filmventory.jsp\">Filmventory</a></li>\n"
                     + "                    <li><a href=\"\">Options</a></li>\n"
@@ -97,10 +97,10 @@ public class FindMovie2 extends HttpServlet {
                     + "        document.getElementsByClassName(\"w3-sidenav\")[0].style.display = \"none\";\n"
                     + "    }\n"
                     + "</script>");
-            out.println("<main class=\"w3-main w3-paytone\" style=\"margin-left:200px\">\n"
+            out.println("<main class=\"w3-main w3-roboto\" style=\"margin-left:200px\">\n"
                     + "\n"
                     + "    <div class=\"w3-card-4 w3-margin\">\n"
-                    + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-paytone\">\n"
+                    + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-roboto\">\n"
                     + "            Details for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
                     + "        <div class=\"w3-container w3-padding\">");
             for (String mess : messages) {
