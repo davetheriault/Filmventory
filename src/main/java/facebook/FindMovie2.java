@@ -147,6 +147,7 @@ public class FindMovie2 extends HttpServlet {
                                   + "<input type=\"hidden\" name=\"lan\" value=\""+map.get("Language")+"\" />"
                                   + "<input type=\"hidden\" name=\"cou\" value=\""+map.get("Country")+"\" />"
                                   + "<input type=\"hidden\" name=\"met\" value=\""+map.get("Metascore")+"\" />"
+                                  + "<input type=\"hidden\" name=\"imd\" value=\""+map.get("imdbID")+"\" />"
                                   + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
                                   + "</form>");
                     }
@@ -156,7 +157,12 @@ public class FindMovie2 extends HttpServlet {
                     out.println("<li>" + key + ": " + map.get(key) + "</li>");
                 }
             }
-            out.println("<li><a href='" + map.get("Poster") + "' >View Poster</a></li> ");
+            URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
+
+            ObjectMapper mapper2 = new ObjectMapper();
+            Map<String, Object> map2 = mapper2.readValue(url2, Map.class);
+            
+            out.println("<li><img alt='" +map.get("Title")+  "' src='http://image.tmdb.org/t/p/w100" + map2.get("poster_path") + "' /></li> ");
             out.println("</ul>");
             out.println("</div></div></main>");
 
