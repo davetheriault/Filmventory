@@ -161,7 +161,9 @@ public class FindMovie2 extends HttpServlet {
 
             ObjectMapper mapper2 = new ObjectMapper();
             Map<String, Object> map2 = mapper2.readValue(url2, Map.class);
-            
+            for (String key2 : map2.keySet()) {
+                out.println("<li>" + key2 + ": " + map2.get(key2) + "</li>");
+            }
             out.println("<li><img alt='" +map.get("Title")+  "' src='http://image.tmdb.org/t/p/w100" + map2.get("poster_path") + "' /></li> ");
             out.println("</ul>");
             out.println("</div></div></main>");
