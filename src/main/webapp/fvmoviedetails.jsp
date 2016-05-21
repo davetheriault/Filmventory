@@ -14,22 +14,24 @@
         <div class="w3-container w3-padding">
 
             <div class="w3-card-2 w3-row">
-                <ul class="w3-ul w3-col m9 l9">
-                    <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
-                    <li> Year: ${movie.year} </li>
-                    <li> Rated: ${movie.rated} </li>
-                    <li> Released: ${movie.released} </li>
-                    <li> Runtime: ${movie.runtime} </li>
-                    <li> Genre: ${movie.genre} </li>
-                    <li> Director: ${movie.director} </li>
-                    <li> Writer: ${movie.writer} </li>
-                    <li> Actors: ${movie.actors} </li>
-                    <li> Plot: ${movie.plot} </li>
-                    <li> Language: ${movie.language} </li>
-                    <li> Country: ${movie.country} </li>
-                    <li> Metascore: ${movie.metascore} </li>
-                </ul>
-                <div class="w3-col w3-rest"> Remove from collection </div>
+                <div class="w3-col m9 l9">
+                    <ul class="w3-ul">
+                        <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
+                        <li> Year: ${movie.year} </li>
+                        <li> Rated: ${movie.rated} </li>
+                        <li> Released: ${movie.released} </li>
+                        <li> Runtime: ${movie.runtime} </li>
+                        <li> Genre: ${movie.genre} </li>
+                        <li> Director: ${movie.director} </li>
+                        <li> Writer: ${movie.writer} </li>
+                        <li> Actors: ${movie.actors} </li>
+                        <li> Plot: ${movie.plot} </li>
+                        <li> Language: ${movie.language} </li>
+                        <li> Country: ${movie.country} </li>
+                        <li> Metascore: ${movie.metascore} </li>
+                    </ul>
+                </div>
+                <div class="w3-col m3 l3"> Remove from collection </div>
             </div>
 
 
