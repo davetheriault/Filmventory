@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     </head>
-    <body class="w3-dark-grey">
+    <body style="background-color: #1a1a1a;">
         <header class="w3-topbar w3-red">
             <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
