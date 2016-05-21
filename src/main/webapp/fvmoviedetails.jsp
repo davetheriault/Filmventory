@@ -33,7 +33,7 @@
                 </div>
                 <div class="w3-col m4 l4">
                     <div class="w3-container">
-                        Remove from collection 
+                        <a class="w3-btn" href="/RemoveMovie" >Remove from collection </a> 
                     </div>    
                 </div>
             </div>
