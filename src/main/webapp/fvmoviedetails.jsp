@@ -32,8 +32,8 @@
                     </ul>
                 </div>
                 <div class="w3-col m4 l4">
-                    <div class="w3-container">
-                        <ul class="w3-ul w3-teal">
+                    <div class="w3-container w3-sidenav">
+                        <ul class="w3-ul w3-dark-grey">
                             <li><a href="/RemoveMovie" >Remove from collection</a></li>
                             <li><a href="">Add to list</a></li>
                         </ul>
