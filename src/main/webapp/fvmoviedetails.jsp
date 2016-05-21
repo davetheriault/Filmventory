@@ -13,8 +13,8 @@
             ${movie.title}</h3>
         <div class="w3-container w3-padding">
 
-            <div class="w3-card-2 w3-row">
-                <div class="w3-col m9 l9">
+            <div class="w3-container w3-row">
+                <div class="w3-col m8 l8">
                     <ul class="w3-ul">
                         <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
                         <li> Year: ${movie.year} </li>
@@ -31,7 +31,11 @@
                         <li> Metascore: ${movie.metascore} </li>
                     </ul>
                 </div>
-                <div class="w3-col m3 l3"> Remove from collection </div>
+                <div class="w3-col m4 l4">
+                    <div class="w3-container">
+                        Remove from collection 
+                    </div>    
+                </div>
             </div>
 
 
