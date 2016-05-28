@@ -17,14 +17,14 @@
                     <option disabled selected>Sort By </option>
                     <option>A-Z</option>
                     <option>Date</option>
-                </select><i class="fa-sort-amount-asc"></i>
+                </select>
             </li>
             <li class="w3-right w3-padding">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Filter By </option>
                     <option>Genre</option>
                     <option></option>
-                </select><i class="fa fa-filter"></i>
+                </select>
             </li>
         </ul>
         <div class="w3-container w3-padding">
