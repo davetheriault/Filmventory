@@ -4,7 +4,7 @@
 <c:set var="title" scope="request" value="Register"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <div class="w3-card-2 w3-padding-top-0">
+    <div class="w3-card w3-padding-top-0">
         <h2 class="w3-amber w3-lobster w3-padding">Login Page</h2> 
         ${message}
         <form class="w3-form" action="Login" method="post"> 

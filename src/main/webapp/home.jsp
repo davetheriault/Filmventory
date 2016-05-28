@@ -9,7 +9,7 @@
 <c:set var="title" scope="request" value="Welcome"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <div class="w3-card-2 w3-padding-top-0">
+    <div class="w3-card w3-padding-top-0">
         <h2 class="w3-lobster w3-amber w3-padding">Welcome ${sessionScope.username}!</h2>
         ${message}
         <div class="w3-card w3-padding w3-red">

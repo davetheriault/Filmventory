@@ -8,7 +8,7 @@
 
 <main class="w3-main w3-roboto" style="margin-left:200px">
 
-    <div class="w3-card-4 w3-margin">
+    <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             Add Movies</h3>
         <div class="w3-container">

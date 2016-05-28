@@ -78,7 +78,7 @@ public class FindMovie2 extends HttpServlet {
                     + "        </header>\n"
                     + "");
             out.println("\n"
-                    + "<div class=\"w3-sidenav w3-collapse w3-red w3-card-2 w3-animate-left\">\n"
+                    + "<div class=\"w3-sidenav w3-collapse w3-red w3-card w3-animate-left\">\n"
                     + "    <a href=\"#\" onclick=\"w3_close()\" class=\"w3-closenav w3-hide-large\">Close X</a> \n"
                     + "    <ul class=\"w3-ul\">\n"
                     + "        <li><a href=\"mymovies.jsp\">My Movies</a></li>\n"
@@ -99,7 +99,7 @@ public class FindMovie2 extends HttpServlet {
                     + "</script>");
             out.println("<main class=\"w3-main w3-roboto\" style=\"margin-left:200px\">\n"
                     + "\n"
-                    + "    <div class=\"w3-card-4 w3-margin\">\n"
+                    + "    <div class=\"w3-card w3-margin\">\n"
                     + "        <h3 class=\"w3-red w3-padding-left w3-margin-0 w3-roboto\">\n"
                     + "            Details for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
                     + "        <div class=\"w3-container w3-padding\">");

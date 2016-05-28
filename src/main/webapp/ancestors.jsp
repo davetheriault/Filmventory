@@ -4,7 +4,7 @@
 <c:set var="title" scope="request" value="Ancestor Database"/>
 <%@include file="includes/header.jsp" %>
 <main class="w3-container">
-    <div class="w3-card-2 w3-padding-top-0">
+    <div class="w3-card w3-padding-top-0">
 
         <h2 class="w3-amber w3-padding-left w3-lobster">Ancestors</h2>
         <ul class="w3-ul w3-large">
