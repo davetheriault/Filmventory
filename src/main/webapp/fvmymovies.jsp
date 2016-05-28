@@ -11,15 +11,15 @@
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
-        <ul class="w3-navbar w3-dark-grey w3-right-align">
-            <li>
+        <ul class="w3-navbar w3-dark-grey">
+            <li class="w3-right">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Sort By </option>
                     <option>A-Z</option>
                     <option>Date</option>
                 </select>
             </li>
-            <li>
+            <li class="w3-right">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Filter By </option>
                     <option>Genre</option>
