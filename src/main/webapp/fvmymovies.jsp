@@ -14,14 +14,14 @@
         <ul class="w3-navbar w3-dark-grey">
             <li>
                 <select class="w3-select">
-                    <option disabled>Sort By </option>
+                    <option disabled selected>Sort By </option>
                     <option>A-Z</option>
                     <option>Date</option>
                 </select>
             </li>
             <li>
                 <select class="w3-select">
-                    <option disabled>Filter By </option>
+                    <option disabled selected>Filter By </option>
                     <option>Genre</option>
                     <option></option>
                 </select>
