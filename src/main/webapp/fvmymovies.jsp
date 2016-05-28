@@ -12,19 +12,19 @@
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
         <ul class="w3-navbar w3-dark-grey">
-            <li class="w3-right">
+            <li class="w3-right w3-padding">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Sort By </option>
                     <option>A-Z</option>
                     <option>Date</option>
-                </select>
+                </select><i class="fa-sort-amount-asc"></i>
             </li>
-            <li class="w3-right">
+            <li class="w3-right w3-padding">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Filter By </option>
                     <option>Genre</option>
                     <option></option>
-                </select>
+                </select><i class="fa fa-filter"></i>
             </li>
         </ul>
         <div class="w3-container w3-padding">
