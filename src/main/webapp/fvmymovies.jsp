@@ -24,10 +24,10 @@
                 <form>
                     <select class="w3-select w3-dark-grey">
                         <option disabled selected>Sort By </option>
-                        <option>A to Z &uarr;</option>
-                        <option>Z to A &darr;</option>
-                        <option>Date &uarr;</option>
-                        <option>Date &darr;</option>
+                        <option>A to Z &nbsp;&nbsp; &uarr;</option>
+                        <option>Z to A &nbsp;&nbsp; &darr;</option>
+                        <option>Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
+                        <option>Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
                     </select>
                 </form>
             </li>
