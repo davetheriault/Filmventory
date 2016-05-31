@@ -16,18 +16,20 @@
             <li class="w3-right w3-padding">
                 <select class="w3-select w3-dark-grey">
                     <option disabled selected>Genre </option>
-                    <option></option>
-                    <option></option>
+                    <c:forEach var="genre" items="${genres}">
+                        <option value="${genre}">${genre}</option>
+                    </c:forEach>
                 </select>
             </li>
             <li class="w3-right w3-padding">
-                <form>
-                    <select class="w3-select w3-dark-grey">
+                <form id="sortby" action="SortBy" method="post">
+                    <input value="${movies}" type="hidden" name="movies" />
+                    <select name="sort" class="w3-select w3-dark-grey" onchange="this.form.submit()">
                         <option disabled selected>Sort By </option>
-                        <option>A to Z &nbsp;&nbsp; &uarr;</option>
-                        <option>Z to A &nbsp;&nbsp; &darr;</option>
-                        <option>Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
-                        <option>Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
+                        <option value="az">A to Z &nbsp;&nbsp; &uarr;</option>
+                        <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
+                        <option value="09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
+                        <option value="90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
                     </select>
                 </form>
             </li>

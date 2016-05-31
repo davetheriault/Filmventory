@@ -7,6 +7,7 @@ package facebook;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +39,28 @@ public class MyMovies extends HttpServlet {
         String fb_id = (String) request.getSession().getAttribute("id");
 
         List<Movie> movies = db.getInventory(fb_id);
+        
+        List<String> genres = new ArrayList<String>();
+        boolean chkgnr = false;
+
+        for (Movie mov : movies) {
+            String[] gnrs = mov.getGenre().replace(",", "").split(" ");
+            
+            for (String gnr : gnrs) {
+                for (String genre : genres) {
+                    if (gnr.equals(genre)) {
+                        chkgnr = true;
+                    }
+                }
+                if (chkgnr == false) {
+                    genres.add(gnr);
+                } else {
+                    chkgnr = false;
+                }
+            }
+        }
+        
+        request.setAttribute("genres", genres);
 
         request.setAttribute("movies", movies);
 
