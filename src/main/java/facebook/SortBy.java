@@ -7,8 +7,7 @@ package facebook;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Theriault
  */
-@WebServlet(name = "AddMovie", urlPatterns = {"/AddMovie"})
-public class AddMovie extends HttpServlet {
+@WebServlet(name = "SortBy", urlPatterns = {"/SortBy"})
+public class SortBy extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class AddMovie extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddMovie</title>");
+            out.println("<title>Servlet SortBy</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddMovie at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SortBy at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,31 +59,7 @@ public class AddMovie extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        JDBC db = new JDBC();
-
-        String titl = request.getParameter("tit");
-        String year = request.getParameter("yea");
-        String rate = request.getParameter("rat");
-        String rele = request.getParameter("rel");
-        String runt = request.getParameter("run");
-        String[] genr = request.getParameter("gen").split(", ");
-        String[] dire = request.getParameter("dir").split(", ");
-        String writer = request.getParameter("wri");
-        
-        writer = writer.replaceAll("(\\s\\(.*?\\))", "");
-        String[] writ = writer.split(", "); // CONTINUE
-        
-        String[] acto = request.getParameter("act").split(", ");
-        String plot = request.getParameter("plo");
-        String lang = request.getParameter("lan");
-        String coun = request.getParameter("cou");
-        String meta = request.getParameter("met");
-        String fbid = (String) request.getSession().getAttribute("id");
-        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
-
-        response.sendRedirect("/MyMovies");
-
+        processRequest(request, response);
     }
 
     /**
@@ -98,31 +73,8 @@ public class AddMovie extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        JDBC db = new JDBC();
-
-        String titl = request.getParameter("tit");
-        String year = request.getParameter("yea");
-        String rate = request.getParameter("rat");
-        String rele = request.getParameter("rel");
-        String runt = request.getParameter("run");
-        String[] genr = request.getParameter("gen").split(", ");
-        String[] dire = request.getParameter("dir").split(", ");
-        String writer = request.getParameter("wri");
         
-        writer = writer.replaceAll("(\\s\\(.*?\\))", "");
-        String[] writ = writer.split(", "); // CONTINUE
-        
-        String[] acto = request.getParameter("act").split(", ");
-        String plot = request.getParameter("plo");
-        String lang = request.getParameter("lan");
-        String coun = request.getParameter("cou");
-        String meta = request.getParameter("met");
-        String fbid = (String) request.getSession().getAttribute("id");
-        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
-
-        response.sendRedirect("/MyMovies");
-
+        String movies = request.getParameter("movies");
     
     }
 

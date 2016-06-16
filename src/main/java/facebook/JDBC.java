@@ -157,34 +157,95 @@ public class JDBC {
     }
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
-            String runtime, String genre, String director, String writer, String actors, String plot,
+            String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
             String language, String country, String metascore) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
         title = title.replace("'", "\\'");
-        director = director.replace("'", "\\'");
-        writer = writer.replace("'", "\\'");
-        actors = actors.replace("'", "\\'");
+
+        List<String> dirs = new ArrayList<>();
+        for (String dir : director) {
+            dir = dir.replace("'", "\\'");
+            dirs.add(dir);
+        }
+
+        List<String> wris = new ArrayList<>();
+        for (String wri : writer) {
+            wri = wri.replace("'", "\\'");
+            wris.add(wri);
+        }
+
+        List<String> acts = new ArrayList<>();
+        for (String act : actors) {
+            act = act.replace("'", "\\'");
+            acts.add(act);
+        }
+
         plot = plot.replace("'", "\\'");
         country = country.replace("'", "\\'");
-
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //sql = "SELECT title FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1;";
-            //rs = stmt.executeQuery(sql);
-            //while (rs.next()) {
-            //    if ("".equals(rs.getString("title")) || rs.getString("title") == null) {
-            sql = "INSERT INTO movie (title,year,rated,released,runtime,genre,director,writer,actors,plot,language,country,metascore)"
-                    + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + genre + "',"
-                    + "'" + director + "','" + writer + "','" + actors + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+            
+            sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
+                    + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
             stmt = conn.prepareStatement(sql);
             stmt.executeUpdate(sql);
-            //    }
-            //}
+
+            for (String genr : genre) {
+                boolean genr1 = checkExists("genre", "genre", genr);
+                if (genr1 == false) {
+                    sql = "INSERT INTO genre (genre)"
+                            + "VALUES ('" + genr + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
+                }
+                int genre_id = getGenreId(genr);
+                int movie_id = getMovieId(title, year);
+                boolean xm2g = checkRelation("movie2genre","movie_id","genre_id", movie_id, genre_id );
+                if (xm2g == false) {
+                    sql = "INSERT INTO movie2genre (movie_id,genre_id)"
+                            + "VALUES ('" + movie_id + "', '" + genre_id + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
+                }
+                
+            }
+
+            for (String dire : dirs) {
+                boolean crew1 = checkExists("crew", "name", dire);
+                if (crew1 == false) {
+                    sql = "INSERT INTO crew (name)"
+                            + "VALUES ('" + dire + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
+                }
+            }
+            
+            for (String writ : wris) {
+                boolean writ1 = checkExists("crew", "name", writ);
+                if (writ1 == false) {
+                    sql = "INSERT INTO crew (name)"
+                            + "VALUES ('" + writ + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
+                }
+            }
+            
+            for (String acto : acts) {
+                boolean act1 = checkExists("crew", "name", acto);
+                if (act1 == false) {
+                    sql = "INSERT INTO crew (name)"
+                            + "VALUES ('" + acto + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
+                }
+            }
+            
+            
             int mov_id = getMovieId(title, year);
             int use_id = getUserId(fb_id);
             sql = "INSERT INTO movie2user (movie_id,user_id) VALUES ('" + mov_id + "','" + use_id + "')";
@@ -324,6 +385,87 @@ public class JDBC {
         return m2u;
     }
 
+    public boolean checkExists(String table, String col, String value) {
+        boolean checkEx = false;
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            sql = "SELECT id FROM '" + table + "' WHERE '" + col + "' = '" + value + "' LIMIT 1";
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                if (rs.getInt("id") >= 1) {
+                    checkEx = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return checkEx;
+    }
+    
+    public boolean checkRelation(String table, String col1, String col2, int value1, int value2) {
+        boolean checkR = false;
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            sql = "SELECT id FROM '" + table + "' WHERE '" + col1 + "' = '" + value1 + "' "
+                    + "AND '" + col2 + "' = '" + value2 + "' LIMIT 1";
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+
+                if (rs.getInt("id") >= 1) {
+                    checkR = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return checkR;
+    }
+
     public List getInventory(String fb_id) {
 
         Connection conn = null;
@@ -427,6 +569,10 @@ public class JDBC {
             }
         }
         return mov;
+    }
+
+    private int getGenreId(String genr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
