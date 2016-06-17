@@ -177,7 +177,7 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        FileWriter logs = new FileWriter( "logs.txt" , false);
+        FileWriter logs = new FileWriter( "logs.txt" , true);
         logs.write("JDBC Line 181 \n List<string> dirs: \n");
         for (String dirlog : dirs) {
             logs.write(dirlog + "\n");
