@@ -209,6 +209,7 @@ public class JDBC {
         country = country.replace("'", "\\'");
         logs.write("\n Plot: \n"+plot+"\n");
         logs.write("\n Country: \n"+country+"\n");
+        logs.flush();
 
         try {
             // ESTABLISH DATABASE CONNECTION
@@ -217,6 +218,7 @@ public class JDBC {
             boolean xmov = checkExist2("movie", "title", "year", title, year);
             logs.write("\n LINE 218 \n CheckMovieExists: \n");
             logs.write(String.valueOf(xmov)+"\n");
+            logs.flush();
 
             // ---- INSERT MOVIE TO MOVIE TABLE ----- 
             if (xmov == false) {
