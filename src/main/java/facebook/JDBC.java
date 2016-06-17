@@ -1,5 +1,7 @@
 package facebook;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
@@ -164,6 +166,7 @@ public class JDBC {
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
             String language, String country, String metascore) throws IOException {
 
+        
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
@@ -177,11 +180,10 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        FileWriter logs = new FileWriter( "logs.txt" , true);
-        logs.write("JDBC Line 181 \n List<string> dirs: \n");
-        for (String dirlog : dirs) {
-            logs.write(dirlog + "\n");
-        }
+        File file = new File("myfile.txt");
+        FileWriter fw = new FileWriter(file);
+	BufferedWriter  bw = new BufferedWriter(fw);
+	 bw.write("test");
        
         //  ADD WRITERS TO LIST AND ESCAPE APOSTROPHES
         List<String> wris = new ArrayList<>();
@@ -189,12 +191,7 @@ public class JDBC {
             wri = wri.replace("'", "\\'");
             wris.add(wri);
         }
-        logs.write("\n Line 192 \n List<string> wris: \n");
-        for (String wrilog : wris) {
-            logs.write(wrilog + "\n");
-        }
-        logs.flush();
-        logs.close();
+
         //  ADD ACTORS TO LIST AND ESCAPE APOSTROPHES
         List<String> acts = new ArrayList<>();
         for (String act : actors) {
