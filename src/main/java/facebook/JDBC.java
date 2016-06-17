@@ -178,7 +178,7 @@ public class JDBC {
             dirs.add(dir);
         }
         FileWriter logs = new FileWriter( "logs.txt" , true);
-        logs.write("JDBC Line 181 \n List<string> dirs: \n");
+        logs.write("\nJDBC Line 181 \n List<string> dirs: \n");
         for (String dirlog : dirs) {
             logs.write(dirlog + "\n");
         }
@@ -200,7 +200,7 @@ public class JDBC {
             act = act.replace("'", "\\'");
             acts.add(act);
         }
-        logs.write("\n Line 203 \n List<string> wris: \n");
+        logs.write("\n Line 203 \n List<string> acts: \n");
         for (String actlog : acts) {
             logs.write(actlog + "\n");
         }
