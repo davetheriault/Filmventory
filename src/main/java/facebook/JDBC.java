@@ -225,8 +225,16 @@ public class JDBC {
                 
                 logs.write("\n Xmov Not True Checks Out \n");
                 logs.flush();
-                sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
-                        + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+                sql = "INSERT INTO movie2 (title, year, rated, released, runtime, plot, language, country, metascore)"
+                        + "VALUES ('" + title + "', '" + year + "', '" + rated + "', '" + released + "', '" + runtime + "', "
+                        + "'" + plot + "', '" + language + "', '" + country + "', '" + metascore + "');";
+                logs.write("\n"+sql);
+                logs.flush();
+                stmt = conn.prepareStatement(sql);
+                logs.write("\n Prepared Statement \n");
+                stmt.execute();
+                sql = "INSERT INTO movie (title, year, rated, released, runtime, plot, language, country, metascore)"
+                        + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "');";
                 logs.write("\n"+sql);
                 logs.flush();
                 stmt = conn.prepareStatement(sql);
