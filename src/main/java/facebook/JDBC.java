@@ -227,10 +227,10 @@ public class JDBC {
                 logs.flush();
                 sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
-                
+                logs.write("\n"+sql);
                 stmt = conn.prepareStatement(sql);
-                int insertMovie = stmt.executeUpdate(sql);
-                logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n"+insertMovie+"\n");
+                stmt.execute();
+                logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n");
                 logs.flush();
                 logs.close();
 
