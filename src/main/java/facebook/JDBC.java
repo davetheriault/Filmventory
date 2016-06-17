@@ -1,5 +1,7 @@
 package facebook;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -160,7 +162,7 @@ public class JDBC {
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
-            String language, String country, String metascore) {
+            String language, String country, String metascore) throws IOException {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -175,12 +177,21 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        JOptionPane.showMessageDialog(null, dirs);
+        FileWriter logs = new FileWriter( "logs.txt" , true);
+        logs.write("JDBC Line 181 \n List<string> dirs: \n");
+        for (String dirlog : dirs) {
+            logs.write(dirlog + "\n");
+        }
+       
         //  ADD WRITERS TO LIST AND ESCAPE APOSTROPHES
         List<String> wris = new ArrayList<>();
         for (String wri : writer) {
             wri = wri.replace("'", "\\'");
             wris.add(wri);
+        }
+        logs.write("\n Line 192 \n List<string> wris: \n");
+        for (String wrilog : wris) {
+            logs.write(wrilog + "\n");
         }
         //  ADD ACTORS TO LIST AND ESCAPE APOSTROPHES
         List<String> acts = new ArrayList<>();
