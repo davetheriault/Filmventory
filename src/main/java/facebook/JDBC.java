@@ -7,9 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.websocket.Session;
 
 public class JDBC {
@@ -173,6 +175,7 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
+        JOptionPane.showMessageDialog(null, dirs);
         //  ADD WRITERS TO LIST AND ESCAPE APOSTROPHES
         List<String> wris = new ArrayList<>();
         for (String wri : writer) {
