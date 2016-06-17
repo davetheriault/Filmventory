@@ -1,7 +1,5 @@
 package facebook;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
@@ -166,7 +164,6 @@ public class JDBC {
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
             String language, String country, String metascore) throws IOException {
 
-        
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
@@ -180,10 +177,11 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        File file = new File("myfile.txt");
-        FileWriter fw = new FileWriter(file);
-	BufferedWriter  bw = new BufferedWriter(fw);
-	 bw.write("test");
+        FileWriter logs = new FileWriter( "logs.txt" , false);
+        logs.write("JDBC Line 181 \n List<string> dirs: \n");
+        for (String dirlog : dirs) {
+            logs.write(dirlog + "\n");
+        }
        
         //  ADD WRITERS TO LIST AND ESCAPE APOSTROPHES
         List<String> wris = new ArrayList<>();
@@ -191,29 +189,44 @@ public class JDBC {
             wri = wri.replace("'", "\\'");
             wris.add(wri);
         }
-
+        logs.write("\n Line 192 \n List<string> wris: \n");
+        for (String wrilog : wris) {
+            logs.write(wrilog + "\n");
+        }
+        
         //  ADD ACTORS TO LIST AND ESCAPE APOSTROPHES
         List<String> acts = new ArrayList<>();
         for (String act : actors) {
             act = act.replace("'", "\\'");
             acts.add(act);
         }
+        logs.write("\n Line 203 \n List<string> wris: \n");
+        for (String actlog : acts) {
+            logs.write(actlog + "\n");
+        }
         // ESCAPE APOSTOPHES FOR PLOT
         plot = plot.replace("'", "\\'");
         country = country.replace("'", "\\'");
+        logs.write("\n Plot: \n"+plot+"\n");
+        logs.write("\n Country: \n"+country+"\n");
 
         try {
             // ESTABLISH DATABASE CONNECTION
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             boolean xmov = checkExist2("movie", "title", "year", title, year);
+            logs.write("\n LINE 218 \n CheckMovieExists: \n");
+            logs.write(String.valueOf(xmov)+"\n");
 
             // ---- INSERT MOVIE TO MOVIE TABLE ----- 
             if (xmov == false) {
                 sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
                 stmt = conn.prepareStatement(sql);
-                stmt.executeUpdate(sql);
+                int insertMovie = stmt.executeUpdate(sql);
+                logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n"+insertMovie+"\n");
+                logs.flush();
+                logs.close();
 
                 // ---- GENRE MANAGEMENT ----- //
                 for (String genr : genre) {
