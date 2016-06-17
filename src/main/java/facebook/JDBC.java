@@ -225,14 +225,7 @@ public class JDBC {
                 
                 logs.write("\n Xmov Not True Checks Out \n");
                 logs.flush();
-                sql = "INSERT INTO movie2 (title, year, rated, released, runtime, plot, language, country, metascore)"
-                        + "VALUES ('" + title + "', '" + year + "', '" + rated + "', '" + released + "', '" + runtime + "', "
-                        + "'" + plot + "', '" + language + "', '" + country + "', '" + metascore + "');";
-                logs.write("\n"+sql);
-                logs.flush();
-                stmt = conn.prepareStatement(sql);
-                logs.write("\n Prepared Statement \n");
-                stmt.execute();
+                
                 sql = "INSERT INTO movie (title, year, rated, released, runtime, plot, language, country, metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "');";
                 logs.write("\n"+sql);
@@ -240,7 +233,6 @@ public class JDBC {
                 stmt = conn.prepareStatement(sql);
                 logs.write("\n Prepared Statement \n");
                 stmt.execute();
-                logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n");
                 logs.flush();
                 logs.close();
 
@@ -258,7 +250,7 @@ public class JDBC {
                     }
 
                     // ----- RELATE GENRE TO MOVIE ---- /
-                    genre_id = getGenreId(genr);
+                    genre_id = getId("genre", "genre", genr);
                     movie_id = getMovieId(title, year);
                     boolean xm2g = checkExist2("movie2genre", "movie_id", "genre_id", Integer.toString(movie_id), Integer.toString(genre_id));
 
@@ -676,8 +668,6 @@ public class JDBC {
         return mov;
     }
 
-    private int getGenreId(String genr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
