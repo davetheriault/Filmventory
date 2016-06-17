@@ -228,7 +228,9 @@ public class JDBC {
                 sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
                 logs.write("\n"+sql);
+                logs.flush();
                 stmt = conn.prepareStatement(sql);
+                logs.write("\n Prepared Statement \n");
                 stmt.execute();
                 logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n");
                 logs.flush();
