@@ -221,9 +221,13 @@ public class JDBC {
             logs.flush();
 
             // ---- INSERT MOVIE TO MOVIE TABLE ----- 
-            if (xmov == false) {
+            if (xmov != true) {
+                
+                logs.write("\n Xmov Not True Checks Out \n");
+                logs.flush();
                 sql = "INSERT INTO movie (title,year,rated,released,runtime,plot,language,country,metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "')";
+                
                 stmt = conn.prepareStatement(sql);
                 int insertMovie = stmt.executeUpdate(sql);
                 logs.write("\n LINE 227 \n INSERT INTO movie rows affected: \n"+insertMovie+"\n");
