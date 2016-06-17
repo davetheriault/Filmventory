@@ -47,7 +47,12 @@
             <c:forEach var="act1" items="${actorArray}">
                 ${act1}<br>
             </c:forEach>
-
+            <c:forEach var="wri1" items="${writerArray}">
+                ${wri1}<br>
+            </c:forEach>
+            <c:forEach var="dir1" items="${directArray}">
+                ${dir1}<br>
+            </c:forEach>
             <c:forEach var="movie" items="${movies}">
                 <div class="w3-card w3-margin">
                     <ul class="w3-ul">
