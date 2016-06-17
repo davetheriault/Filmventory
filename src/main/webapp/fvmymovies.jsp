@@ -41,6 +41,13 @@
         </ul>
         <div class="w3-container w3-padding">
 
+            <c:forEach var="genre" items="${genreArray}">
+                ${genre}<br>
+            </c:forEach>
+            <c:forEach var="act1" items="${actorArray}">
+                ${act1}<br>
+            </c:forEach>
+
             <c:forEach var="movie" items="${movies}">
                 <div class="w3-card w3-margin">
                     <ul class="w3-ul">

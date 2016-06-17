@@ -73,7 +73,7 @@ public class AddMovie extends HttpServlet {
         String writer = request.getParameter("wri");
         
         writer = writer.replaceAll("(\\s\\(.*?\\))", "");
-        String[] writ = writer.split(", "); // CONTINUE
+        String[] writ = writer.split(", "); 
         
         String[] acto = request.getParameter("act").split(", ");
         String plot = request.getParameter("plo");
@@ -82,6 +82,11 @@ public class AddMovie extends HttpServlet {
         String meta = request.getParameter("met");
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+        
+        request.getSession().setAttribute("genreArray", genr);
+        request.getSession().setAttribute("actorArray", acto);
+        request.getSession().setAttribute("writerArray", writ);
+        request.getSession().setAttribute("directArray", dire);
 
         response.sendRedirect("/MyMovies");
 
@@ -120,6 +125,11 @@ public class AddMovie extends HttpServlet {
         String meta = request.getParameter("met");
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+        
+        request.getSession().setAttribute("genreArray", genr);
+        request.getSession().setAttribute("actorArray", acto);
+        request.getSession().setAttribute("writerArray", writ);
+        request.getSession().setAttribute("directArray", dire);
 
         response.sendRedirect("/MyMovies");
 
