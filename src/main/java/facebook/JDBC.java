@@ -193,6 +193,8 @@ public class JDBC {
         for (String wrilog : wris) {
             logs.write(wrilog + "\n");
         }
+        logs.flush();
+        logs.close();
         //  ADD ACTORS TO LIST AND ESCAPE APOSTROPHES
         List<String> acts = new ArrayList<>();
         for (String act : actors) {
