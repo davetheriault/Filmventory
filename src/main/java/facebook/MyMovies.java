@@ -43,7 +43,7 @@ public class MyMovies extends HttpServlet {
         List<String> genres = new ArrayList<String>();
         boolean chkgnr = false;
 
-        for (Movie mov : movies) {
+     /*   for (Movie mov : movies) {
             String[] gnrs = mov.getGenre().replace(",", "").split(" ");
             
             for (String gnr : gnrs) {
@@ -60,7 +60,7 @@ public class MyMovies extends HttpServlet {
             }
         }
         
-        request.setAttribute("genres", genres);
+        request.setAttribute("genres", genres); */
 
         request.setAttribute("movies", movies);
 
