@@ -314,8 +314,9 @@ public class JDBC {
             // --- CREATE MOVIE2USER RELATIONSHIP
             int mov_id = getMovieId(title, year);
             int use_id = getUserId(fb_id);
-            sql = "INSERT INTO movie2user (movie_id,user_id) VALUES ('" + mov_id + "','" + use_id + "')";
-            stmt.executeUpdate(sql);
+            sql = "INSERT INTO movie2user (movie_id, user_id) VALUES ('" + mov_id + "', '" + use_id + "')";
+            stmt = conn.prepareStatement(sql);
+            stmt.execute();
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
