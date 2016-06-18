@@ -238,12 +238,12 @@ public class JDBC {
                 // ---- GENRE MANAGEMENT ----- //
                 for (String genr : genre) {
                     // CHECK GENRE EXISTENCE
-                    boolean genr1 = checkExists("genre", "genre", genr);
-                    logs.write("\n CHECK if GENRE "+genr+" EXISTS: \n");
+                    boolean genr1 = checkExists("genre", "genre", genr );
+                    logs.write("\n CHECK if GENRE "+ genr +" EXISTS: \n");
                     logs.write(String.valueOf(genr1)+"\n");
                     logs.flush();
                     // IF NEW GENRE, ADD TO GENRE TABLE
-                    if (genr1 != true) {
+                    if (!genr1) {
                         logs.write("Genre Not True Passed \n");
                         logs.flush();
                         sql = "INSERT INTO genre (genre)"
@@ -496,8 +496,9 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-
+            
             sql = "SELECT id FROM '" + table + "' WHERE '" + col + "' = '" + value + "' LIMIT 1";
+            
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
