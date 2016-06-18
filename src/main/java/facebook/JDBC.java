@@ -177,12 +177,12 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        FileWriter logs = new FileWriter( "logs.txt" , true);
+        FileWriter logs = new FileWriter("logs.txt", true);
         logs.write("\nJDBC Line 181 \n List<string> dirs: \n");
         for (String dirlog : dirs) {
             logs.write(dirlog + "\n");
         }
-       
+
         //  ADD WRITERS TO LIST AND ESCAPE APOSTROPHES
         List<String> wris = new ArrayList<>();
         for (String wri : writer) {
@@ -193,7 +193,7 @@ public class JDBC {
         for (String wrilog : wris) {
             logs.write(wrilog + "\n");
         }
-        
+
         //  ADD ACTORS TO LIST AND ESCAPE APOSTROPHES
         List<String> acts = new ArrayList<>();
         for (String act : actors) {
@@ -207,8 +207,8 @@ public class JDBC {
         // ESCAPE APOSTOPHES FOR PLOT
         plot = plot.replace("'", "\\'");
         country = country.replace("'", "\\'");
-        logs.write("\n Plot: \n"+plot+"\n");
-        logs.write("\n Country: \n"+country+"\n");
+        logs.write("\n Plot: \n" + plot + "\n");
+        logs.write("\n Country: \n" + country + "\n");
         logs.flush();
 
         try {
@@ -217,50 +217,55 @@ public class JDBC {
 
             boolean xmov = checkExist2("movie", "title", "year", title, year);
             logs.write("\n LINE 218 \n CheckMovieExists: \n");
-            logs.write(String.valueOf(xmov)+"\n");
+            logs.write(String.valueOf(xmov) + "\n");
             logs.flush();
 
             // ---- INSERT MOVIE TO MOVIE TABLE ----- 
             if (xmov != true) {
-                
+
                 logs.write("\n Xmov Not True Checks Out \n");
                 logs.flush();
-                
+
                 sql = "INSERT INTO movie (title, year, rated, released, runtime, plot, language, country, metascore)"
                         + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "');";
-                logs.write("\n"+sql);
+                logs.write("\n" + sql);
                 logs.flush();
                 stmt = conn.prepareStatement(sql);
                 logs.write("\n Prepared Statement \n");
                 stmt.execute();
                 logs.flush();
-                logs.close();
 
                 // ---- GENRE MANAGEMENT ----- //
                 for (String genr : genre) {
                     // CHECK GENRE EXISTENCE
                     boolean genr1 = checkExists("genre", "genre", genr);
-
+                    logs.write("\n CHECK if GENRE "+genr+" EXISTS: \n");
+                    logs.write(String.valueOf(genr1)+"\n");
+                    logs.flush();
                     // IF NEW GENRE, ADD TO GENRE TABLE
-                    if (genr1 == false) {
+                    if (genr1 != true) {
+                        logs.write("Genre Not True Passed \n");
+                        logs.flush();
                         sql = "INSERT INTO genre (genre)"
                                 + "VALUES ('" + genr + "')";
                         stmt = conn.prepareStatement(sql);
                         stmt.executeUpdate(sql);
+                    } else {
+                        logs.write("Genre Not True Failed... skip adding Genre \n\n");
+                        logs.flush();
                     }
 
                     // ----- RELATE GENRE TO MOVIE ---- /
                     genre_id = getId("genre", "genre", genr);
                     movie_id = getMovieId(title, year);
-                    boolean xm2g = checkExist2("movie2genre", "movie_id", "genre_id", Integer.toString(movie_id), Integer.toString(genre_id));
-
+                    
+                    logs.write("Genre Id — "+genre_id+" \nMovie Id — "+movie_id+"\n");
+                    logs.flush();
                     // IF RELATIONSHIP DOESNT EXIST ADD IT TO MOVIE2GENRE TABLE ------
-                    if (xm2g == false) {
-                        sql = "INSERT INTO movie2genre (movie_id,genre_id) "
-                                + "VALUES ('" + movie_id + "', '" + genre_id + "')";
-                        stmt = conn.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
-                    }
+                    sql = "INSERT INTO movie2genre (movie_id, genre_id) "
+                            + "VALUES ('" + movie_id + "', '" + genre_id + "')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
 
                 }
                 // === INSERT DIRECTOR INTO CREW TABLE --- //
@@ -667,7 +672,5 @@ public class JDBC {
         }
         return mov;
     }
-
-    
 
 }
