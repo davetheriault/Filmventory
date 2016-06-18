@@ -418,7 +418,7 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT id FROM '" + table + "' WHERE '" + col + "' = '" + value + "' LIMIT 1";
+            sql = "SELECT id FROM " + table + " WHERE " + col + " = '" + value + "' LIMIT 1";
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -497,7 +497,7 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             
-            sql = "SELECT id FROM '" + table + "' WHERE '" + col + "' = '" + value + "' LIMIT 1";
+            sql = "SELECT id FROM " + table + " WHERE " + col + " = '" + value + "' LIMIT 1";
             
             rs = stmt.executeQuery(sql);
 
@@ -505,6 +505,7 @@ public class JDBC {
 
                 if (rs.getInt("id") >= 1) {
                     checkEx = true;
+                    break;
                 }
             }
         } catch (SQLException ex) {
@@ -538,8 +539,8 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
 
-            sql = "SELECT id FROM '" + table + "' WHERE '" + col1 + "' = '" + value1 + "' "
-                    + "AND '" + col2 + "' = '" + value2 + "' LIMIT 1";
+            sql = "SELECT id FROM " + table + " WHERE " + col1 + " = '" + value1 + "' "
+                    + "AND " + col2 + " = '" + value2 + "' LIMIT 1";
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
