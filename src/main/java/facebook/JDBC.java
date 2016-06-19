@@ -206,7 +206,7 @@ public class JDBC {
         }
         // ESCAPE APOSTOPHES FOR PLOT
         plot = plot.replace("'", "\\'");
-        plot = plot.replace("\"", "\\\"");
+        plot = plot.replace("\"", "\\'");
         
         country = country.replace("'", "\\'");
         logs.write("\n Plot: \n" + plot + "\n");
