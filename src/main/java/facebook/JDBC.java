@@ -265,7 +265,7 @@ public class JDBC {
                     logs.flush();
                     // IF RELATIONSHIP DOESNT EXIST ADD IT TO MOVIE2GENRE TABLE ------
                     sql = "INSERT INTO movie2genre (movie_id, genre_id) "
-                            + "VALUES (" + movie_id + ", " + genre_id + ")";
+                            + "VALUES ('" + movie_id + "', '" + genre_id + "')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
 
@@ -289,7 +289,7 @@ public class JDBC {
                     }
                     int crew_id = getId("crew", "name", dire);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
-                            + "VALUES (" + crew_id + ", " + movie_id + ", 'director')";
+                            + "VALUES ('" + crew_id + "', '" + movie_id + "', 'director')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
                 }
@@ -313,7 +313,7 @@ public class JDBC {
                     }
                     int crew_id = getId("crew", "name", writ);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
-                            + "VALUES (" + crew_id + ", " + movie_id + ", 'writer')";
+                            + "VALUES ('" + crew_id + "', '" + movie_id + "', 'writer')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
                 }
@@ -336,7 +336,7 @@ public class JDBC {
                     }
                     int crew_id = getId("crew", "name", acto);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
-                            + "VALUES (" + crew_id + ", " + movie_id + ", 'actor')";
+                            + "VALUES ('" + crew_id + "', '" + movie_id + "', 'actor')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
                 }
@@ -344,7 +344,7 @@ public class JDBC {
             // --- CREATE MOVIE2USER RELATIONSHIP
             int mov_id = getMovieId(title, year);
             int use_id = getUserId(fb_id);
-            sql = "INSERT INTO movie2user (movie_id, user_id) VALUES (" + mov_id + ", " + use_id + ")";
+            sql = "INSERT INTO movie2user (movie_id, user_id) VALUES ('" + mov_id + "', '" + use_id + "')";
             stmt = conn.prepareStatement(sql);
             stmt.execute();
 
