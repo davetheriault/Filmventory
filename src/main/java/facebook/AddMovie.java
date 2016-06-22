@@ -83,10 +83,6 @@ public class AddMovie extends HttpServlet {
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
         
-        request.getSession().setAttribute("genreArray", genr);
-        request.getSession().setAttribute("actorArray", acto);
-        request.getSession().setAttribute("writerArray", writ);
-        request.getSession().setAttribute("directArray", dire);
 
         response.sendRedirect("/MyMovies");
 
@@ -126,10 +122,6 @@ public class AddMovie extends HttpServlet {
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
         
-        request.getSession().setAttribute("genreArray", genr);
-        request.getSession().setAttribute("actorArray", acto);
-        request.getSession().setAttribute("writerArray", writ);
-        request.getSession().setAttribute("directArray", dire);
 
         response.sendRedirect("/MyMovies");
 
