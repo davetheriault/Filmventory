@@ -273,11 +273,19 @@ public class JDBC {
                 // === INSERT DIRECTOR INTO CREW TABLE --- //
                 for (String dire : dirs) {
                     boolean crew1 = checkExists("crew", "name", dire);
+                    logs.write("\nCheckExists "+dire+" = "+crew1+"\n");
+                    logs.flush();
                     if (crew1 == false) {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + dire + "')";
                         stmt = conn.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
+                        int insertD = stmt.executeUpdate(sql);
+                        if (insertD != 0) {
+                            logs.write("\nDirector "+dire+" inserted. \n");
+                            logs.flush();
+                        } else { 
+                            logs.write("\nDirector "+dire+" failed. \n");
+                        }
                     }
                     int crew_id = getId("crew", "name", dire);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
@@ -287,11 +295,19 @@ public class JDBC {
                 // === INSERT WRITER INTO CREW TABLE --- //
                 for (String writ : wris) {
                     boolean writ1 = checkExists("crew", "name", writ);
+                    logs.write("\nCheckExists "+writ+" = "+writ1+"\n");
+                    logs.flush();
                     if (writ1 == false) {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + writ + "')";
                         stmt = conn.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
+                        int insertW = stmt.executeUpdate(sql);
+                        if (insertW != 0) {
+                            logs.write("\nDirector "+writ+" inserted. \n");
+                            logs.flush();
+                        } else { 
+                            logs.write("\nDirector "+writ+" failed. \n");
+                        }
                     }
                     int crew_id = getId("crew", "name", writ);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
@@ -300,11 +316,19 @@ public class JDBC {
                 // === INSERT ACTOR INTO CREW TABLE --- //
                 for (String acto : acts) {
                     boolean act1 = checkExists("crew", "name", acto);
+                    logs.write("\nCheckExists "+acto+" = "+act1+"\n");
+                    logs.flush();
                     if (act1 == false) {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + acto + "')";
                         stmt = conn.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
+                        int insertA = stmt.executeUpdate(sql);
+                        if (insertA != 0) {
+                            logs.write("\nDirector "+acto+" inserted. \n");
+                            logs.flush();
+                        } else { 
+                            logs.write("\nDirector "+acto+" failed. \n");
+                        }
                     }
                     int crew_id = getId("crew", "name", acto);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
