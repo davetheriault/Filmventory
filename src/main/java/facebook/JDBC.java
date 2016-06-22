@@ -236,6 +236,7 @@ public class JDBC {
                 logs.write("\n Prepared Statement \n");
                 stmt.execute();
                 logs.flush();
+                movie_id = getMovieId(title, year);
 
                 // ---- GENRE MANAGEMENT ----- //
                 for (String genr : genre) {
@@ -259,7 +260,6 @@ public class JDBC {
 
                     // ----- RELATE GENRE TO MOVIE ---- /
                     genre_id = getId("genre", "genre", genr);
-                    movie_id = getMovieId(title, year);
                     
                     logs.write("Genre Id — "+genre_id+" \nMovie Id — "+movie_id+"\n");
                     logs.flush();
@@ -305,10 +305,10 @@ public class JDBC {
                         stmt = conn.prepareStatement(sql);
                         int insertW = stmt.executeUpdate(sql);
                         if (insertW != 0) {
-                            logs.write("\nDirector "+writ+" inserted. \n");
+                            logs.write("\nWriter "+writ+" inserted. \n");
                             logs.flush();
                         } else { 
-                            logs.write("\nDirector "+writ+" failed. \n");
+                            logs.write("\nWriter "+writ+" failed. \n");
                         }
                     }
                     int crew_id = getId("crew", "name", writ);
