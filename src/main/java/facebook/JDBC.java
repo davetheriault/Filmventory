@@ -290,6 +290,8 @@ public class JDBC {
                     int crew_id = getId("crew", "name", dire);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
                             + "VALUES (" + crew_id + ", " + movie_id + ", 'director')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
                 }
 
                 // === INSERT WRITER INTO CREW TABLE --- //
@@ -312,6 +314,8 @@ public class JDBC {
                     int crew_id = getId("crew", "name", writ);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
                             + "VALUES (" + crew_id + ", " + movie_id + ", 'writer')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
                 }
                 // === INSERT ACTOR INTO CREW TABLE --- //
                 for (String acto : acts) {
@@ -333,6 +337,8 @@ public class JDBC {
                     int crew_id = getId("crew", "name", acto);
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
                             + "VALUES (" + crew_id + ", " + movie_id + ", 'actor')";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.executeUpdate(sql);
                 }
             }
             // --- CREATE MOVIE2USER RELATIONSHIP
