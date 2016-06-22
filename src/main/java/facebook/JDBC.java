@@ -207,7 +207,7 @@ public class JDBC {
         // ESCAPE APOSTOPHES FOR PLOT
         plot = plot.replace("'", "\\'");
         plot = plot.replace("\"", "\\'");
-        
+
         country = country.replace("'", "\\'");
         logs.write("\n Plot: \n" + plot + "\n");
         logs.write("\n Country: \n" + country + "\n");
@@ -241,9 +241,9 @@ public class JDBC {
                 // ---- GENRE MANAGEMENT ----- //
                 for (String genr : genre) {
                     // CHECK GENRE EXISTENCE
-                    boolean genr1 = checkExists("genre", "genre", genr );
-                    logs.write("\n CHECK if GENRE "+ genr +" EXISTS: \n");
-                    logs.write(String.valueOf(genr1)+"\n");
+                    boolean genr1 = checkExists("genre", "genre", genr);
+                    logs.write("\n CHECK if GENRE " + genr + " EXISTS: \n");
+                    logs.write(String.valueOf(genr1) + "\n");
                     logs.flush();
                     // IF NEW GENRE, ADD TO GENRE TABLE
                     if (!genr1) {
@@ -260,8 +260,8 @@ public class JDBC {
 
                     // ----- RELATE GENRE TO MOVIE ---- /
                     genre_id = getId("genre", "genre", genr);
-                    
-                    logs.write("Genre Id — "+genre_id+" \nMovie Id — "+movie_id+"\n");
+
+                    logs.write("Genre Id — " + genre_id + " \nMovie Id — " + movie_id + "\n");
                     logs.flush();
                     // IF RELATIONSHIP DOESNT EXIST ADD IT TO MOVIE2GENRE TABLE ------
                     sql = "INSERT INTO movie2genre (movie_id, genre_id) "
@@ -273,7 +273,7 @@ public class JDBC {
                 // === INSERT DIRECTOR INTO CREW TABLE --- //
                 for (String dire : dirs) {
                     boolean crew1 = checkExists("crew", "name", dire);
-                    logs.write("\nCheckExists "+dire+" = "+crew1+"\n");
+                    logs.write("\nCheckExists " + dire + " = " + crew1 + "\n");
                     logs.flush();
                     if (crew1 == false) {
                         sql = "INSERT INTO crew (name)"
@@ -281,14 +281,16 @@ public class JDBC {
                         stmt = conn.prepareStatement(sql);
                         int insertD = stmt.executeUpdate(sql);
                         if (insertD != 0) {
-                            logs.write("\nDirector "+dire+" inserted. \n");
+                            logs.write("\nDirector " + dire + " inserted. \n");
                             logs.flush();
-                        } else { 
-                            logs.write("\nDirector "+dire+" failed. \n");
+                        } else {
+                            logs.write("\nDirector " + dire + " failed. \n");
+                            logs.flush();
                         }
                     }
                     int crew_id = getId("crew", "name", dire);
-                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
+                    logs.write("\ncrew_id = " + crew_id + "\n");
+                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'director')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
@@ -297,7 +299,7 @@ public class JDBC {
                 // === INSERT WRITER INTO CREW TABLE --- //
                 for (String writ : wris) {
                     boolean writ1 = checkExists("crew", "name", writ);
-                    logs.write("\nCheckExists "+writ+" = "+writ1+"\n");
+                    logs.write("\nCheckExists " + writ + " = " + writ1 + "\n");
                     logs.flush();
                     if (writ1 == false) {
                         sql = "INSERT INTO crew (name)"
@@ -305,14 +307,14 @@ public class JDBC {
                         stmt = conn.prepareStatement(sql);
                         int insertW = stmt.executeUpdate(sql);
                         if (insertW != 0) {
-                            logs.write("\nWriter "+writ+" inserted. \n");
+                            logs.write("\nWriter " + writ + " inserted. \n");
                             logs.flush();
-                        } else { 
-                            logs.write("\nWriter "+writ+" failed. \n");
+                        } else {
+                            logs.write("\nWriter " + writ + " failed. \n");
                         }
                     }
                     int crew_id = getId("crew", "name", writ);
-                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
+                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'writer')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
@@ -320,7 +322,7 @@ public class JDBC {
                 // === INSERT ACTOR INTO CREW TABLE --- //
                 for (String acto : acts) {
                     boolean act1 = checkExists("crew", "name", acto);
-                    logs.write("\nCheckExists "+acto+" = "+act1+"\n");
+                    logs.write("\nCheckExists " + acto + " = " + act1 + "\n");
                     logs.flush();
                     if (act1 == false) {
                         sql = "INSERT INTO crew (name)"
@@ -328,14 +330,14 @@ public class JDBC {
                         stmt = conn.prepareStatement(sql);
                         int insertA = stmt.executeUpdate(sql);
                         if (insertA != 0) {
-                            logs.write("\nDirector "+acto+" inserted. \n");
+                            logs.write("\nDirector " + acto + " inserted. \n");
                             logs.flush();
-                        } else { 
-                            logs.write("\nDirector "+acto+" failed. \n");
+                        } else {
+                            logs.write("\nDirector " + acto + " failed. \n");
                         }
                     }
                     int crew_id = getId("crew", "name", acto);
-                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position_id) "
+                    sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'actor')";
                     stmt = conn.prepareStatement(sql);
                     stmt.executeUpdate(sql);
@@ -529,9 +531,9 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            
+
             sql = "SELECT id FROM " + table + " WHERE " + col + " = '" + value + "' LIMIT 1";
-            
+
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
