@@ -165,7 +165,7 @@ request.setAttribute("title", request.getAttribute("title"));
             for (String key : innerMap.keySet()) {
 
                 if (key.equals("Title")) {
-                    results += "<li>" + key + ": <a href='FindMovie2?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a></li>";
+                    results += "<li>" + key + ": <a href='FindMovie2?title=" + encode((String) innerMap.get(key), "UTF-8") + "&y=" + encode((String) innerMap.get("Year"), "UTF-8") + "'>" + innerMap.get(key) + "</a></li>";
                 }
                 if (key.equals("Year")) {
                     results += "<li>" + key + ": " + innerMap.get(key) + "</li>";

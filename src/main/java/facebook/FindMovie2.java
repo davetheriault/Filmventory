@@ -38,15 +38,13 @@ public class FindMovie2 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         JDBC db = new JDBC();
-        
+
         List<String> messages = new ArrayList();
-        
-        
 
         if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
-                response.sendRedirect("filmventory.jsp");
+            response.sendRedirect("filmventory.jsp");
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -104,7 +102,7 @@ public class FindMovie2 extends HttpServlet {
                     + "            Details for &quot;" + request.getParameter("title") + "&quot;</h3>\n"
                     + "        <div class=\"w3-container w3-padding\">");
             for (String mess : messages) {
-                out.println("messages: "+mess);
+                out.println("messages: " + mess);
             }
 
             String title = request.getParameter("title");
@@ -122,38 +120,37 @@ public class FindMovie2 extends HttpServlet {
 
                 } else if (key.equals("Title")) {
                     out.println("<li>" + key + ": " + map.get(key) + " ");
-                    
+
                     boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
                     if (own == false) {
-                      /*  out.println("<a class=\"w3-button w3-right\" href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
-                                   +"&yea="+(String)map.get("Year")+"&rel="+encode((String)map.get("Released"), "UTF-8")
-                                   +"&rat="+encode((String)map.get("Rated"), "UTF-8")+"&run="+encode((String)map.get("Runtime"), "UTF-8")
-                                   +"&gen="+encode((String)map.get("Genre"), "UTF-8")+"&dir="+encode((String)map.get("Director"), "UTF-8")
-                                   +"&wri="+encode((String)map.get("Writer"), "UTF-8")+"&act="+encode((String)map.get("Actors"), "UTF-8")
-                                   +"&plo="+encode((String)map.get("Plot"), "UTF-8")+"&lan="+encode((String)map.get("Language"), "UTF-8")
-                                   +"&cou="+encode((String)map.get("Country"), "UTF-8")+"&met="+encode((String)map.get("Metascore"), "UTF-8")
-                                   +"&title="+urltitle+"\">Add Movie</a>"); */
+                        /*  out.println("<a class=\"w3-button w3-right\" href=\"/AddMovie?add=yes&tit="+encode((String)map.get("Title"), "UTF-8")
+                         +"&yea="+(String)map.get("Year")+"&rel="+encode((String)map.get("Released"), "UTF-8")
+                         +"&rat="+encode((String)map.get("Rated"), "UTF-8")+"&run="+encode((String)map.get("Runtime"), "UTF-8")
+                         +"&gen="+encode((String)map.get("Genre"), "UTF-8")+"&dir="+encode((String)map.get("Director"), "UTF-8")
+                         +"&wri="+encode((String)map.get("Writer"), "UTF-8")+"&act="+encode((String)map.get("Actors"), "UTF-8")
+                         +"&plo="+encode((String)map.get("Plot"), "UTF-8")+"&lan="+encode((String)map.get("Language"), "UTF-8")
+                         +"&cou="+encode((String)map.get("Country"), "UTF-8")+"&met="+encode((String)map.get("Metascore"), "UTF-8")
+                         +"&title="+urltitle+"\">Add Movie</a>"); */
                         out.println("<form id=\"addFilm\" method=\"post\" action=\"AddMovie\">"
-                                  + "<input type=\"hidden\" name=\"tit\" value=\""+map.get("Title")+"\" />"
-                                  + "<input type=\"hidden\" name=\"yea\" value=\""+map.get("Year")+"\" />"
-                                  + "<input type=\"hidden\" name=\"rat\" value=\""+map.get("Rated")+"\" />"
-                                  + "<input type=\"hidden\" name=\"rel\" value=\""+map.get("Released")+"\" />"
-                                  + "<input type=\"hidden\" name=\"run\" value=\""+map.get("Runtime")+"\" />"
-                                  + "<input type=\"hidden\" name=\"gen\" value=\""+map.get("Genre")+"\" />"
-                                  + "<input type=\"hidden\" name=\"dir\" value=\""+map.get("Director")+"\" />"
-                                  + "<input type=\"hidden\" name=\"wri\" value=\""+map.get("Writer")+"\" />"
-                                  + "<input type=\"hidden\" name=\"act\" value=\""+map.get("Actors")+"\" />"
-                                  + "<input type=\"hidden\" name=\"plo\" value=\""+map.get("Plot")+"\" />"
-                                  + "<input type=\"hidden\" name=\"lan\" value=\""+map.get("Language")+"\" />"
-                                  + "<input type=\"hidden\" name=\"cou\" value=\""+map.get("Country")+"\" />"
-                                  + "<input type=\"hidden\" name=\"met\" value=\""+map.get("Metascore")+"\" />"
-                                  + "<input type=\"hidden\" name=\"imd\" value=\""+map.get("imdbID")+"\" />"
-                                  + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
-                                  + "</form>");
+                                + "<input type=\"hidden\" name=\"tit\" value=\"" + map.get("Title") + "\" />"
+                                + "<input type=\"hidden\" name=\"yea\" value=\"" + map.get("Year") + "\" />"
+                                + "<input type=\"hidden\" name=\"rat\" value=\"" + map.get("Rated") + "\" />"
+                                + "<input type=\"hidden\" name=\"rel\" value=\"" + map.get("Released") + "\" />"
+                                + "<input type=\"hidden\" name=\"run\" value=\"" + map.get("Runtime") + "\" />"
+                                + "<input type=\"hidden\" name=\"gen\" value=\"" + map.get("Genre") + "\" />"
+                                + "<input type=\"hidden\" name=\"dir\" value=\"" + map.get("Director") + "\" />"
+                                + "<input type=\"hidden\" name=\"wri\" value=\"" + map.get("Writer") + "\" />"
+                                + "<input type=\"hidden\" name=\"act\" value=\"" + map.get("Actors") + "\" />"
+                                + "<input type=\"hidden\" name=\"plo\" value=\"" + map.get("Plot") + "\" />"
+                                + "<input type=\"hidden\" name=\"lan\" value=\"" + map.get("Language") + "\" />"
+                                + "<input type=\"hidden\" name=\"cou\" value=\"" + map.get("Country") + "\" />"
+                                + "<input type=\"hidden\" name=\"met\" value=\"" + map.get("Metascore") + "\" />"
+                                + "<input type=\"hidden\" name=\"imd\" value=\"" + map.get("imdbID") + "\" />"
+                                + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
+                                + "</form>");
                     }
                     out.println("</li>");
-                } 
-                else {
+                } else {
                     out.println("<li>" + key + ": " + map.get(key) + "</li>");
                 }
             }
@@ -164,7 +161,7 @@ public class FindMovie2 extends HttpServlet {
             for (String key2 : map2.keySet()) {
                 out.println("<li>" + key2 + ": " + map2.get(key2) + "</li>");
             }
-            out.println("<li><img alt='" +map.get("Title")+  "' src='http://image.tmdb.org/t/p/w100" + map2.get("poster_path") + "' /></li> ");
+            out.println("<li><img alt='" + map.get("Title") + "' src='http://image.tmdb.org/t/p/w100" + map2.get("poster_path") + "' /></li> ");
             out.println("</ul>");
             out.println("</div></div></main>");
 
@@ -185,7 +182,82 @@ public class FindMovie2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        JDBC db = new JDBC();
+
+        List<String> messages = new ArrayList();
+
+        if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
+            response.sendRedirect("filmventory.jsp");
+        }
+        String message = "";
+        for (String mess : messages) {
+            message += " " + mess + " ";
+        }
+        request.setAttribute("message", message);
+
+        String title = request.getParameter("title");
+        String year = request.getParameter("year");
+
+        String urltitle = encode(title, "UTF-8");
+        String urlyear = encode(year, "UTF-8");
+
+        URL url = new URL("http://www.omdbapi.com/?t=" + urltitle + "&y=" + urlyear);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(url, Map.class);
+
+        String results = "<ul class=\"w3-ul\">";
+        for (String key : map.keySet()) {
+            if (key.equals("Poster")) {
+
+            } else if (key.equals("Title")) {
+                results += "<li>" + key + ": " + map.get(key) + " ";
+
+                boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
+                if (own == false) {
+
+                    results += "<form id=\"addFilm\" method=\"post\" action=\"AddMovie\">"
+                            + "<input type=\"hidden\" name=\"tit\" value=\"" + map.get("Title") + "\" />"
+                            + "<input type=\"hidden\" name=\"yea\" value=\"" + map.get("Year") + "\" />"
+                            + "<input type=\"hidden\" name=\"rat\" value=\"" + map.get("Rated") + "\" />"
+                            + "<input type=\"hidden\" name=\"rel\" value=\"" + map.get("Released") + "\" />"
+                            + "<input type=\"hidden\" name=\"run\" value=\"" + map.get("Runtime") + "\" />"
+                            + "<input type=\"hidden\" name=\"gen\" value=\"" + map.get("Genre") + "\" />"
+                            + "<input type=\"hidden\" name=\"dir\" value=\"" + map.get("Director") + "\" />"
+                            + "<input type=\"hidden\" name=\"wri\" value=\"" + map.get("Writer") + "\" />"
+                            + "<input type=\"hidden\" name=\"act\" value=\"" + map.get("Actors") + "\" />"
+                            + "<input type=\"hidden\" name=\"plo\" value=\"" + map.get("Plot") + "\" />"
+                            + "<input type=\"hidden\" name=\"lan\" value=\"" + map.get("Language") + "\" />"
+                            + "<input type=\"hidden\" name=\"cou\" value=\"" + map.get("Country") + "\" />"
+                            + "<input type=\"hidden\" name=\"met\" value=\"" + map.get("Metascore") + "\" />"
+                            + "<input type=\"hidden\" name=\"imd\" value=\"" + map.get("imdbID") + "\" />"
+                            + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
+                            + "</form>";
+                }
+                results += "</li>";
+            } else {
+                results += "<li>" + key + ": " + map.get(key) + "</li>";
+            }
+        }
+        URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
+
+        ObjectMapper mapper2 = new ObjectMapper();
+        Map<String, Object> map2 = mapper2.readValue(url2, Map.class);
+        for (String key2 : map2.keySet()) {
+            if (key2.equals("Response") || key2.equals("movie_results") || key2.equals("person_results")
+                    || key2.equals("tv_results") || key2.equals("tv_episode_results")
+                    || key2.equals("tv_season_results")) {
+
+            } else {
+                results += "<li>" + key2 + ": " + map2.get(key2) + "</li>";
+            }
+        }
+        results += "</ul>";
+        request.setAttribute("results", results);
+
+        request.getRequestDispatcher("fvfind2.jsp").forward(request, response);
+
     }
 
     /**
@@ -199,7 +271,81 @@ public class FindMovie2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        JDBC db = new JDBC();
+
+        List<String> messages = new ArrayList();
+
+        if (request.getSession().getAttribute("facebook") == null || request.getSession().getAttribute("facebook") == "") {
+            response.sendRedirect("filmventory.jsp");
+        }
+        String message = "";
+        for (String mess : messages) {
+            message += " " + mess + " ";
+        }
+        request.setAttribute("message", message);
+
+        String title = request.getParameter("title");
+        String year = request.getParameter("year");
+
+        String urltitle = encode(title, "UTF-8");
+        String urlyear = encode(year, "UTF-8");
+
+        URL url = new URL("http://www.omdbapi.com/?t=" + urltitle + "&y=" + urlyear);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(url, Map.class);
+
+        String results = "<ul class=\"w3-ul\">";
+        for (String key : map.keySet()) {
+            if (key.equals("Poster")) {
+
+            } else if (key.equals("Title")) {
+                results += "<li>" + key + ": " + map.get(key) + " ";
+
+                boolean own = db.checkMovie2User((String) request.getSession().getAttribute("id"), (String) map.get(key), (String) map.get("Year"));
+                if (own == false) {
+
+                    results += "<form id=\"addFilm\" method=\"post\" action=\"AddMovie\">"
+                            + "<input type=\"hidden\" name=\"tit\" value=\"" + map.get("Title") + "\" />"
+                            + "<input type=\"hidden\" name=\"yea\" value=\"" + map.get("Year") + "\" />"
+                            + "<input type=\"hidden\" name=\"rat\" value=\"" + map.get("Rated") + "\" />"
+                            + "<input type=\"hidden\" name=\"rel\" value=\"" + map.get("Released") + "\" />"
+                            + "<input type=\"hidden\" name=\"run\" value=\"" + map.get("Runtime") + "\" />"
+                            + "<input type=\"hidden\" name=\"gen\" value=\"" + map.get("Genre") + "\" />"
+                            + "<input type=\"hidden\" name=\"dir\" value=\"" + map.get("Director") + "\" />"
+                            + "<input type=\"hidden\" name=\"wri\" value=\"" + map.get("Writer") + "\" />"
+                            + "<input type=\"hidden\" name=\"act\" value=\"" + map.get("Actors") + "\" />"
+                            + "<input type=\"hidden\" name=\"plo\" value=\"" + map.get("Plot") + "\" />"
+                            + "<input type=\"hidden\" name=\"lan\" value=\"" + map.get("Language") + "\" />"
+                            + "<input type=\"hidden\" name=\"cou\" value=\"" + map.get("Country") + "\" />"
+                            + "<input type=\"hidden\" name=\"met\" value=\"" + map.get("Metascore") + "\" />"
+                            + "<input type=\"hidden\" name=\"imd\" value=\"" + map.get("imdbID") + "\" />"
+                            + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
+                            + "</form>";
+                }
+                results += "</li>";
+            } else {
+                results += "<li>" + key + ": " + map.get(key) + "</li>";
+            }
+        }
+        URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
+
+        ObjectMapper mapper2 = new ObjectMapper();
+        Map<String, Object> map2 = mapper2.readValue(url2, Map.class);
+        for (String key2 : map2.keySet()) {
+            if (key2.equals("Response") || key2.equals("movie_results") || key2.equals("person_results")
+                    || key2.equals("tv_results") || key2.equals("tv_episode_results")
+                    || key2.equals("tv_season_results")) {
+
+            } else {
+                results += "<li>" + key2 + ": " + map2.get(key2) + "</li>";
+            }
+        }
+        results += "</ul>";
+        request.setAttribute("results", results);
+
+        request.getRequestDispatcher("fvfind2.jsp").forward(request, response);
     }
 
     /**
