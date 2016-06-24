@@ -286,7 +286,7 @@ public class FindMovie2 extends HttpServlet {
         request.setAttribute("message", message);
 
         String title = request.getParameter("title");
-        String year = request.getParameter("year");
+        String year = request.getParameter("y");
 
         String urltitle = encode(title, "UTF-8");
         String urlyear = encode(year, "UTF-8");

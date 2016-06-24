@@ -626,15 +626,16 @@ public class JDBC {
                 mov.setRated(rs.getString("rated"));
                 mov.setReleased(rs.getString("released"));
                 mov.setRuntime(rs.getString("runtime"));
-                mov.setGenre(rs.getString("genre"));
-                mov.setDirector(rs.getString("director"));
-                mov.setWriter(rs.getString("writer"));
-                mov.setActors(rs.getString("actors"));
                 mov.setPlot(rs.getString("plot"));
                 mov.setLanguage(rs.getString("language"));
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
-
+                
+                mov.setGenre(getGenres(rs.getInt("id")));
+                mov.setDirector((List<String>) getPositions(rs.getInt("id")).get(0));
+                mov.setWriter((List<String>) getPositions(rs.getInt("id")).get(1));
+                mov.setActors((List<String>) getPositions(rs.getInt("id")).get(2));
+                
                 list.add(mov);
             }
         } catch (SQLException ex) {
@@ -679,16 +680,20 @@ public class JDBC {
                 mov.setRated(rs.getString("rated"));
                 mov.setReleased(rs.getString("released"));
                 mov.setRuntime(rs.getString("runtime"));
-                mov.setGenre(rs.getString("genre"));
-                mov.setDirector(rs.getString("director"));
-                mov.setWriter(rs.getString("writer"));
-                mov.setActors(rs.getString("actors"));
                 mov.setPlot(rs.getString("plot"));
                 mov.setLanguage(rs.getString("language"));
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
-
             }
+            List<String> genres = getGenres(movid);
+            mov.setGenre(genres);
+
+            List<List<String>> positions = getPositions(movid);
+            
+            mov.setDirector(positions.get(0));
+            mov.setWriter(positions.get(1));
+            mov.setActors(positions.get(2));
+
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -708,6 +713,70 @@ public class JDBC {
             }
         }
         return mov;
+    }
+
+    public List getGenres(int movie_id) throws SQLException {
+
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<String> genreList = new ArrayList<>();
+
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+
+        sql = "SELECT genre FROM genre g "
+                + "INNER JOIN movie2genre mg ON g.id=mg.genre_id "
+                + "WHERE mg.movie_id = '" + movie_id + "' ";
+
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            genreList.add(rs.getString("genre"));
+        }
+
+        return genreList;
+    }
+
+    public List getPositions(int movie_id) throws SQLException {
+
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<List<String>> positions = new ArrayList<>();
+        List<String> directors = new ArrayList<>();
+        List<String> writers = new ArrayList<>();
+        List<String> actors = new ArrayList<>();
+
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+
+        sql = "SELECT c.name, cm.position"
+                + "FROM crew c "
+                + "INNER JOIN crew2movie cm "
+                + "ON c.id=cm.crew_id "
+                + "WHERE cm.movie_id = '" + movie_id + "'";
+        
+        rs = stmt.executeQuery(sql);
+        
+        while (rs.next()) {
+            if (rs.getString("position") == "director") {
+                directors.add(rs.getString("name"));
+            }
+            if (rs.getString("position") == "writer") {
+                writers.add(rs.getString("name"));
+            }
+            if (rs.getString("position") == "actor") {
+                actors.add(rs.getString("name"));
+            }
+        }
+        
+        positions.add(directors);
+        positions.add(writers);
+        positions.add(actors);
+
+        return positions;
     }
 
 }

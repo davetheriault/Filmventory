@@ -5,6 +5,8 @@
  */
 package facebook;
 
+import java.util.List;
+
 /**
  *
  * @author Theriault
@@ -16,10 +18,10 @@ public class Movie {
     private String rated;
     private String released;
     private String runtime;
-    private String genre;
-    private String director;
-    private String writer;
-    private String actors;
+    private List<String> genre;
+    private List<String> director;
+    private List<String> writer;
+    private List<String> actors;
     private String plot;
     private String language;
     private String country;
@@ -68,35 +70,35 @@ public class Movie {
         this.runtime = runtime;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(List<String>genre) {
         this.genre = genre;
     }
 
-    public String getDirector() {
+    public List<String>getDirector() {
         return director;
     }
 
-    public void setDirector(String director) {
+    public void setDirector(List<String> director) {
         this.director = director;
     }
 
-    public String getWriter() {
+    public List<String> getWriter() {
         return writer;
     }
 
-    public void setWriter(String writer) {
+    public void setWriter(List<String> writer) {
         this.writer = writer;
     }
 
-    public String getActors() {
+    public List<String> getActors() {
         return actors;
     }
 
-    public void setActors(String actors) {
+    public void setActors(List<String> actors) {
         this.actors = actors;
     }
 
