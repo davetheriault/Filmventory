@@ -642,16 +642,11 @@ public class JDBC {
                     logs.write(gr + "\n");
                     logs.flush();
                 }
-                List<List<String>> p = getPositions(rs.getInt("id"));
-                logs.write("\nDirectors: \n");
-                for ( String po : p.get(0) ){
-                    logs.write(po + "\n");
-                    logs.flush();
-                }
+                
                 mov.setGenre(getGenres(rs.getInt("id")));
-                mov.setDirector((List<String>) getPositions(rs.getInt("id")).get(0));
-                mov.setWriter((List<String>) getPositions(rs.getInt("id")).get(1));
-                mov.setActors((List<String>) getPositions(rs.getInt("id")).get(2));
+                mov.setDirector(getPositions(rs.getInt("id"), "director"));
+                mov.setWriter(getPositions(rs.getInt("id"), "writer"));
+                mov.setActors(getPositions(rs.getInt("id"), "actor"));
                 
                 list.add(mov);
             }
@@ -704,12 +699,10 @@ public class JDBC {
             }
             List<String> genres = getGenres(movid);
             mov.setGenre(genres);
-
-            List<List<String>> positions = getPositions(movid);
             
-            mov.setDirector(positions.get(0));
-            mov.setWriter(positions.get(1));
-            mov.setActors(positions.get(2));
+            mov.setDirector(getPositions(movid, "director"));
+            mov.setWriter(getPositions(movid, "writer"));
+            mov.setActors(getPositions(movid, "actor"));
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -755,13 +748,12 @@ public class JDBC {
         return genreList;
     }
 
-    public List getPositions(int movie_id) throws SQLException {
+    public List getPositions(int movie_id, String pos) throws SQLException {
 
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
         ResultSet rs = null;
-        List<List<String>> positions = new ArrayList<>();
         List<String> directors = new ArrayList<>();
         List<String> writers = new ArrayList<>();
         List<String> actors = new ArrayList<>();
@@ -789,11 +781,20 @@ public class JDBC {
             }
         }
         
-        positions.add(directors);
-        positions.add(writers);
-        positions.add(actors);
-
-        return positions;
+        if (pos.equals("director")) {
+            return directors;
+        }
+        
+        if (pos.equals("writer")) {
+            return writers;
+        }
+        
+        if (pos.equals("actor")) {
+            return actors;
+        }
+        else {
+            return null;
+        }
     }
 
 }
