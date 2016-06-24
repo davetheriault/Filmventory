@@ -16,34 +16,34 @@
             <div class="w3-container w3-row">
                 <div class="w3-col m8 l8">
                     <ul class="w3-ul">
-                        <li> Title: <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
-                        <li> Year: ${movie.year} </li>
-                        <li> Rated: ${movie.rated} </li>
-                        <li> Released: ${movie.released} </li>
-                        <li> Runtime: ${movie.runtime} </li>
-                        <li> Genre: 
+                        <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
+                        <li> <strong>Year:</strong><br> ${movie.year} </li>
+                        <li> <strong>Rated:</strong><br> ${movie.rated} </li>
+                        <li> <strong>Released:</strong><br> ${movie.released} </li>
+                        <li> <strong>Runtime:</strong><br> ${movie.runtime} </li>
+                        <li> <strong>Genre:</strong><br> 
                             <c:forEach var="genre" items="${movie.genre}">
                                 &nbsp;<a href="">${genre}</a>&nbsp;
                             </c:forEach> 
                         </li>
-                        <li> Director: 
+                        <li> <strong>Director:</strong><br> 
                             <c:forEach var="dir" items="${movie.director}">
                                 &nbsp;<a href="">${dir}</a>&nbsp;
                             </c:forEach> 
                         </li>
-                        <li> Writer: 
+                        <li> <strong>Writer:</strong><br> 
                             <c:forEach var="wri" items="${movie.writer}">
                                 &nbsp;<a href="">${wri}</a>&nbsp;
                             </c:forEach> 
                         </li>
-                        <li> Actors: 
+                        <li> <strong>Actors:</strong><br> 
                             <c:forEach var="act" items="${movie.actors}">
                                 &nbsp;<a href="">${act}</a>&nbsp;
                             </c:forEach> </li>
-                        <li> Plot: ${movie.plot} </li>
-                        <li> Language: ${movie.language} </li>
-                        <li> Country: ${movie.country} </li>
-                        <li> Metascore: ${movie.metascore} </li>
+                        <li> <strong>Plot:</strong><br> ${movie.plot} </li>
+                        <li> <strong>Language:</strong><br> ${movie.language} </li>
+                        <li> <strong>Country:</strong><br> ${movie.country} </li>
+                        <li> <strong>Metascore:</strong><br> ${movie.metascore} </li>
                     </ul>
                 </div>
                 <div class="w3-col m4 l4">
