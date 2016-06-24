@@ -787,13 +787,13 @@ public class JDBC {
         rs = stmt.executeQuery(sql);
         
         while (rs.next()) {
-            if (rs.getString("position") == "director") {
+            if ("director".equals(rs.getString("position"))) {
                 directors.add(rs.getString("name"));
             }
-            if (rs.getString("position") == "writer") {
+            if ("writer".equals(rs.getString("position"))) {
                 writers.add(rs.getString("name"));
             }
-            if (rs.getString("position") == "actor") {
+            if ("actor".equals(rs.getString("position"))) {
                 actors.add(rs.getString("name"));
             }
         }
