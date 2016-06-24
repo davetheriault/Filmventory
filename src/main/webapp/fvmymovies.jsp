@@ -18,8 +18,10 @@
                     <input value="${movies}" type="hidden" name="movies" />
                     <select class="w3-select w3-dark-grey" onchange="this.form.submit()">
                         <option disabled selected>Genre </option>
-                        <c:forEach var="genre" items="${movies.genre}">
-                            <option value="${genre}">${genre}</option>
+                        <c:forEach var="mov" items="${movies}">
+                            <c:forEach var="genre" items="${mov.genre}">
+                                <option value="${genre}">${genre}</option>
+                            </c:forEach>
                         </c:forEach>
                     </select>
                 </form>
@@ -41,7 +43,7 @@
         </ul>
         <div class="w3-container w3-padding">
 
-   
+
             <c:forEach var="movie" items="${movies}">
                 <div class="w3-card w3-margin">
                     <ul class="w3-ul">
