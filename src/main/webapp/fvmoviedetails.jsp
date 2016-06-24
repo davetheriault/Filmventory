@@ -23,22 +23,22 @@
                         <li> Runtime: ${movie.runtime} </li>
                         <li> Genre: 
                             <c:forEach var="genre" items="${movie.genre}">
-                                <a href="">${genre}</a>&nbsp;
+                                &nbsp;<a href="">${genre}</a>&nbsp;
                             </c:forEach> 
                         </li>
                         <li> Director: 
                             <c:forEach var="dir" items="${movie.director}">
-                                <a href="">${dir}</a>&nbsp;
+                                &nbsp;<a href="">${dir}</a>&nbsp;
                             </c:forEach> 
                         </li>
                         <li> Writer: 
                             <c:forEach var="wri" items="${movie.writer}">
-                                <a href="">${wri}</a>
+                                &nbsp;<a href="">${wri}</a>&nbsp;
                             </c:forEach> 
                         </li>
                         <li> Actors: 
                             <c:forEach var="act" items="${movie.actors}">
-                                <a href="">${act}</a>
+                                &nbsp;<a href="">${act}</a>&nbsp;
                             </c:forEach> </li>
                         <li> Plot: ${movie.plot} </li>
                         <li> Language: ${movie.language} </li>
