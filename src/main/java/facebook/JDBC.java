@@ -642,8 +642,25 @@ public class JDBC {
                     logs.write(gr + "\n");
                     logs.flush();
                 }
-                
-                mov.setGenre(getGenres(rs.getInt("id")));
+                List<String> d = getPositions(rs.getInt("id"), "director");
+                logs.write("\nDirectors: \n");
+                for ( String di : d ) {
+                    logs.write(di + "\n");
+                    logs.flush();
+                }
+                List<String> w = getPositions(rs.getInt("id"), "writer");
+                logs.write("\nWriters: \n");
+                for ( String wr : w ) {
+                    logs.write(wr + "\n");
+                    logs.flush();
+                }
+                List<String> a = getPositions(rs.getInt("id"), "actor");
+                logs.write("\nActors: \n");
+                for ( String ac : a ) {
+                    logs.write(ac + "\n");
+                    logs.flush();
+                }
+                mov.setGenre(g);
                 mov.setDirector(getPositions(rs.getInt("id"), "director"));
                 mov.setWriter(getPositions(rs.getInt("id"), "writer"));
                 mov.setActors(getPositions(rs.getInt("id"), "actor"));
