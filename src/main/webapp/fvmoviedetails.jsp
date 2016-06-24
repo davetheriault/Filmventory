@@ -16,11 +16,15 @@
             <div class="w3-container w3-row">
                 <div class="w3-col m8 l8">
                     <ul class="w3-ul">
-                        <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
-                        <li> <strong>Year:</strong><br> ${movie.year} </li>
-                        <li> <strong>Rated:</strong><br> ${movie.rated} </li>
-                        <li> <strong>Released:</strong><br> ${movie.released} </li>
-                        <li> <strong>Runtime:</strong><br> ${movie.runtime} </li>
+                        <li>
+                            <div class="w3-half"> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </div>
+                            <div class="w3-half"> <strong>Year:</strong><br> ${movie.year} </div>
+                        </li>
+                        <li> 
+                            <div class="w3-third"> <strong>Rated:</strong><br> ${movie.rated} </div>
+                            <div class="w3-third"> <strong>Released:</strong><br> ${movie.released} </div>
+                            <div class="w3-third"> <strong>Runtime:</strong><br> ${movie.runtime} </div>
+                        </li>
                         <li> <strong>Genre:</strong><br> 
                             <c:forEach var="genre" items="${movie.genre}">
                                 &nbsp;<a href="">${genre}</a>&nbsp;
