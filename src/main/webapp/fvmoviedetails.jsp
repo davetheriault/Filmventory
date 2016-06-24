@@ -21,10 +21,25 @@
                         <li> Rated: ${movie.rated} </li>
                         <li> Released: ${movie.released} </li>
                         <li> Runtime: ${movie.runtime} </li>
-                        <li> Genre: ${movie.genre} </li>
-                        <li> Director: ${movie.director} </li>
-                        <li> Writer: ${movie.writer} </li>
-                        <li> Actors: ${movie.actors} </li>
+                        <li> Genre: 
+                            <c:forEach var="genre" items="${movie.genre}">
+                                <a href="">${genre}</a>&nbsp;
+                            </c:forEach> 
+                        </li>
+                        <li> Director: 
+                            <c:forEach var="dir" items="${movie.director}">
+                                <a href="">${dir}</a>&nbsp;
+                            </c:forEach> 
+                        </li>
+                        <li> Writer: 
+                            <c:forEach var="wri" items="${movie.writer}">
+                                <a href="">${wri}</a>
+                            </c:forEach> 
+                        </li>
+                        <li> Actors: 
+                            <c:forEach var="act" items="${movie.actors}">
+                                <a href="">${act}</a>
+                            </c:forEach> </li>
                         <li> Plot: ${movie.plot} </li>
                         <li> Language: ${movie.language} </li>
                         <li> Country: ${movie.country} </li>
