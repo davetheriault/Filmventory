@@ -31,6 +31,8 @@ public class JDBC {
     private String USER = username;
     private String PASS = password;
 
+    
+    
     public JDBC() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -43,6 +45,7 @@ public class JDBC {
         JDBC db = new JDBC();
         //db.getPeople();
     }
+    
 
     public void addUser(String fbid, String f_name, String l_name) {
         Connection conn = null;
@@ -615,7 +618,7 @@ public class JDBC {
 
         try {
             FileWriter logs = new FileWriter("inventory.txt", true);
-            
+
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
@@ -632,39 +635,46 @@ public class JDBC {
                 mov.setLanguage(rs.getString("language"));
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
-                
+
                 logs.write("\n Movie Details: \n" + mov.getTitle() + "\n" + mov.getMetascore() + "\n");
                 logs.flush();
-                
+
                 List<String> g = getGenres(rs.getInt("id"));
                 logs.write("\nGenres: \n");
-                for ( String gr : g ) {
+                for (String gr : g) {
                     logs.write(gr + "\n");
                     logs.flush();
                 }
+                mov.setGenre(g);
+                logs.write("\nGenres in Movie Object: \n");
+                for (String gm : mov.getGenre()) {
+                    logs.write(gm + "\n");
+                    logs.flush();
+                }
+                
                 List<String> d = getPositions(rs.getInt("id"), "director");
                 logs.write("\nDirectors: \n");
-                for ( String di : d ) {
+                for (String di : d) {
                     logs.write(di + "\n");
                     logs.flush();
                 }
                 List<String> w = getPositions(rs.getInt("id"), "writer");
                 logs.write("\nWriters: \n");
-                for ( String wr : w ) {
+                for (String wr : w) {
                     logs.write(wr + "\n");
                     logs.flush();
                 }
                 List<String> a = getPositions(rs.getInt("id"), "actor");
                 logs.write("\nActors: \n");
-                for ( String ac : a ) {
+                for (String ac : a) {
                     logs.write(ac + "\n");
                     logs.flush();
                 }
-                mov.setGenre(g);
+                
                 mov.setDirector(getPositions(rs.getInt("id"), "director"));
                 mov.setWriter(getPositions(rs.getInt("id"), "writer"));
                 mov.setActors(getPositions(rs.getInt("id"), "actor"));
-                
+
                 list.add(mov);
             }
         } catch (SQLException ex) {
@@ -688,7 +698,7 @@ public class JDBC {
         return list;
     }
 
-    Movie getMovie(String title, String year) {
+    Movie getMovie(String title, String year) throws IOException {
 
         int movid = getMovieId(title, year);
 
@@ -716,7 +726,7 @@ public class JDBC {
             }
             List<String> genres = getGenres(movid);
             mov.setGenre(genres);
-            
+
             mov.setDirector(getPositions(movid, "director"));
             mov.setWriter(getPositions(movid, "writer"));
             mov.setActors(getPositions(movid, "actor"));
@@ -765,7 +775,7 @@ public class JDBC {
         return genreList;
     }
 
-    public List getPositions(int movie_id, String pos) throws SQLException {
+    public List getPositions(int movie_id, String pos) throws IOException {
 
         Connection conn = null;
         Statement stmt = null;
@@ -774,44 +784,51 @@ public class JDBC {
         List<String> directors = new ArrayList<>();
         List<String> writers = new ArrayList<>();
         List<String> actors = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
 
-        conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        stmt = conn.createStatement();
+            sql = "SELECT c.name, cm.position"
+                    + "FROM crew c "
+                    + "INNER JOIN crew2movie cm "
+                    + "ON c.id=cm.crew_id "
+                    + "WHERE cm.movie_id = '" + movie_id + "'";
 
-        sql = "SELECT c.name, cm.position"
-                + "FROM crew c "
-                + "INNER JOIN crew2movie cm "
-                + "ON c.id=cm.crew_id "
-                + "WHERE cm.movie_id = '" + movie_id + "'";
-        
-        rs = stmt.executeQuery(sql);
-        
-        while (rs.next()) {
-            if ("director".equals(rs.getString("position"))) {
-                directors.add(rs.getString("name"));
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                if ("director".equals(rs.getString("position"))) {
+                    directors.add(rs.getString("name"));
+                }
+                if ("writer".equals(rs.getString("position"))) {
+                    writers.add(rs.getString("name"));
+                }
+                if ("actor".equals(rs.getString("position"))) {
+                    actors.add(rs.getString("name"));
+                }
             }
-            if ("writer".equals(rs.getString("position"))) {
-                writers.add(rs.getString("name"));
-            }
-            if ("actor".equals(rs.getString("position"))) {
-                actors.add(rs.getString("name"));
-            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            FileWriter exc = new FileWriter("exception.txt", true);
+            exc.write(ex.getMessage());
+            exc.flush();
+            exc.close();
         }
-        
+
         if (pos.equals("director")) {
             return directors;
         }
-        
+
         if (pos.equals("writer")) {
             return writers;
         }
-        
+
         if (pos.equals("actor")) {
             return actors;
-        }
-        else {
+        } else {
             return null;
         }
+
     }
 
 }
