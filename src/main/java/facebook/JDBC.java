@@ -671,9 +671,9 @@ public class JDBC {
                     logs.flush();
                 }
                 
-                mov.setDirector(getPositions(rs.getInt("id"), "director"));
-                mov.setWriter(getPositions(rs.getInt("id"), "writer"));
-                mov.setActors(getPositions(rs.getInt("id"), "actor"));
+                mov.setDirector(d);
+                mov.setWriter(w);
+                mov.setActors(a);
 
                 list.add(mov);
             }
@@ -726,10 +726,15 @@ public class JDBC {
             }
             List<String> genres = getGenres(movid);
             mov.setGenre(genres);
-
-            mov.setDirector(getPositions(movid, "director"));
-            mov.setWriter(getPositions(movid, "writer"));
-            mov.setActors(getPositions(movid, "actor"));
+            
+            List d = getPositions(movid, "director");
+            mov.setDirector(d);
+            
+            List w = getPositions(movid, "writer");
+            mov.setWriter(w);
+            
+            List a = getPositions(movid, "actor");
+            mov.setActors(a);
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
