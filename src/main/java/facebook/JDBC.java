@@ -605,7 +605,7 @@ public class JDBC {
         return checkR;
     }
 
-    public List getInventory(String fb_id) {
+    public List getInventory(String fb_id) throws IOException {
 
         Connection conn = null;
         Statement stmt = null;
@@ -614,6 +614,8 @@ public class JDBC {
         List<Movie> list = new ArrayList<>();
 
         try {
+            FileWriter logs = new FileWriter("inventory.txt", true);
+            
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
@@ -631,6 +633,21 @@ public class JDBC {
                 mov.setCountry(rs.getString("country"));
                 mov.setMetascore(rs.getString("metascore"));
                 
+                logs.write("\n Movie Details: \n" + mov.getTitle() + "\n" + mov.getMetascore() + "\n");
+                logs.flush();
+                
+                List<String> g = getGenres(rs.getInt("id"));
+                logs.write("\nGenres: \n");
+                for ( String gr : g ) {
+                    logs.write(gr + "\n");
+                    logs.flush();
+                }
+                List<List<String>> p = getPositions(rs.getInt("id"));
+                logs.write("\nDirectors: \n");
+                for ( String po : p.get(0) ){
+                    logs.write(po + "\n");
+                    logs.flush();
+                }
                 mov.setGenre(getGenres(rs.getInt("id")));
                 mov.setDirector((List<String>) getPositions(rs.getInt("id")).get(0));
                 mov.setWriter((List<String>) getPositions(rs.getInt("id")).get(1));
