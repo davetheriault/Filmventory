@@ -792,7 +792,7 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
 
-            sql = "SELECT c.name, cm.position"
+            sql = "SELECT c.name, cm.position "
                     + "FROM crew c "
                     + "INNER JOIN crew2movie cm "
                     + "ON c.id=cm.crew_id "
