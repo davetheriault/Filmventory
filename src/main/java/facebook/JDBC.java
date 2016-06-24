@@ -786,9 +786,8 @@ public class JDBC {
         Statement stmt = null;
         String sql = null;
         ResultSet rs = null;
-        List<String> directors = new ArrayList<>();
-        List<String> writers = new ArrayList<>();
-        List<String> actors = new ArrayList<>();
+        List<String> crew = new ArrayList<>();
+        
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
@@ -797,21 +796,15 @@ public class JDBC {
                     + "FROM crew c "
                     + "INNER JOIN crew2movie cm "
                     + "ON c.id=cm.crew_id "
-                    + "WHERE cm.movie_id = '" + movie_id + "'";
+                    + "WHERE cm.movie_id = '" + movie_id + "' "
+                    + "AND cm.position = '" + pos + "'";
 
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                if ("director".equals(rs.getString("position"))) {
-                    directors.add(rs.getString("name"));
-                }
-                if ("writer".equals(rs.getString("position"))) {
-                    writers.add(rs.getString("name"));
-                }
-                if ("actor".equals(rs.getString("position"))) {
-                    actors.add(rs.getString("name"));
-                }
+                crew.add(rs.getString("name"));
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
             FileWriter exc = new FileWriter("exception.txt", true);
@@ -820,19 +813,7 @@ public class JDBC {
             exc.close();
         }
 
-        if (pos.equals("director")) {
-            return directors;
-        }
-
-        if (pos.equals("writer")) {
-            return writers;
-        }
-
-        if (pos.equals("actor")) {
-            return actors;
-        } else {
-            return null;
-        }
+        return crew;
 
     }
 
