@@ -60,4 +60,12 @@
 
 </main>
 </body>
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $("#bygenre").click( function (event) {
+            event.preventDefault();
+        });
+    });
+</script>
 </html>
