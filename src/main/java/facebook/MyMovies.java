@@ -40,8 +40,10 @@ public class MyMovies extends HttpServlet {
         
         String sort = "";
         
-        if (request.getAttribute("sort") != "" || request.getAttribute("sort") != null) {
-            sort = (String) request.getAttribute("sort");
+        String sortAttr = (String) request.getAttribute("sort");
+        
+        if (sortAttr.equals("az") || sortAttr.equals("za") || sortAttr.equals("y09") || sortAttr.equals("y90")) {
+            sort = sortAttr;
         }
         
         List<Movie> movies = db.getInventory(fb_id, sort);
