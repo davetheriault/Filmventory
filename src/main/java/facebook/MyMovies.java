@@ -38,10 +38,13 @@ public class MyMovies extends HttpServlet {
 
         String fb_id = (String) request.getSession().getAttribute("id");
         
-        String sort = (String) request.getAttribute("sort");
-
-        List<Movie> movies = db.getInventory(fb_id, sort);
+        String sort = "";
         
+        if (request.getAttribute("sort") != "" || request.getAttribute("sort") != null) {
+            sort = (String) request.getAttribute("sort");
+        }
+        
+        List<Movie> movies = db.getInventory(fb_id, sort);
         
         
         request.getSession().setAttribute("movies", movies);
