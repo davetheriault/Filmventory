@@ -40,7 +40,7 @@ public class MyMovies extends HttpServlet {
         
         String sort = "";
         
-        String sortAttr = (String) request.getAttribute("sort");
+        String sortAttr = (String) request.getParameter("sort");
         
         if (sortAttr.equals("az") || sortAttr.equals("za") || sortAttr.equals("y09") || sortAttr.equals("y90")) {
             sort = sortAttr;
