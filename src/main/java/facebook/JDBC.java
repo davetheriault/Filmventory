@@ -617,7 +617,7 @@ public class JDBC {
         String sql = null;
         ResultSet rs = null;
         List<Movie> list = new ArrayList<>();
-        if (sort.equals("az") || sort.equals("") || sort == null) { sort = "movie.title ASC"; }
+        if (sort.equals("az") || sort.equals("")) { sort = "movie.title ASC"; }
         if (sort.equals("za")) { sort = "movie.title DESC"; }
         if (sort.equals("y09")) { sort = "movie.released ASC"; }
         if (sort.equals("y90")) { sort = "movie.released DESC"; }
