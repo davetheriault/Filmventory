@@ -617,8 +617,8 @@ public class JDBC {
         String sql = null;
         ResultSet rs = null;
         List<Movie> list = new ArrayList<>();
-        if (sort.equals("az") || sort.equals("")) { sort = "movie.title ASC"; }
-        if (sort.equals("za")) { sort = "movie.title DESC"; }
+        if (sort.equals("az") || sort.equals("")) { sort = "titlesort ASC"; }
+        if (sort.equals("za")) { sort = "titlesort DESC"; }
         if (sort.equals("y09")) { sort = "movie.year ASC"; }
         if (sort.equals("y90")) { sort = "movie.year DESC"; }
         try {
@@ -627,7 +627,11 @@ public class JDBC {
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY " + sort + " ";
+            sql = "SELECT *, CASE WHEN movie.title LIKE 'The %' THEN trim(substr(movie.title, 4)) "
+                + "ELSE movie.title END AS titlesort FROM movie "
+                + "INNER JOIN movie2user ON movie.id=movie2user.movie_id "
+                + "WHERE movie2user.user_id = '" + user_id + "' "
+                + "ORDER BY " + sort + " ";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
