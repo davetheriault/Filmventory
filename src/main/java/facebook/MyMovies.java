@@ -37,30 +37,14 @@ public class MyMovies extends HttpServlet {
         JDBC db = new JDBC();
 
         String fb_id = (String) request.getSession().getAttribute("id");
-
-        List<Movie> movies = db.getInventory(fb_id);
         
-        List<String> genres = new ArrayList<String>();
-        boolean chkgnr = false;
+        String sort = (String) request.getAttribute("sort");
 
-     /*   for (Movie mov : movies) {
-            String[] gnrs = mov.getGenre().replace(",", "").split(" ");
-            
-            for (String gnr : gnrs) {
-                for (String genre : genres) {
-                    if (gnr.equals(genre)) {
-                        chkgnr = true;
-                    }
-                }
-                if (chkgnr == false) {
-                    genres.add(gnr);
-                } else {
-                    chkgnr = false;
-                }
-            }
-        }
+        List<Movie> movies = db.getInventory(fb_id, sort);
         
-        request.setAttribute("genres", genres); */
+        
+        
+        request.getSession().setAttribute("movies", movies);
 
         request.setAttribute("movies", movies);
 

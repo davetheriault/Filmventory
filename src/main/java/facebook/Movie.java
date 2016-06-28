@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Theriault
  */
-public class Movie {
+public class Movie{
     
     private String title;
     private String year;

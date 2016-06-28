@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -608,21 +610,24 @@ public class JDBC {
         return checkR;
     }
 
-    public List getInventory(String fb_id) throws IOException {
+    public List getInventory(String fb_id, String sort) throws IOException {
 
         Connection conn = null;
         Statement stmt = null;
         String sql = null;
         ResultSet rs = null;
         List<Movie> list = new ArrayList<>();
-
+        if (sort.equals("az") || sort.equals("") || sort.equals(null)) { sort = "movie.title ASC"; }
+        if (sort.equals("za")) { sort = "movie.title DESC"; }
+        if (sort.equals("y09")) { sort = "movie.released ASC"; }
+        if (sort.equals("y90")) { sort = "movie.released DESC"; }
         try {
             FileWriter logs = new FileWriter("inventory.txt", true);
 
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY movie.title";
+            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY '" + sort +"'";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
@@ -816,5 +821,7 @@ public class JDBC {
         return crew;
 
     }
+
+    
 
 }
