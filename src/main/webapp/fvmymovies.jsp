@@ -14,7 +14,7 @@
         <ul class="w3-navbar w3-dark-grey">
 
             <li class="w3-right w3-padding">
-                <form id="bygenre" action="MyMovies" method="post">
+                <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
                     <select class="w3-select w3-dark-grey" onchange="this.form.submit()">
                         <option disabled selected>Genre </option>
@@ -27,7 +27,7 @@
                 </form>
             </li>
             <li class="w3-right w3-padding">
-                <form id="sortby" action="MyMovies" method="post">
+                <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
                     <select name="sort" class="w3-select w3-dark-grey" onchange="this.form.submit()">
                         <option disabled selected>Sort By </option>

@@ -627,7 +627,7 @@ public class JDBC {
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
-            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY '" + sort +"'";
+            sql = "SELECT * FROM movie INNER JOIN movie2user ON movie.id=movie2user.movie_id WHERE movie2user.user_id = '" + user_id + "' ORDER BY " + sort + " ";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
