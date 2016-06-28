@@ -5,6 +5,7 @@
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
 <%@include file="includes/sidenav.html" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <main class="w3-main w3-roboto" style="margin-left:200px">
 
@@ -16,7 +17,7 @@
             <li class="w3-right w3-padding">
                 <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <select class="w3-select w3-dark-grey" onchange="this.form.submit()">
+                    <select id="genreList" name="genre" class="w3-select w3-dark-grey" onchange="this.form.submit()">
                         <option disabled selected>Genre </option>
                         <c:forEach var="mov" items="${movies}">
                             <c:forEach var="genre" items="${mov.genre}">
@@ -63,7 +64,7 @@
 
 <script type="text/javascript">
     $(document).ready( function () {
-        $("#bygenre").click( function (event) {
+        $("#genreList").click( function (event) {
             event.preventDefault();
         });
     });
