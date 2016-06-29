@@ -46,7 +46,7 @@ public class MyMovies extends HttpServlet {
             sort = sortAttr;
         }
         
-        List<Movie> movies = db.getInventory(fb_id, sort);
+        List<Movie> movies = db.getInventory(fb_id, sort, "");
         
         
         request.getSession().setAttribute("movies", movies);

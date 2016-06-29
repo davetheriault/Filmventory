@@ -7,6 +7,8 @@ package facebook;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +60,26 @@ public class SortGenre extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String genre = (String) request.getParameter("genre");
+        
+        JDBC db = new JDBC();
+        
+        String fb_id = (String) request.getSession().getAttribute("id");
+        
+        List<Movie> movies = db.getInventory(fb_id, "", genre);
+        
+        for ( Movie mov : movies ) {
+            String title = mov.getTitle();
+            String year = (String) mov.getYear();
+            String outp =  "<div class=\"w3-card w3-margin\">";
+                   outp += "<ul class=\"w3-ul\">";
+                   outp += "<li><strong><a href=\"/MovieDetails?title=" + title + "&year=" + year + "\" >" + title + "</a></strong> &#40" + year + "&#40 </li>";
+                   outp += "</ul>"; 
+                   outp += "</div>";
+            out.println(outp);
+        }
+    
     }
 
     /**

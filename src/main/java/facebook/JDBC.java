@@ -610,7 +610,7 @@ public class JDBC {
         return checkR;
     }
 
-    public List getInventory(String fb_id, String sort) throws IOException {
+    public List getInventory(String fb_id, String sort, String genre) throws IOException {
 
         Connection conn = null;
         Statement stmt = null;
@@ -621,6 +621,7 @@ public class JDBC {
         if (sort.equals("za")) { sort = "titlesort DESC"; }
         if (sort.equals("y09")) { sort = "movie.year ASC"; }
         if (sort.equals("y90")) { sort = "movie.year DESC"; }
+        int g_id = getId("genre", "id", genre);
         try {
             FileWriter logs = new FileWriter("inventory.txt", true);
 
@@ -629,9 +630,15 @@ public class JDBC {
             stmt = conn.createStatement();
             sql = "SELECT *, CASE WHEN movie.title LIKE 'The %' THEN trim(substr(movie.title, 4)) "
                 + "ELSE movie.title END AS titlesort FROM movie "
-                + "INNER JOIN movie2user ON movie.id=movie2user.movie_id "
-                + "WHERE movie2user.user_id = '" + user_id + "' "
-                + "ORDER BY " + sort + " ";
+                + "INNER JOIN movie2user ON movie.id=movie2user.movie_id ";
+            if ( !genre.equals("") ) {
+            sql += "INNER JOIN movie2genre ON movie.id=movie2genre.movie_id ";
+            }
+            sql += "WHERE movie2user.user_id = '" + user_id + "' ";
+            if ( !genre.equals("") ) {
+            sql += "AND movie2genre.genre_id = '" + g_id + "' ";
+            }
+            sql += "ORDER BY " + sort + " ";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Movie mov = new Movie();
@@ -824,6 +831,12 @@ public class JDBC {
 
         return crew;
 
+    }
+
+    void getGenreMovies(String fb_id, String genre) {
+
+        
+    
     }
 
     
