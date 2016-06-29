@@ -17,7 +17,7 @@
             <li class="w3-right w3-padding">
                 <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <select id="genreList" name="genre" class="w3-select w3-dark-grey" onchange="this.form.submit()">
+                    <select id="genreList" name="genre" class="w3-select w3-dark-grey" >
                         <option disabled selected>Genre </option>
                         <c:forEach var="mov" items="${movies}">
                             <c:forEach var="genre" items="${mov.genre}">
@@ -42,7 +42,7 @@
 
 
         </ul>
-        <div class="w3-container w3-padding">
+        <div class="w3-container w3-padding" id="results">
 
 
             <c:forEach var="movie" items="${movies}">
@@ -63,10 +63,30 @@
 </body>
 
 <script type="text/javascript">
-    $(document).ready( function () {
-        $("#genreList").click( function (event) {
-            event.preventDefault();
+    $(document).ready(function () {
+        $("#genreList").change(function () {
+            var genre = $(this).val();
+            alert(genre);
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.open("GET", "SortGenre?genre=" + genre, true);
+
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4) {
+                    var inner = document.getElementById("results");
+                    inner.innerHTML = xmlhttp.responseText;
+                }
+            };
+            
         });
     });
+
 </script>
 </html>
