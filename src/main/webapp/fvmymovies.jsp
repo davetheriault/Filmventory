@@ -64,8 +64,16 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //$("#genreList").change(sort());
-       // $("#sortlist").change(sort());
+        $("#genreList").change(function() {
+            if ($(this).val() !== null ) {
+                sort();
+            }
+        });
+        $("#sortlist").change(function() {
+            if ($(this).val() !== null ) {
+                sort();
+            }
+        });
     });
     function sort() {
         var genre = $("#genreList").val();
