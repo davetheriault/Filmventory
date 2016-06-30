@@ -5,6 +5,7 @@
  */
 package facebook;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -39,7 +40,7 @@ public class SortGenre extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortGenre</title>");            
+            out.println("<title>Servlet SortGenre</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SortGenre at " + request.getContextPath() + "</h1>");
@@ -61,34 +62,49 @@ public class SortGenre extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        FileWriter sortlog = new FileWriter("sort.txt", true);
+
         String genre = (String) request.getParameter("genre");
         String sort = (String) request.getParameter("sort");
-        
+
+        sortlog.write("\nsort value: " + sort);
+        sortlog.write("\ngenre value: " + genre);
+        sortlog.flush();
+
         JDBC db = new JDBC();
-        
+
         String fb_id = (String) request.getSession().getAttribute("id");
-        
+
+        sortlog.write("\nFacebook id: " + fb_id);
+        sortlog.flush();
+
         List<Movie> movies = db.getInventory(fb_id, sort);
-        
-        for ( Movie mov : movies ) {
+
+        for (Movie mov : movies) {
             boolean genreCheck = false;
-            for ( String gnr : mov.getGenre() ) {
-                if ( gnr.equals(genre) ) {
+            for (String gnr : mov.getGenre()) {
+                sortlog.write("\n" + mov.getTitle() + " " + gnr);
+                sortlog.flush();
+                if (gnr.equals(genre)) {
                     genreCheck = true;
                 }
             }
-            if ( genreCheck == true ) {
-            String title = mov.getTitle();
-            String year = (String) mov.getYear();
-            String outp =  "<div class=\"w3-card w3-margin\">";
-                   outp += "<ul class=\"w3-ul\">";
-                   outp += "<li><strong><a href=\"/MovieDetails?title=" + title + "&year=" + year + "\" >" + title + "</a></strong> &#40" + year + "&#40 </li>";
-                   outp += "</ul>"; 
-                   outp += "</div>";
-            out.println(outp);
+            if (genreCheck == true || genre.equals("All")) {
+                sortlog.write("\nGenreCheck Passed");
+                sortlog.flush();
+                String title = mov.getTitle();
+                String year = (String) mov.getYear();
+                String outp = "<div class=\"w3-card w3-margin\">";
+                outp += "<ul class=\"w3-ul\">";
+                outp += "<li><strong><a href=\"/MovieDetails?title=" + title + "&year=" + year + "\" >" + title + "</a></strong> &#40" + year + "&#40 </li>";
+                outp += "</ul>";
+                outp += "</div>";
+                sortlog.write("\n" +outp);
+                sortlog.flush();
+                out.println(outp);
             }
         }
-    
+
     }
 
     /**

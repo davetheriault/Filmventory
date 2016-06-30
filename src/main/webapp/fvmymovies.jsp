@@ -17,8 +17,9 @@
             <li class="w3-right w3-padding">
                 <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
+                    <label for="genreList">Genre:</label>
                     <select id="genreList" name="genre" class="w3-select w3-dark-grey" >
-                        <option disabled selected>Genre </option>
+                        <option selected>All </option>
                         <c:forEach var="mov" items="${movies}">
                             <c:forEach var="genre" items="${mov.genre}">
                                 <option value="${genre}">${genre}</option>
@@ -30,9 +31,10 @@
             <li class="w3-right w3-padding">
                 <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <select name="sort" class="w3-select w3-dark-grey" id="sortlist" >
-                        <option disabled selected>Sort By </option>
-                        <option value="az">A to Z &nbsp;&nbsp; &uarr;</option>
+                    <label for="sortList">Sort By:</label>
+                    <select name="sort" class="w3-select w3-dark-grey" id="sortList" >
+                        
+                        <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                         <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
                         <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
                         <option value="y90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
@@ -69,7 +71,7 @@
                 sort();
             }
         });
-        $("#sortlist").change(function() {
+        $("#sortList").change(function() {
             if ($(this).val() !== null ) {
                 sort();
             }
@@ -77,7 +79,7 @@
     });
     function sort() {
         var genre = $("#genreList").val();
-        var sort = $("#sortlist").val();
+        var sort = $("#sortList").val();
         alert(genre);
         alert(sort);
         if (window.XMLHttpRequest) {
