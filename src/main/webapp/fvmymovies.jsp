@@ -64,8 +64,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#genreList").change(sort());
-        $("#sortlist").change(sort());
+        //$("#genreList").change(sort());
+       // $("#sortlist").change(sort());
     });
     function sort() {
         var genre = $("#genreList").val();
