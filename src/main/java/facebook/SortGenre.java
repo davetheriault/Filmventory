@@ -67,7 +67,7 @@ public class SortGenre extends HttpServlet {
         
         String fb_id = (String) request.getSession().getAttribute("id");
         
-        List<Movie> movies = db.getInventory(fb_id, "", genre);
+        List<Movie> movies = db.getInventory(fb_id, "");
         
         for ( Movie mov : movies ) {
             String title = mov.getTitle();

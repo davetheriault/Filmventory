@@ -30,7 +30,7 @@
             <li class="w3-right w3-padding">
                 <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <select name="sort" class="w3-select w3-dark-grey" onchange="this.form.submit()">
+                    <select name="sort" class="w3-select w3-dark-grey" id="sortlist" onchange="this.form.submit()">
                         <option disabled selected>Sort By </option>
                         <option value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                         <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
@@ -66,7 +66,9 @@
     $(document).ready(function () {
         $("#genreList").change(function () {
             var genre = $(this).val();
+            var sort = $("#sortlist").val();
             alert(genre);
+            alert(sort);
             if (window.XMLHttpRequest) {
                 // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
@@ -75,7 +77,7 @@
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
 
-            xmlhttp.open("GET", "SortGenre?genre=" + genre, true);
+            xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
 
             xmlhttp.send();
             xmlhttp.onreadystatechange = function () {
