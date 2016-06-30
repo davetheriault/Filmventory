@@ -30,7 +30,7 @@
             <li class="w3-right w3-padding">
                 <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <select name="sort" class="w3-select w3-dark-grey" id="sortlist" onchange="this.form.submit()">
+                    <select name="sort" class="w3-select w3-dark-grey" id="sortlist" >
                         <option disabled selected>Sort By </option>
                         <option value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                         <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
@@ -64,31 +64,32 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#genreList").change(function () {
-            var genre = $(this).val();
-            var sort = $("#sortlist").val();
-            alert(genre);
-            alert(sort);
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-
-            xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
-
-            xmlhttp.send();
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4) {
-                    var inner = document.getElementById("results");
-                    inner.innerHTML = xmlhttp.responseText;
-                }
-            };
-            
-        });
+        $("#genreList").change(sort());
+        $("#sortlist").change(sort());
     });
+    function sort() {
+        var genre = $("#genreList").val();
+        var sort = $("#sortlist").val();
+        alert(genre);
+        alert(sort);
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 
+        xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
+
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                var inner = document.getElementById("results");
+                inner.innerHTML = xmlhttp.responseText;
+            }
+        };
+
+    }
 </script>
 </html>

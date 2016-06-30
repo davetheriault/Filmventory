@@ -62,14 +62,22 @@ public class SortGenre extends HttpServlet {
             throws ServletException, IOException {
 
         String genre = (String) request.getParameter("genre");
+        String sort = (String) request.getParameter("sort");
         
         JDBC db = new JDBC();
         
         String fb_id = (String) request.getSession().getAttribute("id");
         
-        List<Movie> movies = db.getInventory(fb_id, "");
+        List<Movie> movies = db.getInventory(fb_id, sort);
         
         for ( Movie mov : movies ) {
+            boolean genreCheck = false;
+            for ( String gnr : mov.getGenre() ) {
+                if ( gnr.equals(genre) ) {
+                    genreCheck = true;
+                }
+            }
+            if ( genreCheck == true ) {
             String title = mov.getTitle();
             String year = (String) mov.getYear();
             String outp =  "<div class=\"w3-card w3-margin\">";
@@ -78,6 +86,7 @@ public class SortGenre extends HttpServlet {
                    outp += "</ul>"; 
                    outp += "</div>";
             out.println(outp);
+            }
         }
     
     }
