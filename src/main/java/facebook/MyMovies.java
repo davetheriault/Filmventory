@@ -37,18 +37,18 @@ public class MyMovies extends HttpServlet {
         JDBC db = new JDBC();
 
         String fb_id = (String) request.getSession().getAttribute("id");
-        
+
         String sort = "";
-        
+
         String sortAttr = (String) request.getParameter("sort");
-        
-        if (sortAttr.equals("az") || sortAttr.equals("za") || sortAttr.equals("y09") || sortAttr.equals("y90")) {
-            sort = sortAttr;
+
+        if (sortAttr != null) {
+            if (sortAttr.equals("az") || sortAttr.equals("za") || sortAttr.equals("y09") || sortAttr.equals("y90")) {
+                sort = sortAttr;
+            }
         }
-        
         List<Movie> movies = db.getInventory(fb_id, sort);
-        
-        
+
         request.getSession().setAttribute("movies", movies);
 
         request.setAttribute("movies", movies);
