@@ -828,11 +828,43 @@ public class JDBC {
 
     }
 
-    void getGenreMovies(String fb_id, String genre) {
+    public void removeMovie (String title, String year, String user_id) {
 
+        int movid = getMovieId(title, year);
+
+        Connection conn = null;
+        Statement stmt = null;
+        String sql;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            sql = "DELETE FROM movie2user WHERE movie_id = '" + movid + "' AND user_id = '" + user_id + "'";
+            stmt.execute(sql);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
-    
     }
+    
+    
 
     
 
