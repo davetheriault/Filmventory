@@ -838,8 +838,9 @@ public class JDBC {
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            sql = "DELETE FROM movie2user WHERE movie_id = '" + movid + "' AND user_id = '" + user_id + "'";
+            
+            sql = "DELETE FROM movie2user WHERE movie_id = " + movid + " AND user_id = " + user_id + ";";
+            stmt = conn.prepareStatement(sql);
             stmt.execute(sql);
             
 
