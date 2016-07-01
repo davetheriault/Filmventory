@@ -17,8 +17,9 @@
             <li class="w3-right w3-padding">
                 <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <label class="w3-label" for="genreList">Genre:</label>
-                    <select id="genreList" name="genre" class="w3-select w3-dark-grey" >
+                    <div class="w3-row">
+                    <label class="w3-label w3-col" for="genreList">Genre:</label>
+                    <select id="genreList" name="genre" class="w3-select w3-dark-grey w3-col" >
                         <option selected>All </option>
                         <c:forEach var="mov" items="${movies}">
                             <c:forEach var="genre" items="${mov.genre}">
@@ -26,19 +27,22 @@
                             </c:forEach>
                         </c:forEach>
                     </select>
+                    </div>
                 </form>
             </li>
             <li class="w3-right w3-padding">
                 <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <label class="w3-label" for="sortList">Sort By:</label>
-                    <select name="sort" class="w3-select w3-dark-grey" id="sortList" >
+                    <div class="w3-row">
+                    <label class="w3-label w3-col" for="sortList">Sort By:</label>
+                    <select name="sort" class="w3-select w3-dark-grey w3-col" id="sortList" >
 
                         <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                         <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
                         <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
                         <option value="y90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
                     </select>
+                    </div>
                 </form>
             </li>
 
