@@ -62,6 +62,8 @@ public class SortGenre extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setContentType("text/html");
+        
         FileWriter sortlog = new FileWriter("sort.txt", true);
 
         String genre = (String) request.getParameter("genre");
@@ -101,7 +103,7 @@ public class SortGenre extends HttpServlet {
                 outp += "</div>";
                 sortlog.write("\n" +outp);
                 sortlog.flush();
-                out.println(outp);
+                response.getWriter().write(outp);
             }
         }
 

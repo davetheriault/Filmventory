@@ -33,7 +33,7 @@
                     <input value="${movies}" type="hidden" name="movies" />
                     <label for="sortList">Sort By:</label>
                     <select name="sort" class="w3-select w3-dark-grey" id="sortList" >
-                        
+
                         <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                         <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
                         <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
@@ -66,13 +66,13 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#genreList").change(function() {
-            if ($(this).val() !== null ) {
+        $("#genreList").change(function () {
+            if ($(this).val() !== null) {
                 sort();
             }
         });
-        $("#sortList").change(function() {
-            if ($(this).val() !== null ) {
+        $("#sortList").change(function () {
+            if ($(this).val() !== null) {
                 sort();
             }
         });
@@ -91,6 +91,7 @@
         }
 
         xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
+        xmlHttpRequest.setRequestHandler("Content-Type", "application/x-www-form-urlencoded");
 
         xmlhttp.send();
         xmlhttp.onreadystatechange = function () {
