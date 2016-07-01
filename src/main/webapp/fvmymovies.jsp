@@ -25,7 +25,7 @@
                 </c:forEach>
             </div>
             <div class="w3-quarter">
-                <ul class="w3-sidenav w3-dark-grey">
+                <ul class="w3-navbar w3-dark-grey">
 
                     <li class="w3-right w3-padding">
                         <form id="bygenre" action="MyMovies" method="get">
