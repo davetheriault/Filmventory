@@ -12,57 +12,56 @@
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
-        <ul class="w3-navbar w3-dark-grey">
 
-            <li class="w3-right w3-padding">
-                <form id="bygenre" action="MyMovies" method="get">
-                    <input value="${movies}" type="hidden" name="movies" />
+        <div class="w3-container w3-row">
+            <div class="w3-container w3-padding w3-col m9 l9" id="results">
 
-                    <label class="w3-label" for="genreList">Genre:</label>
+                <c:forEach var="movie" items="${movies}">
+                    <div class="w3-card w3-margin">
+                        <ul class="w3-ul">
+                            <li><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) </li>
+                        </ul>
+                    </div>
+                </c:forEach>
+            </div>
+            <div class="w3-quarter">
+                <ul class="w3-sidenav w3-dark-grey">
 
-                    <select id="genreList" name="genre" class="w3-select w3-dark-grey">
-                        <option selected>All </option>
-                        <c:forEach var="mov" items="${movies}">
-                            <c:forEach var="genre" items="${mov.genre}">
-                                <option value="${genre}">${genre}</option>
-                            </c:forEach>
-                        </c:forEach>
-                    </select>
+                    <li class="w3-right w3-padding">
+                        <form id="bygenre" action="MyMovies" method="get">
+                            <input value="${movies}" type="hidden" name="movies" />
 
-                </form>
-            </li>
-            <li class="w3-right w3-padding">
-                <form id="sortby" action="MyMovies" method="get">
-                    <input value="${movies}" type="hidden" name="movies" />
-                    
-                        <label class="w3-label" for="sortList">Sort By:</label>
-                        <select name="sort" class="w3-select w3-dark-grey" id="sortList" >
+                            <label class="w3-label" for="genreList" style="display: inline-block">Genre:</label>
 
-                            <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
-                            <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
-                            <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
-                            <option value="y90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
-                        </select>
-                    
-                </form>
-            </li>
+                            <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block">
+                                <option selected>All </option>
+                                <c:forEach var="mov" items="${movies}">
+                                    <c:forEach var="genre" items="${mov.genre}">
+                                        <option value="${genre}">${genre}</option>
+                                    </c:forEach>
+                                </c:forEach>
+                            </select>
 
+                        </form>
+                    </li>
+                    <li class="w3-right w3-padding">
+                        <form id="sortby" action="MyMovies" method="get">
+                            <input value="${movies}" type="hidden" name="movies" />
 
-        </ul>
-        <div class="w3-container w3-padding" id="results">
+                            <label class="w3-label" for="sortList" style="display: inline-block">Sort By:</label>
+                            <select name="sort" class="w3-select w3-dark-grey" id="sortList" style="display: inline-block">
 
+                                <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
+                                <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
+                                <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
+                                <option value="y90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
+                            </select>
 
-            <c:forEach var="movie" items="${movies}">
-                <div class="w3-card w3-margin">
-                    <ul class="w3-ul">
-                        <li><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) </li>
-                    </ul>
-                </div>
-            </c:forEach>
-
-
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-
     </div>
     <br>
 
