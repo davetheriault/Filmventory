@@ -98,7 +98,7 @@ public class SortGenre extends HttpServlet {
                 String year = (String) mov.getYear();
                 String outp = "<div class=\"w3-card w3-margin\">";
                 outp += "<ul class=\"w3-ul\">";
-                outp += "<li><strong><a href=\"/MovieDetails?title=" + title + "&year=" + year + "\" >" + title + "</a></strong> &#40" + year + "&#40 </li>";
+                outp += "<li><strong><a href=\"/MovieDetails?title=" + title + "&year=" + year + "\" >" + title + "</a></strong> &#40;" + year + "&#40; </li>";
                 outp += "</ul>";
                 outp += "</div>";
                 sortlog.write("\n" +outp);
