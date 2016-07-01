@@ -91,7 +91,6 @@
         }
 
         xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
-        xmlHttpRequest.setRequestHandler("Content-Type", "application/x-www-form-urlencoded");
 
         xmlhttp.send();
         xmlhttp.onreadystatechange = function () {
