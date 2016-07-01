@@ -48,10 +48,27 @@ public class MyMovies extends HttpServlet {
             }
         }
         List<Movie> movies = db.getInventory(fb_id, sort);
+        
+        List<String> gnrs = new ArrayList<>();
+        for ( Movie mov : movies ) {
+            for ( String genre1 : mov.getGenre() ){
+                boolean dupli = false;
+                for (String gnrlst : gnrs) {
+                    if ( genre1.equals(gnrlst) ) {
+                        dupli = true;
+                    }
+                }
+                if (dupli == false) {
+                    gnrs.add(genre1);
+                }
+            }
+        }
 
         request.getSession().setAttribute("movies", movies);
 
         request.setAttribute("movies", movies);
+        
+        request.setAttribute("genres", gnrs);
 
         request.getRequestDispatcher("fvmymovies.jsp").forward(request, response);
     }

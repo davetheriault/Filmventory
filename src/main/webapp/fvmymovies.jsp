@@ -35,11 +35,11 @@
 
                             <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block">
                                 <option selected>All </option>
-                                <c:forEach var="mov" items="${movies}">
-                                    <c:forEach var="genre" items="${mov.genre}">
+                                
+                                    <c:forEach var="genre" items="${genres}">
                                         <option value="${genre}">${genre}</option>
                                     </c:forEach>
-                                </c:forEach>
+                                
                             </select>
 
                         </form>
