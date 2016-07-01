@@ -95,7 +95,7 @@
 
         xmlhttp.send();
         xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4) {
+            if (xmlhttp.readyState === 4) {
                 var inner = document.getElementById("results");
                 inner.innerHTML = xmlhttp.responseText;
                 alert(xmlhttp.length);
