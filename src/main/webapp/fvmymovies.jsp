@@ -17,7 +17,7 @@
             <li class="w3-right w3-padding">
                 <form id="bygenre" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <label for="genreList">Genre:</label>
+                    <label class="w3-label" for="genreList">Genre:</label>
                     <select id="genreList" name="genre" class="w3-select w3-dark-grey" >
                         <option selected>All </option>
                         <c:forEach var="mov" items="${movies}">
@@ -31,7 +31,7 @@
             <li class="w3-right w3-padding">
                 <form id="sortby" action="MyMovies" method="get">
                     <input value="${movies}" type="hidden" name="movies" />
-                    <label for="sortList">Sort By:</label>
+                    <label class="w3-label" for="sortList">Sort By:</label>
                     <select name="sort" class="w3-select w3-dark-grey" id="sortList" >
 
                         <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
@@ -80,8 +80,7 @@
     function sort() {
         var genre = $("#genreList").val();
         var sort = $("#sortList").val();
-        alert(genre);
-        alert(sort);
+        
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -90,16 +89,14 @@
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
 
-        xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=", true);
+        xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=" + sort, true);
 
         xmlhttp.send();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4) {
                 var inner = document.getElementById("results");
                 inner.innerHTML = xmlhttp.responseText;
-                alert(xmlhttp.length);
-                alert(xmlhttp.statusText);
-                alert(xmlhttp.responseText);
+                
             }
         };
 
