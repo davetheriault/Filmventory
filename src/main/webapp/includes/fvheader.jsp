@@ -5,6 +5,10 @@
         if (request.getAttribute("title") != "filmventory") {
             response.sendRedirect("filmventory.jsp");
         }
+    } else {
+        if (request.getAttribute("title") == "filmventory") {
+        response.sendRedirect("fvhome.jsp");
+    }
     }
 %>
 <!DOCTYPE html>
