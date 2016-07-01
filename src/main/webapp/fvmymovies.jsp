@@ -13,7 +13,7 @@
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
 
-        <div class="w3-container w3-row">
+        <div class="w3-container w3-row w3-padding-0 w3-row">
             <div class="w3-container w3-padding w3-col m9 l9" id="results">
 
                 <c:forEach var="movie" items="${movies}">
@@ -25,7 +25,7 @@
                 </c:forEach>
             </div>
             <div class="w3-quarter">
-                <ul class="w3-navbar w3-dark-grey">
+                <ul class="w3-navbar w3-grey">
 
                     <li class="w3-right w3-padding">
                         <form id="bygenre" action="MyMovies" method="get">
