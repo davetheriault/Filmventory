@@ -97,6 +97,9 @@
             if (xmlhttp.readyState == 4) {
                 var inner = document.getElementById("results");
                 inner.innerHTML = xmlhttp.responseText;
+                alert(xmlhttp.length);
+                alert(xmlhttp.statusText);
+                alert(xmlhttp.responseText);
             }
         };
 
