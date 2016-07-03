@@ -828,10 +828,17 @@ public class JDBC {
 
     }
 
-    public void removeMovie (String title, String year, String user_id) {
+    public void removeMovie (String title, String year, String user_id) throws IOException {
 
+        FileWriter rem = new FileWriter("remove.txt", true);
+        
         int movid = getMovieId(title, year);
 
+        rem.write(year + "\n");
+        rem.write(title + "\n");
+        rem.write(movid + "\n");
+        rem.flush();
+        
         Connection conn = null;
         Statement stmt = null;
         String sql;
@@ -840,7 +847,10 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             
             sql = "DELETE FROM movie2user WHERE movie_id = " + movid + " AND user_id = " + user_id + ";";
+            rem.write(sql);
+            rem.flush();
             stmt = conn.prepareStatement(sql);
+            
             stmt.execute(sql);
             
 
