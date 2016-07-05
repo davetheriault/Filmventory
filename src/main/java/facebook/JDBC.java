@@ -33,8 +33,6 @@ public class JDBC {
     private String USER = username;
     private String PASS = password;
 
-    
-    
     public JDBC() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -47,7 +45,6 @@ public class JDBC {
         JDBC db = new JDBC();
         //db.getPeople();
     }
-    
 
     public void addUser(String fbid, String f_name, String l_name) {
         Connection conn = null;
@@ -617,10 +614,18 @@ public class JDBC {
         String sql = null;
         ResultSet rs = null;
         List<Movie> list = new ArrayList<>();
-        if (sort.equals("az") || sort.equals("")) { sort = "titlesort ASC"; }
-        if (sort.equals("za")) { sort = "titlesort DESC"; }
-        if (sort.equals("y09")) { sort = "movie.year ASC"; }
-        if (sort.equals("y90")) { sort = "movie.year DESC"; }
+        if (sort.equals("az") || sort.equals("")) {
+            sort = "titlesort ASC";
+        }
+        if (sort.equals("za")) {
+            sort = "titlesort DESC";
+        }
+        if (sort.equals("y09")) {
+            sort = "movie.year ASC";
+        }
+        if (sort.equals("y90")) {
+            sort = "movie.year DESC";
+        }
         try {
             FileWriter logs = new FileWriter("inventory.txt", true);
 
@@ -628,11 +633,11 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             sql = "SELECT *, CASE WHEN movie.title LIKE 'The %' THEN trim(substr(movie.title, 4)) "
-                + "ELSE movie.title END AS titlesort FROM movie "
-                + "INNER JOIN movie2user ON movie.id=movie2user.movie_id ";
-            
+                    + "ELSE movie.title END AS titlesort FROM movie "
+                    + "INNER JOIN movie2user ON movie.id=movie2user.movie_id ";
+
             sql += "WHERE movie2user.user_id = '" + user_id + "' ";
-            
+
             sql += "ORDER BY " + sort + " ";
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -662,7 +667,7 @@ public class JDBC {
                     logs.write(gm + "\n");
                     logs.flush();
                 }
-                
+
                 List<String> d = getPositions(rs.getInt("id"), "director");
                 logs.write("\nDirectors: \n");
                 for (String di : d) {
@@ -681,7 +686,7 @@ public class JDBC {
                     logs.write(ac + "\n");
                     logs.flush();
                 }
-                
+
                 mov.setDirector(d);
                 mov.setWriter(w);
                 mov.setActors(a);
@@ -737,13 +742,13 @@ public class JDBC {
             }
             List<String> genres = getGenres(movid);
             mov.setGenre(genres);
-            
+
             List d = getPositions(movid, "director");
             mov.setDirector(d);
-            
+
             List w = getPositions(movid, "writer");
             mov.setWriter(w);
-            
+
             List a = getPositions(movid, "actor");
             mov.setActors(a);
 
@@ -798,7 +803,7 @@ public class JDBC {
         String sql = null;
         ResultSet rs = null;
         List<String> crew = new ArrayList<>();
-        
+
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
@@ -815,7 +820,7 @@ public class JDBC {
             while (rs.next()) {
                 crew.add(rs.getString("name"));
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
             FileWriter exc = new FileWriter("exception.txt", true);
@@ -828,22 +833,57 @@ public class JDBC {
 
     }
 
-    public void removeMovie (String title, String year, String fb_id) throws IOException {
-        
+    public List getLists(String fb_id) {
+
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        List<MovieList> lists = new ArrayList<>();
+        int user_id = this.getUserId(fb_id);
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            sql = "SELECT * "
+                + "FROM list "
+                + "WHERE user_id = '" + user_id + "' ";
+
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                int list_id = rs.getInt("id");
+                String list_name = rs.getString("name");
+                int u_id = rs.getInt("user_id");
+                MovieList mL = new MovieList(list_id, list_name, u_id);
+                lists.add(mL);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+
+        return lists;
+
+    }
+
+    public void removeMovie(String title, String year, String fb_id) throws IOException {
+
         int movid = getMovieId(title, year);
         int usrid = getUserId(fb_id);
-        
+
         Connection conn = null;
         Statement stmt = null;
         String sql;
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
+
             sql = "DELETE FROM movie2user WHERE movie_id = " + movid + " AND user_id = " + usrid + ";";
             stmt = conn.prepareStatement(sql);
             stmt.execute(sql);
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -863,11 +903,7 @@ public class JDBC {
                 Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-    }
-    
-    
 
-    
+    }
 
 }

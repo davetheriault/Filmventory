@@ -7,6 +7,7 @@ package facebook;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,10 +62,15 @@ public class MovieDetails extends HttpServlet {
         
         JDBC db = new JDBC();
 
+        String fb_id = (String) request.getSession().getAttribute("id");
         String title = request.getParameter("title");
         String year = request.getParameter("year");
         
         Movie movie = db.getMovie(title, year);
+        
+        List<MovieList> mList = db.getLists(fb_id);
+        
+        request.getSession().setAttribute("lists", mList);
         
         request.setAttribute("movie", movie);
         
