@@ -57,7 +57,7 @@
                 <div class="w3-col m4 l4">
                     <div class="w3-container">
                         <ul class="w3-ul w3-dark-grey">
-                            <li><a href="/RemoveMovie?title=${movie.title}&year=${movie.year}" >Remove from collection</a></li>
+                            <li><a href="/RemoveMovie?title=${movie.title}&year=${movie.year}" id="removeClick" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href=""><i class="fa fa-plus"></i> Create New List</a></li>
                                 <c:forEach var="list" items="${lists}">
@@ -82,7 +82,11 @@
         $("#add2list").click( function (event) {
             event.preventDefault();
             $(".lists").toggleClass("hidden");
-        })
-    })
+        });
+        
+        $("#removeClick").click( function () {
+            confirm("Remove this movie from your collection?");
+        });
+    });
 </script>
 </html>
