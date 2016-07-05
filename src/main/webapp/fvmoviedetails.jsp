@@ -88,8 +88,9 @@
             event.preventDefault();
             var c = confirm("Remove this movie from your collection?");
             if (c === true) {
-                window.location("/RemoveMovie?title=${movie.title}&year=${movie.year}");
-            } 
+                var url = window.location.hostname;
+                window.location.href = url + "/RemoveMovie?title=${movie.title}&year=${movie.year}");
+        } 
         });
     });
 </script>
