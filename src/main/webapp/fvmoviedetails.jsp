@@ -84,8 +84,12 @@
             $(".lists").toggleClass("hidden");
         });
         
-        $("#removeClick").click( function () {
-            confirm("Remove this movie from your collection?");
+        $("#removeClick").click( function (event) {
+            event.preventDefault();
+            var c = confirm("Remove this movie from your collection?");
+            if (c === true) {
+                window.location("/RemoveMovie?title=${movie.title}&year=${movie.year}");
+            } 
         });
     });
 </script>
