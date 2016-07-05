@@ -57,7 +57,7 @@
                 <div class="w3-col m4 l4">
                     <div class="w3-container">
                         <ul class="w3-ul w3-dark-grey">
-                            <li><a href="/RemoveMovie?title=${movie.title}&year=${movie.year}" id="removeClick" >Remove from collection</a></li>
+                            <li><a href="" id="removeClick" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href=""><i class="fa fa-plus"></i> Create New List</a></li>
                                 <c:forEach var="list" items="${lists}">
@@ -89,7 +89,8 @@
             var c = confirm("Remove this movie from your collection?");
             if (c === true) {
                 var url = window.location.hostname;
-                window.location.href = url + "/RemoveMovie?title=${movie.title}&year=${movie.year}");
+                var link = url + "/RemoveMovie?title=${movie.title}&year=${movie.year}");
+                $(location).attr("href", link);
         } 
         });
     });
