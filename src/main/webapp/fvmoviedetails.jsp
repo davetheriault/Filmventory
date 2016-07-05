@@ -58,10 +58,10 @@
                     <div class="w3-container">
                         <ul class="w3-ul w3-dark-grey">
                             <li><a href="/RemoveMovie?title=${movie.title}&year=${movie.year}" >Remove from collection</a></li>
-                            <li><a href="">Add to list</a></li>
-                            <li class="">Create New List</li>
+                            <li><a href="" id="add2list">Add to list</a></li>
+                            <li class="lists hidden"><a href=""><i class="fa fa-plus"></i> Create New List</a></li>
                                 <c:forEach var="list" items="${lists}">
-                                <li class="">${list.name}</li>
+                                <li class="lists hidden"><a href=""><i class="fa fa-plus"></i> ${list.name}</a></li>
                                 </c:forEach>
                             
                         </ul>
@@ -77,4 +77,12 @@
 
 </main>
 </body>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $("#add2list").click( function (event) {
+            event.preventDefault();
+            $(".lists").toggleClass("hidden");
+        })
+    })
+</script>
 </html>
