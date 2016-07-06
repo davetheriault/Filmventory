@@ -96,6 +96,7 @@
                 alert(domain);
                 var link = domain + "/RemoveMovie?title=" + t2 + "&year=" + y2;
                 alert(link);
+                window.location = link;
             }                 
         });
     });
