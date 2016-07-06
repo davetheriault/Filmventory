@@ -92,10 +92,7 @@
                 var t2 = encodeURI(t);
                 var y = $("#removeClick").attr("data-year");
                 var y2 = encodeURI(y);
-                var domain = window.location.hostname;
-                alert(domain);
-                var link = domain + "/RemoveMovie?title=" + t2 + "&year=" + y2;
-                alert(link);
+                var link = "/RemoveMovie?title=" + t2 + "&year=" + y2;
                 window.location = link;
             }                 
         });
