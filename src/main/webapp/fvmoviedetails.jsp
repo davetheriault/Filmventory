@@ -62,8 +62,9 @@
                             <li class="lists hidden w3-grey"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                             <li>
                                 <form class="w3-form w3-light-grey" id="newListForm">
-                                    <label for="listname">List Name:</label><input class="w3-input w3-grey" type="text" id="listname"/>
-                                    <input class="w3-btn-block w3-text-black" type="submit" form="newListForm"/>
+                                    <label for="listname">List Name:</label>
+                                    <input class="w3-input w3-grey" type="text" id="listname"/>
+                                    <input class="w3-btn w3-right" type="submit" value="Create List" form="newListForm"/>
                                 </form>
                             </li>
                             <c:forEach var="list" items="${lists}">
