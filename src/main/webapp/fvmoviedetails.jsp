@@ -91,8 +91,8 @@
                 
                 var domain = window.location.hostname;
                 alert(domain);
-                var link = domain + "/RemoveMovie?title=${movie.title}&year=${movie.year}"
-                alert(link);
+               // var link = domain + "/RemoveMovie?title=${movie.title}&year=${movie.year}"
+               // alert(link);
             }                
                 
         } 
