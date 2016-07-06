@@ -60,10 +60,9 @@
                             <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
-                            <li class="w3-light-grey">
+                            <li class="w3-light-grey w3-padding-0">
                                 <form id="newListForm">
-                                    
-                                    <input class="w3-input w3-grey" type="text" id="listname" placeholder="List Name..."/>
+                                    <input class="w3-input w3-light-grey" type="text" id="listname" placeholder="List Name..."/>
                                     <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>
                                 </form>
                             </li>
