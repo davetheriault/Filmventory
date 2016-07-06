@@ -103,8 +103,8 @@
         $("#newList").click(function (event) {
             event.preventDefault();
             $form = '<li class="w3-light-grey w3-padding-0">\n\
-                     <form id="newListForm">\n\
-                     <input class="w3-input w3-light-grey" type="text" id="listname" placeholder="List Name..."/>\n\
+                     <form id="newListForm" action="/AddList" method="post">\n\
+                     <input class="w3-input w3-light-grey" type="text" name="listname" id="listname" placeholder="List Name..."/>\n\
                      <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>\n\
                      </form></li>';
             $($form).insertAfter("#newli");
