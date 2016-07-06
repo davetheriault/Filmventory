@@ -60,7 +60,12 @@
                             <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey" id="newli"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
-                            
+                            <li class="nlist hidden w3-light-grey w3-padding-0">
+                                <form id="newListForm" action="/AddList" method="post">
+                                    <input class="w3-input w3-light-grey" type="text" name="listname" id="listname" placeholder="List Name..."/>
+                                    <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>
+                                </form>
+                            </li>
                             <c:forEach var="list" items="${lists}">
                                 <c:url var="url" value="/AddList?list=${list.name}&title=${movie.title}&year=${movie.year}" />
                                 <li class="lists hidden w3-grey">
@@ -102,12 +107,7 @@
 
         $("#newList").click(function (event) {
             event.preventDefault();
-            $form = '<li class="w3-light-grey w3-padding-0">\n\
-                     <form id="newListForm" action="/AddList" method="post">\n\
-                     <input class="w3-input w3-light-grey" type="text" name="listname" id="listname" placeholder="List Name..."/>\n\
-                     <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>\n\
-                     </form></li>';
-            $($form).insertAfter("#newli");
+            $(".nlist").toggleClass("hidden");
         });
     });
 </script>
