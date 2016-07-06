@@ -60,11 +60,11 @@
                             <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
-                            <li>
-                                <form class="w3-form w3-light-grey" id="newListForm">
+                            <li class="w3-light-grey">
+                                <form class="w3-form" id="newListForm">
                                     <label for="listname">List Name:</label>
                                     <input class="w3-input w3-grey" type="text" id="listname"/>
-                                    <input class="w3-right w3-text-black" type="submit" value="Create List" form="newListForm"/>
+                                    <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>
                                 </form>
                             </li>
                             <c:forEach var="list" items="${lists}">
