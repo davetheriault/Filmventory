@@ -88,10 +88,13 @@
             event.preventDefault();
             var c = confirm("Remove this movie from your collection?");
             if (c) {
-                
+                var t = $("#removeClick").attr("data-title");
+                var t2 = encodeURI(t);
+                var y = $("#removeClick").attr("data-year");
+                var y2 = encodeURI(y);
                 var domain = window.location.hostname;
                 alert(domain);
-                var link = domain + "/RemoveMovie?title=" + $("#removeClick").attr("data-title") + "&year=" + $("#removeClick").attr("data-year");
+                var link = domain + "/RemoveMovie?title=" + t2 + "&year=" + y2;
                 alert(link);
             }                 
         });
