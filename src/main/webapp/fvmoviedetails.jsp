@@ -61,9 +61,9 @@
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                             <li>
-                                <form class="w3-form" id="newListForm">
-                                    <label for="listname">List Name:</label><input class="w3-input" type="text" id="listname"/>
-                                    <input type="submit" form="newListForm"/>
+                                <form class="w3-form w3-light-grey" id="newListForm">
+                                    <label for="listname">List Name:</label><input class="w3-input w3-grey" type="text" id="listname"/>
+                                    <input class="w3-btn-block w3-text-black" type="submit" form="newListForm"/>
                                 </form>
                             </li>
                             <c:forEach var="list" items="${lists}">
