@@ -59,16 +59,18 @@
                         <ul class="w3-ul w3-dark-grey">
                             <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
-                            <li class="lists hidden w3-grey"><a href=""><i class="fa fa-plus"></i> Create New List</a></li>
+                            <li class="lists hidden w3-grey"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                                 <c:forEach var="list" items="${lists}">
-                                <li class="lists hidden w3-grey"><a href=""><i class="fa fa-plus"></i> ${list.name}</a></li>
+                                    <c:url var="url" value="/AddList?list=${list.name}&title=${movie.title}&year=${movie.year}" />
+                                    <li class="lists hidden w3-grey">
+                                        <a href="${url}"><i class="fa fa-plus"></i> ${list.name}</a>
+                                    </li>
                                 </c:forEach>
                             
                         </ul>
                     </div>    
                 </div>
             </div>
-
 
         </div>
 
