@@ -57,7 +57,7 @@
                 <div class="w3-col m4 l4">
                     <div class="w3-container">
                         <ul class="w3-ul w3-dark-grey">
-                            <li><a href="" id="removeClick" >Remove from collection</a></li>
+                            <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
                             <li><a href="" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey"><a href=""><i class="fa fa-plus"></i> Create New List</a></li>
                                 <c:forEach var="list" items="${lists}">
@@ -91,11 +91,9 @@
                 
                 var domain = window.location.hostname;
                 alert(domain);
-               // var link = domain + "/RemoveMovie?title=${movie.title}&year=${movie.year}"
-               // alert(link);
-            }                
-                
-         
+                var link = domain + "/RemoveMovie?title=" + $("#removeClick").attr("data-title") + "&year=" + $("#removeClick").attr("data-year");
+                alert(link);
+            }                 
         });
     });
 </script>
