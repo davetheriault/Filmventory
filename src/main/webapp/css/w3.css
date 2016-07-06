@@ -343,4 +343,6 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             display: none;
         }
         
-        
+        #newListForm input {
+            padding: 6px 2px 6px 17px;
+        }
