@@ -90,7 +90,6 @@
         $("#add2list").click(function (event) {
             event.preventDefault();
             $(".lists").toggleClass("hidden");
-            $(".lists").toggleClass("visible");
         });
 
         $("#removeClick").click(function (event) {
@@ -109,7 +108,6 @@
         $("#newList").click(function (event) {
             event.preventDefault();
             $(".nlist").toggleClass("hidden");
-            $(".nlist").toggleClass("visible");
         });
     });
 </script>
