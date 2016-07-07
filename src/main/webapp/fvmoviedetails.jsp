@@ -90,6 +90,9 @@
         $("#add2list").click(function (event) {
             event.preventDefault();
             $(".lists").toggleClass("hidden");
+            if (!$(".nlist").hasClass("hidden") {
+                $(".nlist").toggleClass("hidden");
+            }
         });
 
         $("#removeClick").click(function (event) {
