@@ -338,9 +338,9 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             vertical-align: middle;
         }
         
-        .lists {
+        .visible {
             visibility: visible;
-            display: inherit;
+            display: initial;
             height: auto;
             transition: all 2s ease;
         }
