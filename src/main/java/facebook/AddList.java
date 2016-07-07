@@ -72,7 +72,15 @@ public class AddList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        String title = request.getParameter("title");
+        String year = request.getParameter("year");
+        String listname = request.getParameter("list");
+        String fb_id = (String) request.getSession().getAttribute("id");
+        
+        JDBC db = new JDBC();
+        
+        db.addList(fb_id, title, year, listname);
     }
 
     /**

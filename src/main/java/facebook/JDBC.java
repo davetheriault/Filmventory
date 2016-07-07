@@ -906,4 +906,49 @@ public class JDBC {
 
     }
 
+    void addList(String fb_id, String title, String year, String listname) {
+        
+        String user_id = Integer.toString(getId("user", "fb_id", fb_id));
+        boolean oldlist = checkExist2("list", "name", "user_id", listname, user_id);
+        
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = null;
+        
+         try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            if (oldlist == false) {
+                sql = "INSERT INTO list (name, user_id) "
+                    + "VALUES ('" + listname + "', '" + user_id + "')";
+                stmt = conn.prepareStatement(sql);
+                stmt.execute(sql);
+            }
+            int list_id = getId("list", "name", listname + " AND user_id = " + user_id);
+            int movie_id = getMovieId(title, year);
+            sql = "INSERT INTO movie2list (list_id, movie_id) "
+                + "VALUES ('"+list_id+"', '"+movie_id+"');";
+            stmt = conn.prepareStatement(sql);
+            stmt.execute(sql);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }
