@@ -338,13 +338,6 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             vertical-align: middle;
         }
         
-        .visible {
-            visibility: visible;
-            display: block;
-            height: auto;
-            transition: all 2s ease;
-        }
-        
         .hidden {
             visibility: hidden;
             display: none;
