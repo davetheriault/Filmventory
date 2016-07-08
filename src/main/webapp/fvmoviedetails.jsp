@@ -94,10 +94,11 @@
             event.preventDefault();
             alert("ok");
             $(".lists").toggleClass("hidden");
-            if (!$(".nlist").hasClass("hidden") {
+           /* if (!$(".nlist").hasClass("hidden") {
                 alert("nlist not hidden");
                 $(".nlist").toggleClass("hidden");
             }
+            */
         });
 
         $("#removeClick").click(function (event) {
