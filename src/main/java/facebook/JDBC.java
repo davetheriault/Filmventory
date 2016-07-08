@@ -48,17 +48,17 @@ public class JDBC {
 
     public void addUser(String fbid, String f_name, String l_name) {
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         //  ResultSet rs = null;
         try {
             //connect
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+            
             sql = "INSERT INTO user (fb_id,first_name,last_name) VALUES ('" + fbid + "','" + f_name + "','" + l_name + "') ;";
-
-            stmt.executeUpdate(sql);
+            stmt = conn.prepareStatement(sql);
+            stmt.executeUpdate();
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,7 +82,7 @@ public class JDBC {
 
     public User getUser(String fb_id) {
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         User user = new User();
@@ -91,10 +91,11 @@ public class JDBC {
         try {
             //connect
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            sql = "SELECT * FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
 
-            rs = stmt.executeQuery(sql);
+            sql = "SELECT * FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
             while (rs.next()) {
                 user.setFbId(rs.getString("fb_id"));
                 user.setFirstName(rs.getString("first_name"));
@@ -123,7 +124,7 @@ public class JDBC {
 
     public boolean checkUser(String fb_id) {
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         boolean check = false;
@@ -132,10 +133,11 @@ public class JDBC {
         try {
             //connect
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-            sql = "SELECT fb_id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
 
-            rs = stmt.executeQuery(sql);
+            sql = "SELECT fb_id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
             while (rs.next()) {
                 if (rs.getString("fb_id") != "" && rs.getString("fb_id") != null) {
                     check = true;
@@ -254,7 +256,7 @@ public class JDBC {
                         sql = "INSERT INTO genre (genre)"
                                 + "VALUES ('" + genr + "')";
                         stmt = conn.prepareStatement(sql);
-                        stmt.executeUpdate(sql);
+                        stmt.executeUpdate();
                     } else {
                         logs.write("Genre Not True Failed... skip adding Genre \n\n");
                         logs.flush();
@@ -269,7 +271,7 @@ public class JDBC {
                     sql = "INSERT INTO movie2genre (movie_id, genre_id) "
                             + "VALUES ('" + movie_id + "', '" + genre_id + "')";
                     stmt = conn.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
+                    stmt.executeUpdate();
 
                 }
                 // === INSERT DIRECTOR INTO CREW TABLE --- //
@@ -281,7 +283,7 @@ public class JDBC {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + dire + "')";
                         stmt = conn.prepareStatement(sql);
-                        int insertD = stmt.executeUpdate(sql);
+                        int insertD = stmt.executeUpdate();
                         if (insertD != 0) {
                             logs.write("\nDirector " + dire + " inserted. \n");
                             logs.flush();
@@ -295,9 +297,10 @@ public class JDBC {
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'director')";
                     stmt = conn.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
+                    stmt.executeUpdate();
                 }
 
+                
                 // === INSERT WRITER INTO CREW TABLE --- //
                 for (String writ : wris) {
                     boolean writ1 = checkExists("crew", "name", writ);
@@ -307,7 +310,7 @@ public class JDBC {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + writ + "')";
                         stmt = conn.prepareStatement(sql);
-                        int insertW = stmt.executeUpdate(sql);
+                        int insertW = stmt.executeUpdate();
                         if (insertW != 0) {
                             logs.write("\nWriter " + writ + " inserted. \n");
                             logs.flush();
@@ -319,7 +322,7 @@ public class JDBC {
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'writer')";
                     stmt = conn.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
+                    stmt.executeUpdate();
                 }
                 // === INSERT ACTOR INTO CREW TABLE --- //
                 for (String acto : acts) {
@@ -330,7 +333,7 @@ public class JDBC {
                         sql = "INSERT INTO crew (name)"
                                 + "VALUES ('" + acto + "')";
                         stmt = conn.prepareStatement(sql);
-                        int insertA = stmt.executeUpdate(sql);
+                        int insertA = stmt.executeUpdate();
                         if (insertA != 0) {
                             logs.write("\nDirector " + acto + " inserted. \n");
                             logs.flush();
@@ -342,7 +345,7 @@ public class JDBC {
                     sql = "INSERT INTO crew2movie (crew_id, movie_id, position) "
                             + "VALUES ('" + crew_id + "', '" + movie_id + "', 'actor')";
                     stmt = conn.prepareStatement(sql);
-                    stmt.executeUpdate(sql);
+                    stmt.executeUpdate();
                 }
             }
             // --- CREATE MOVIE2USER RELATIONSHIP
@@ -375,13 +378,15 @@ public class JDBC {
     private int getMovieId(String title, String year) {
         int mov_id = 0;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+            
             sql = "SELECT id FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1";
+            stmt = conn.prepareStatement(sql);
+            
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -412,14 +417,14 @@ public class JDBC {
     private int getUserId(String fb_id) {
         int use_id = 0;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
             sql = "SELECT id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 use_id = rs.getInt("id");
@@ -449,14 +454,15 @@ public class JDBC {
     private int getId(String table, String col, String value) {
         int id = 0;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+
             sql = "SELECT id FROM " + table + " WHERE " + col + " = '" + value + "' LIMIT 1";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 id = rs.getInt("id");
@@ -486,15 +492,17 @@ public class JDBC {
     public boolean checkMovie2User(String fb_id, String title, String year) {
         boolean m2u = false;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+
             int mov = getMovieId(title, year);
             int user = getUserId(fb_id);
             sql = "SELECT id FROM movie2user WHERE movie_id = '" + mov + "' AND user_id = '" + user + "' LIMIT 1";
+            stmt = conn.prepareStatement(sql);
+            
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -527,16 +535,15 @@ public class JDBC {
     public boolean checkExists(String table, String col, String value) {
         boolean checkEx = false;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
 
             sql = "SELECT id FROM " + table + " WHERE " + col + " = '" + value + "' LIMIT 1";
-
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -569,16 +576,16 @@ public class JDBC {
     public boolean checkExist2(String table, String col1, String col2, String value1, String value2) {
         boolean checkR = false;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
 
             sql = "SELECT id FROM " + table + " WHERE " + col1 + " = '" + value1 + "' "
                     + "AND " + col2 + " = '" + value2 + "' LIMIT 1";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -610,7 +617,7 @@ public class JDBC {
     public List getInventory(String fb_id, String sort) throws IOException {
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         List<Movie> list = new ArrayList<>();
@@ -631,7 +638,6 @@ public class JDBC {
 
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
             sql = "SELECT *, CASE WHEN movie.title LIKE 'The %' THEN trim(substr(movie.title, 4)) "
                     + "ELSE movie.title END AS titlesort FROM movie "
                     + "INNER JOIN movie2user ON movie.id=movie2user.movie_id ";
@@ -639,7 +645,8 @@ public class JDBC {
             sql += "WHERE movie2user.user_id = '" + user_id + "' ";
 
             sql += "ORDER BY " + sort + " ";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
             while (rs.next()) {
                 Movie mov = new Movie();
                 mov.setTitle(rs.getString("title"));
@@ -719,16 +726,18 @@ public class JDBC {
         int movid = getMovieId(title, year);
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         Movie mov = new Movie();
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
+
             sql = "SELECT * FROM movie WHERE id = '" + movid + "' LIMIT 1";
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
             while (rs.next()) {
                 mov.setTitle(rs.getString("title"));
                 mov.setYear(rs.getString("year"));
@@ -776,19 +785,19 @@ public class JDBC {
     public List getGenres(int movie_id) throws SQLException {
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         List<String> genreList = new ArrayList<>();
 
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        stmt = conn.createStatement();
 
         sql = "SELECT genre FROM genre g "
                 + "INNER JOIN movie2genre mg ON g.id=mg.genre_id "
                 + "WHERE mg.movie_id = '" + movie_id + "' ";
-
-        rs = stmt.executeQuery(sql);
+        stmt = conn.prepareStatement(sql);
+        rs = stmt.executeQuery();
+        
         while (rs.next()) {
             genreList.add(rs.getString("genre"));
         }
@@ -799,14 +808,13 @@ public class JDBC {
     public List getPositions(int movie_id, String pos) throws IOException {
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         List<String> crew = new ArrayList<>();
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
 
             sql = "SELECT c.name, cm.position "
                     + "FROM crew c "
@@ -815,7 +823,8 @@ public class JDBC {
                     + "WHERE cm.movie_id = '" + movie_id + "' "
                     + "AND cm.position = '" + pos + "'";
 
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 crew.add(rs.getString("name"));
@@ -823,10 +832,7 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-            FileWriter exc = new FileWriter("exception.txt", true);
-            exc.write(ex.getMessage());
-            exc.flush();
-            exc.close();
+            
         }
 
         return crew;
@@ -836,7 +842,7 @@ public class JDBC {
     public List getLists(String fb_id) {
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         List<MovieList> lists = new ArrayList<>();
@@ -844,13 +850,13 @@ public class JDBC {
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
 
             sql = "SELECT * "
                 + "FROM list "
                 + "WHERE user_id = '" + user_id + "' ";
 
-            rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 int list_id = rs.getInt("id");
@@ -875,7 +881,7 @@ public class JDBC {
         int usrid = getUserId(fb_id);
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql;
 
         try {
@@ -883,7 +889,7 @@ public class JDBC {
 
             sql = "DELETE FROM movie2user WHERE movie_id = " + movid + " AND user_id = " + usrid + ";";
             stmt = conn.prepareStatement(sql);
-            stmt.execute(sql);
+            stmt.execute();
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -916,7 +922,7 @@ public class JDBC {
         addL.flush();
         
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         String sql = null;
         
          try {
@@ -929,7 +935,7 @@ public class JDBC {
                 sql = "INSERT INTO list (name, user_id) "
                     + "VALUES ('" + listname + "', '" + user_id + "')";
                 stmt = conn.prepareStatement(sql);
-                stmt.execute(sql);
+                stmt.execute();
                 addL.write(sql + "\n");
                 addL.flush();
             }
@@ -942,7 +948,7 @@ public class JDBC {
             sql = "INSERT INTO movie2list (list_id, movie_id) "
                 + "VALUES ('"+list_id+"', '"+movie_id+"');";
             stmt = conn.prepareStatement(sql);
-            stmt.execute(sql);
+            stmt.execute();
             addL.write("\n" + sql + "\n");
             addL.flush();
 
