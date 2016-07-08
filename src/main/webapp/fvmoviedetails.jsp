@@ -57,8 +57,8 @@
                 <div class="w3-col m4 l4">
                     <div class="w3-container">
                         <ul class="w3-ul w3-dark-grey">
-                            <li><a href="" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
-                            <li><a href="" id="add2list">Add to list</a></li>
+                            <li><a href="#" id="removeClick" data-title="${movie.title}" data-year="${movie.year}" >Remove from collection</a></li>
+                            <li><a href="#" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey" id="newli"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                             <li class="nlist hidden w3-light-grey w3-padding-0">
                                 <form id="newListForm" action="/AddList" method="post">
