@@ -924,6 +924,8 @@ public class JDBC {
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
+        ResultSet rs = null;
+        int list_id = 0;
         
          try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -939,7 +941,14 @@ public class JDBC {
                 addL.write(sql + "\n");
                 addL.flush();
             }
-            int list_id = getId("list", "name", listname + " AND user_id = " + user_id);
+            sql = "SELECT id FROM list WHERE name = '" + listname + "' AND user_id = " + user_id + " LIMIT 1";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                list_id = rs.getInt("id");
+            }
+            
             addL.write("\nList ID: " + list_id + "\n");
             addL.flush();
             int movie_id = getMovieId(title, year);
