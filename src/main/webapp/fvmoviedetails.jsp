@@ -91,8 +91,10 @@
     $(document).ready(function () {
         $("#add2list").click(function (event) {
             event.preventDefault();
+            alert("ok");
             $(".lists").toggleClass("hidden");
             if (!$(".nlist").hasClass("hidden") {
+                alert("nlist not hidden");
                 $(".nlist").toggleClass("hidden");
             }
         });
