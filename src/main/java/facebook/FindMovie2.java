@@ -220,8 +220,10 @@ public class FindMovie2 extends HttpServlet {
                 postLog.flush();
                 ObjectMapper postmap = new ObjectMapper();
                 Map<String, Object> map2 = postmap.readValue(url2, Map.class);
-                postLog.write("\n" + map2.get("poster_path"));
-                postLog.flush();
+                for ( String keyP : map2.keySet() ) {
+                    postLog.write( keyP + ": " + map2.get(keyP) + "\n");
+                    postLog.flush();
+                }
                 String posterURL = "http://image.tmdb.org/t/p/w500/" + map2.get("poster_path");
                 request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
@@ -253,6 +255,7 @@ public class FindMovie2 extends HttpServlet {
                 results += "<li>" + key + ": " + map.get(key) + "</li>";
             }
         }
+        /*
         URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
 
         ObjectMapper mapper2 = new ObjectMapper();
@@ -265,7 +268,7 @@ public class FindMovie2 extends HttpServlet {
             } else {
                 results += "<li>" + key2 + ": " + map2.get(key2) + "</li>";
             }
-        }
+        } */
         results += "</ul>";
         request.setAttribute("results", results);
 
