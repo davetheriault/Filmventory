@@ -14,6 +14,8 @@
 
             ${results}
 
-        </div></div></main>
+        </div>
+            <img src="${poster}"  />
+    </div></main>
 </body>
 </html>

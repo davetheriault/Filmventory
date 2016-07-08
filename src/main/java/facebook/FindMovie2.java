@@ -206,11 +206,15 @@ public class FindMovie2 extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.readValue(url, Map.class);
-
+                
         String results = "<ul class=\"w3-ul\">";
         for (String key : map.keySet()) {
             if (key.equals("Poster")) {
-
+                URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
+                ObjectMapper postmap = new ObjectMapper();
+                Map<String, Object> map2 = postmap.readValue(url2, Map.class);
+                String posterURL = "http://image.tmdb.org/t/p/w500/" + map2.get("poster_path");
+                request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
                 results += "<li>" + key + ": " + map.get(key) + " ";
 
