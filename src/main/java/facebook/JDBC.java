@@ -55,7 +55,7 @@ public class JDBC {
             //connect
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
+
             sql = "INSERT INTO user (fb_id,first_name,last_name) VALUES ('" + fbid + "','" + f_name + "','" + l_name + "') ;";
             stmt = conn.prepareStatement(sql);
             stmt.executeUpdate();
@@ -95,7 +95,7 @@ public class JDBC {
             sql = "SELECT * FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 user.setFbId(rs.getString("fb_id"));
                 user.setFirstName(rs.getString("first_name"));
@@ -137,7 +137,7 @@ public class JDBC {
             sql = "SELECT fb_id FROM user WHERE fb_id = '" + fb_id + "' LIMIT 1;";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 if (rs.getString("fb_id") != "" && rs.getString("fb_id") != null) {
                     check = true;
@@ -300,7 +300,6 @@ public class JDBC {
                     stmt.executeUpdate();
                 }
 
-                
                 // === INSERT WRITER INTO CREW TABLE --- //
                 for (String writ : wris) {
                     boolean writ1 = checkExists("crew", "name", writ);
@@ -383,10 +382,10 @@ public class JDBC {
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
+
             sql = "SELECT id FROM movie WHERE title = '" + title + "' AND year = '" + year + "' LIMIT 1";
             stmt = conn.prepareStatement(sql);
-            
+
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -502,7 +501,7 @@ public class JDBC {
             int user = getUserId(fb_id);
             sql = "SELECT id FROM movie2user WHERE movie_id = '" + mov + "' AND user_id = '" + user + "' LIMIT 1";
             stmt = conn.prepareStatement(sql);
-            
+
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -737,7 +736,7 @@ public class JDBC {
             sql = "SELECT * FROM movie WHERE id = '" + movid + "' LIMIT 1";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 mov.setTitle(rs.getString("title"));
                 mov.setYear(rs.getString("year"));
@@ -797,7 +796,7 @@ public class JDBC {
                 + "WHERE mg.movie_id = '" + movie_id + "' ";
         stmt = conn.prepareStatement(sql);
         rs = stmt.executeQuery();
-        
+
         while (rs.next()) {
             genreList.add(rs.getString("genre"));
         }
@@ -832,7 +831,7 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
 
         return crew;
@@ -852,8 +851,8 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             sql = "SELECT * "
-                + "FROM list "
-                + "WHERE user_id = '" + user_id + "' ";
+                    + "FROM list "
+                    + "WHERE user_id = '" + user_id + "' ";
 
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -868,7 +867,7 @@ public class JDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
 
         return lists;
@@ -913,53 +912,44 @@ public class JDBC {
     }
 
     void addList(String fb_id, String title, String year, String listname) throws IOException {
-        
-        FileWriter addL = new FileWriter("addL.txt", true);
+
         String user_id = Integer.toString(getId("user", "fb_id", fb_id));
         boolean oldlist = checkExist2("list", "name", "user_id", listname, user_id);
-        
-        addL.write(user_id + "\n" + oldlist + "\n");
-        addL.flush();
-        
+
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
-        int list_id = 0;
-        
-         try {
+        String list_id = null;
+
+        try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
+
             if (oldlist == false) {
-                
-                addL.write("\noldlist false passed \n");
-                addL.flush();
+
                 sql = "INSERT INTO list (name, user_id) "
-                    + "VALUES ('" + listname + "', '" + user_id + "')";
+                        + "VALUES ('" + listname + "', '" + user_id + "')";
                 stmt = conn.prepareStatement(sql);
                 stmt.execute();
-                addL.write(sql + "\n");
-                addL.flush();
             }
             sql = "SELECT id FROM list WHERE name = '" + listname + "' AND user_id = " + user_id + " LIMIT 1";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
-                list_id = rs.getInt("id");
+                list_id = Integer.toString(rs.getInt("id"));
             }
-            
-            addL.write("\nList ID: " + list_id + "\n");
-            addL.flush();
-            int movie_id = getMovieId(title, year);
-            addL.write("\nMov ID: " + movie_id + "\n");
-            addL.flush();
-            sql = "INSERT INTO movie2list (list_id, movie_id) "
-                + "VALUES ('"+list_id+"', '"+movie_id+"');";
-            stmt = conn.prepareStatement(sql);
-            stmt.execute();
-            addL.write("\n" + sql + "\n");
-            addL.flush();
+
+            String movie_id = Integer.toString(getMovieId(title, year));
+
+            boolean m2l = checkExist2("movie2list", "list_id", "movie_id", list_id, movie_id);
+
+            if (!m2l) {
+                sql = "INSERT INTO movie2list (list_id, movie_id) "
+                        + "VALUES ('" + list_id + "', '" + movie_id + "');";
+                stmt = conn.prepareStatement(sql);
+                stmt.execute();
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
