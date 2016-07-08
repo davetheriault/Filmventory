@@ -6,6 +6,7 @@
 package facebook;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -211,8 +212,16 @@ public class FindMovie2 extends HttpServlet {
         for (String key : map.keySet()) {
             if (key.equals("Poster")) {
                 URL url2 = new URL("https://api.themoviedb.org/3/find/" + map.get("imdbID") + "?external_source=imdb_id&api_key=485892eacda398b32d06aa04114b3974");
+                
+                FileWriter postLog = new FileWriter("poster.txt", true);
+                postLog.write(url2 + "\n");
+                postLog.flush();
+                postLog.write("\nImdb ID: " + map.get("imdbID"));
+                postLog.flush();
                 ObjectMapper postmap = new ObjectMapper();
                 Map<String, Object> map2 = postmap.readValue(url2, Map.class);
+                postLog.write("\n" + map2.get("poster_path"));
+                postLog.flush();
                 String posterURL = "http://image.tmdb.org/t/p/w500/" + map2.get("poster_path");
                 request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
