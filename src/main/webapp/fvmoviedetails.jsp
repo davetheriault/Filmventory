@@ -89,6 +89,7 @@
 </body>
 <script type="text/javascript">
     $(document).ready(function () {
+        alert("Ready");
         $("#add2list").click(function (event) {
             event.preventDefault();
             alert("ok");
