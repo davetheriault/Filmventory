@@ -906,10 +906,14 @@ public class JDBC {
 
     }
 
-    void addList(String fb_id, String title, String year, String listname) {
+    void addList(String fb_id, String title, String year, String listname) throws IOException {
         
+        FileWriter addL = new FileWriter("addL.txt", true);
         String user_id = Integer.toString(getId("user", "fb_id", fb_id));
         boolean oldlist = checkExist2("list", "name", "user_id", listname, user_id);
+        
+        addL.write(user_id + "\n" + oldlist + "\n");
+        addL.flush();
         
         Connection conn = null;
         Statement stmt = null;
@@ -919,17 +923,28 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             
             if (oldlist == false) {
+                
+                addL.write("\noldlist false passed \n");
+                addL.flush();
                 sql = "INSERT INTO list (name, user_id) "
                     + "VALUES ('" + listname + "', '" + user_id + "')";
                 stmt = conn.prepareStatement(sql);
                 stmt.execute(sql);
+                addL.write(sql + "\n");
+                addL.flush();
             }
             int list_id = getId("list", "name", listname + " AND user_id = " + user_id);
+            addL.write("\nList ID: " + list_id + "\n");
+            addL.flush();
             int movie_id = getMovieId(title, year);
+            addL.write("\nMov ID: " + movie_id + "\n");
+            addL.flush();
             sql = "INSERT INTO movie2list (list_id, movie_id) "
                 + "VALUES ('"+list_id+"', '"+movie_id+"');";
             stmt = conn.prepareStatement(sql);
             stmt.execute(sql);
+            addL.write("\n" + sql + "\n");
+            addL.flush();
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
