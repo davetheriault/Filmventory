@@ -8,6 +8,7 @@ package facebook;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -87,6 +88,10 @@ public class AddMovie extends HttpServlet {
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
         
+        FileWriter urll = new FileWriter("URL.txt", true);
+        urll.write(request.getParameter("img") + "\n");
+        urll.flush();
+        
         URL imgurl = new URL(request.getParameter("img"));
         Image poster = ImageIO.read(imgurl);
         
@@ -128,6 +133,10 @@ public class AddMovie extends HttpServlet {
         String lang = request.getParameter("lan");
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
+        
+        FileWriter urll = new FileWriter("URL.txt", true);
+        urll.write(request.getParameter("img") + "\n");
+        urll.flush();
         
         URL imgurl = new URL(request.getParameter("img"));
         Image poster = ImageIO.read(imgurl);
