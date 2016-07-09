@@ -1023,7 +1023,7 @@ public class JDBC {
 
     List<MovieList> getInLists(String fb_id, String movie_id) {
 
-        List<MovieList> inList = null;
+        List<MovieList> inList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
@@ -1032,10 +1032,12 @@ public class JDBC {
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sql = "SELECT * FROM list l INNER JOIN movie2list m2l WHERE l.user_id = ? AND m2l.movie_id = ? ;";
+            sql = "SELECT * FROM list l INNER JOIN movie2list m2l "
+                + "ON l.id = m2l.list_id "
+                + "WHERE l.user_id = " + user_id + " "
+                + "AND m2l.movie_id = " + movie_id + " ;";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, user_id);
-            stmt.setString(2, movie_id);
+            
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -1069,7 +1071,7 @@ public class JDBC {
     }
 
     List<MovieList> getNotInLists(String fb_id, String movie_id) {
-        List<MovieList> notInList = null;
+        List<MovieList> notInList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
@@ -1078,7 +1080,8 @@ public class JDBC {
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sql = "SELECT * FROM list l INNER JOIN movie2list m2l WHERE l.user_id = ? AND m2l.movie_id <> ? ;";
+            sql = "SELECT * FROM list l INNER JOIN movie2list m2l "
+                + "ON l.id = m2l.list_id WHERE l.user_id = ? AND m2l.movie_id <> ? ;";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, user_id);
             stmt.setString(2, movie_id);
