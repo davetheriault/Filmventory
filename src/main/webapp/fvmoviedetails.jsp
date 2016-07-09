@@ -25,14 +25,10 @@
                                     <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
                                     <li> <strong>Rated:</strong><br> ${movie.rated} </li>
                                     <li> <strong>Released:</strong><br> ${movie.released} </li>
+                                    <li> <strong>Runtime:</strong><br> ${movie.runtime} </li>
+                                    <li> <strong>Metascore:</strong><br> ${movie.metascore} </li>
                                 </ul>
                             </div>
-                        </li>
-
-                        <li class="w3-container w3-row"> 
-                            <div class="w3-third"> <strong>Rated:</strong><br> ${movie.rated} </div>
-                            <div class="w3-third"> <strong>Released:</strong><br> ${movie.released} </div>
-                            <div class="w3-third"> <strong>Runtime:</strong><br> ${movie.runtime} </div>
                         </li>
 
                         <li> <strong>Plot:</strong><br> ${movie.plot} </li>
@@ -62,8 +58,6 @@
 
                         <li> <strong>Language:</strong><br> ${movie.language} </li>
                         <li> <strong>Country:</strong><br> ${movie.country} </li>
-                        <li> <strong>Metascore:</strong><br> ${movie.metascore} </li>
-                        <li> <img width="200px" src="/Poster?id=${movie.id}" /> </li>
                     </ul>
                 </div>
                 <div class="w3-col m4 l4">
