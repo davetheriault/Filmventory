@@ -19,7 +19,7 @@
                         <li> 
                             <div class="w3-row">
                                 <div class="w3-half">
-                                    <img width="200px" src="/Poster?id=${movie.id}" />
+                                    <img style="width: 100%; height: auto; max-width: 200px;" src="/Poster?id=${movie.id}" />
                                 </div>
                                 <ul class="w3-ul w3-half">
                                     <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
