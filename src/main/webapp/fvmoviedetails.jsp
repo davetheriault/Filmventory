@@ -16,7 +16,18 @@
             <div class="w3-container w3-row">
                 <div class="w3-col m8 l8">
                     <ul class="w3-ul">
-                        <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
+                        <li> 
+                            <div class="w3-row">
+                                <div class="w3-half">
+                                    <img width="200px" src="/Poster?id=${movie.id}" />
+                                </div>
+                                <ul class="w3-ul w3-half">
+                                    <li> <strong>Title:</strong><br> <a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a> </li>
+                                    <li> <strong>Rated:</strong><br> ${movie.rated} </li>
+                                    <li> <strong>Released:</strong><br> ${movie.released} </li>
+                                </ul>
+                            </div>
+                        </li>
 
                         <li class="w3-container w3-row"> 
                             <div class="w3-third"> <strong>Rated:</strong><br> ${movie.rated} </div>
