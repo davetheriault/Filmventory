@@ -170,7 +170,7 @@ public class JDBC {
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
-            String language, String country, String metascore, FileInputStream poster) throws IOException {
+            String language, String country, String metascore, InputStream poster) throws IOException {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -242,7 +242,7 @@ public class JDBC {
                 logs.write("\n" + sql);
                 logs.flush();
                 stmt = conn.prepareStatement(sql);
-                stmt.setBlob(1, poster);
+                stmt.setBinaryStream(1, poster);
                 logs.write("\n Prepared Statement \n");
                 stmt.execute();
                 logs.flush();
