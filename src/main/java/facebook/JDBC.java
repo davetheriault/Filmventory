@@ -1033,11 +1033,11 @@ public class JDBC {
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             sql = "SELECT * FROM list l INNER JOIN movie2list m2l "
-                + "ON l.id = m2l.list_id "
-                + "WHERE l.user_id = " + user_id + " "
-                + "AND m2l.movie_id = " + movie_id + " ;";
+                    + "ON l.id = m2l.list_id "
+                    + "WHERE l.user_id = " + user_id + " "
+                    + "AND m2l.movie_id = " + movie_id + " ;";
             stmt = conn.prepareStatement(sql);
-            
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -1080,12 +1080,25 @@ public class JDBC {
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sql = "SELECT * FROM list l INNER JOIN movie2list m2l "
-                + "ON l.id = m2l.list_id WHERE l.user_id = ? AND m2l.movie_id <> ? ;";
+            sql = "SELECT * FROM list WHERE user_id = " + user_id + " ;";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, user_id);
-            stmt.setString(2, movie_id);
             rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                sql = "SELECT id FROM movie2list WHERE list_id = " + rs.getInt("id") + " "
+                        + "AND movie_id = " + movie_id + " ;";
+                stmt = conn.prepareStatement(sql);
+                ResultSet rs2 = stmt.executeQuery();
+                while (rs2.next()) {
+                    if (rs2.getInt("id") == 0 || rs2.getInt("id") < 1) {
+                        int list_id = rs.getInt("id");
+                        String list_name = rs.getString("name");
+                        int u_id = rs.getInt("user_id");
+                        MovieList mL = new MovieList(list_id, list_name, u_id);
+                        notInList.add(mL);
+                    }
+                }
+            }
 
             while (rs.next()) {
                 int list_id = rs.getInt("id");
