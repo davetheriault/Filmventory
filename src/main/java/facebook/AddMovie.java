@@ -95,8 +95,7 @@ public class AddMovie extends HttpServlet {
         
         URL imgurl = new URL(request.getParameter("img"));
         
-        InputStream is = imgurl.openStream();
-        byte[] poster = IOUtils.toByteArray(is);
+        InputStream poster = imgurl.openStream();
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
@@ -143,8 +142,7 @@ public class AddMovie extends HttpServlet {
         
         URL imgurl = new URL(request.getParameter("img"));
         
-        InputStream is = imgurl.openStream();
-        byte[] poster = IOUtils.toByteArray(is);
+        InputStream poster = imgurl.openStream();
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
