@@ -206,8 +206,9 @@ public class FindMovie2 extends HttpServlet {
         String urltitle = encode(title, "UTF-8");
         String urlyear = encode(year, "UTF-8");
         
-        URL posterURL = null;
-
+        URL posterU = null;
+        String posterURL = null;
+        
         URL url = new URL("http://www.omdbapi.com/?t=" + urltitle + "&y=" + urlyear);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -235,7 +236,9 @@ public class FindMovie2 extends HttpServlet {
                 postLog.flush();
                 String purl = movres.substring(movres.lastIndexOf("poster_path=") + 12, movres.indexOf(", popularity"));
                 
-                posterURL = new URL("http://image.tmdb.org/t/p/w500" + purl);
+                posterU = new URL("http://image.tmdb.org/t/p/w500" + purl);
+                posterURL = posterU.toString();
+                
                 request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
                 results += "<li>" + key + ": " + map.get(key) + " ";
