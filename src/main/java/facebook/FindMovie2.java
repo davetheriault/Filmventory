@@ -5,15 +5,18 @@
  */
 package facebook;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.URL;
 import static java.net.URLEncoder.encode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.json.Json;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -218,13 +221,17 @@ public class FindMovie2 extends HttpServlet {
                 postLog.flush();
                 postLog.write("\nImdb ID: " + map.get("imdbID"));
                 postLog.flush();
+                
                 ObjectMapper postmap = new ObjectMapper();
                 Map<String, Object> map2 = postmap.readValue(url2, Map.class);
                 for ( String keyP : map2.keySet() ) {
                     postLog.write( keyP + ": " + map2.get(keyP) + "\n");
                     postLog.flush();
                 }
-                String posterURL = "http://image.tmdb.org/t/p/w500/" + map2.get("poster_path");
+                String movres = (String) map2.get("movie_results");
+                String purl = movres.substring(movres.lastIndexOf("poster_path=") + 1, movres.indexOf(", popularity"));
+                
+                String posterURL = "http://image.tmdb.org/t/p/w500/" + purl;
                 request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
                 results += "<li>" + key + ": " + map.get(key) + " ";
