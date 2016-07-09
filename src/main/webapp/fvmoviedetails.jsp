@@ -74,13 +74,19 @@
                                     <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>
                                 </form>
                             </li>
-                            <c:forEach var="list" items="${lists}">
+                            <c:forEach var="list" items="${notinlist}">
                                 <c:url var="url" value="/AddList?listname=${list.name}&title=${movie.title}&year=${movie.year}" />
                                 <li class="lists hidden w3-grey">
                                     <a href="${url}"><i class="fa fa-plus"></i> ${list.name}</a>
                                 </li>
                             </c:forEach>
-
+                                <li>Lists with <em>${movie.title}</em> 
+                                    <ul>
+                                        <c:forEach var="inlist" items="${inlist}">
+                                            <li>${inlist.name}</li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
                         </ul>
                     </div>    
                 </div>

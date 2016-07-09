@@ -70,6 +70,13 @@ public class MovieDetails extends HttpServlet {
         
         List<MovieList> mList = db.getLists(fb_id);
         
+        List<MovieList> inList = db.getInLists(fb_id, movie.getId());
+        
+        List<MovieList> notInList = db.getNotInLists(fb_id, movie.getId());
+        
+        request.setAttribute("inlist", inList);
+        request.setAttribute("notinlist", notInList);
+        
         request.getSession().setAttribute("lists", mList);
         
         request.setAttribute("movie", movie);
