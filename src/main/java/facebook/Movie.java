@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class Movie{
     
+    private String id;
     private String title;
     private String year;
     private String rated;
@@ -27,6 +28,13 @@ public class Movie{
     private String country;
     private String metascore;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     
     

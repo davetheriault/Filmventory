@@ -52,6 +52,7 @@
                         <li> <strong>Language:</strong><br> ${movie.language} </li>
                         <li> <strong>Country:</strong><br> ${movie.country} </li>
                         <li> <strong>Metascore:</strong><br> ${movie.metascore} </li>
+                        <li> <img width="200px" src="/Poster?id=${movie.id}" /> </li>
                     </ul>
                 </div>
                 <div class="w3-col m4 l4">

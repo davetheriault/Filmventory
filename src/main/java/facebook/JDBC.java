@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -651,6 +652,7 @@ public class JDBC {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Movie mov = new Movie();
+                mov.setId(rs.getString("id"));
                 mov.setTitle(rs.getString("title"));
                 mov.setYear(rs.getString("year"));
                 mov.setRated(rs.getString("rated"));
@@ -741,6 +743,7 @@ public class JDBC {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
+                mov.setId(rs.getString("id"));
                 mov.setTitle(rs.getString("title"));
                 mov.setYear(rs.getString("year"));
                 mov.setRated(rs.getString("rated"));
@@ -972,6 +975,38 @@ public class JDBC {
                 Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    byte[] getPoster(String id) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        byte[] bytes = null;
+        Blob imgfile = null;
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            sql = "SELECT poster FROM movie WHERE id = "+id+"";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                imgfile = rs.getBlob("poster");
+                bytes = imgfile.getBytes(1, (int)imgfile.length());
+            }
+            
+        } catch (SQLException ex) {
+            
+        } finally {
+            try { if (conn != null) { conn.close(); } }
+            catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+            try { if (stmt != null) { stmt.close(); } } 
+            catch (SQLException ex) { Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex); }
+        }
+        
+        return bytes;
     }
 
 }
