@@ -231,7 +231,7 @@ public class FindMovie2 extends HttpServlet {
                 String movres = map2.get("movie_results").toString();
                 postLog.write(movres);
                 postLog.flush();
-                String purl = movres.substring(movres.lastIndexOf("poster_path=") + 1, movres.indexOf(", popularity"));
+                String purl = movres.substring(movres.lastIndexOf("poster_path=") + 12, movres.indexOf(", popularity"));
                 
                 String posterURL = "http://image.tmdb.org/t/p/w500/" + purl;
                 request.setAttribute("poster", posterURL);
