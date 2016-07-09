@@ -5,13 +5,16 @@
  */
 package facebook;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,13 +87,12 @@ public class AddMovie extends HttpServlet {
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
         
-        String imgurl = request.getParameter("img");
-        InputStream poster = new FileInputStream(new File(imgurl));
+        URL imgurl = new URL(request.getParameter("img"));
+        Image poster = ImageIO.read(imgurl);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
         
-
         response.sendRedirect("/MyMovies");
 
     }
@@ -127,8 +129,8 @@ public class AddMovie extends HttpServlet {
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
         
-        String imgurl = request.getParameter("img");
-        InputStream poster = new FileInputStream(new File(imgurl));
+        URL imgurl = new URL(request.getParameter("img"));
+        Image poster = ImageIO.read(imgurl);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);

@@ -1,5 +1,6 @@
 package facebook;
 
+import java.awt.Image;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -167,7 +168,7 @@ public class JDBC {
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
-            String language, String country, String metascore, InputStream poster) throws IOException {
+            String language, String country, String metascore, Image poster) throws IOException {
 
         Connection conn = null;
         PreparedStatement stmt = null;
