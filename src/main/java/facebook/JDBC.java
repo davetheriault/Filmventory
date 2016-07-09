@@ -169,7 +169,7 @@ public class JDBC {
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
-            String language, String country, String metascore, Image poster) throws IOException {
+            String language, String country, String metascore, byte[] poster) throws IOException {
 
         Connection conn = null;
         PreparedStatement stmt = null;

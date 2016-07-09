@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -93,7 +94,9 @@ public class AddMovie extends HttpServlet {
         urll.flush();
         
         URL imgurl = new URL(request.getParameter("img"));
-        Image poster = ImageIO.read(imgurl);
+        
+        InputStream is = imgurl.openStream();
+        byte[] poster = IOUtils.toByteArray(is);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
@@ -139,7 +142,9 @@ public class AddMovie extends HttpServlet {
         urll.flush();
         
         URL imgurl = new URL(request.getParameter("img"));
-        Image poster = ImageIO.read(imgurl);
+        
+        InputStream is = imgurl.openStream();
+        byte[] poster = IOUtils.toByteArray(is);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);

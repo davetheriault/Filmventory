@@ -68,11 +68,10 @@ public class Poster extends HttpServlet {
         
         response.setContentType("image/jpeg");
         
-        OutputStream out = response.getOutputStream();
-        
-        out.write(imgbytes);
-        out.flush();
-        out.close();
+        try (OutputStream out = response.getOutputStream()) {
+            out.write(imgbytes);
+            out.flush();
+        }
     
     }
 
