@@ -61,7 +61,7 @@ public class AddList extends HttpServlet {
             throws ServletException, IOException {
         String title = request.getParameter("title");
         String year = request.getParameter("year");
-        String listname = request.getParameter("list");
+        String listname = request.getParameter("listname");
         String fb_id = (String) request.getSession().getAttribute("id");
 
         JDBC db = new JDBC();
@@ -86,7 +86,7 @@ public class AddList extends HttpServlet {
 
         String title = request.getParameter("title");
         String year = request.getParameter("year");
-        String listname = request.getParameter("list");
+        String listname = request.getParameter("listname");
         String fb_id = (String) request.getSession().getAttribute("id");
 
         JDBC db = new JDBC();

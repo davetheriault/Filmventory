@@ -18,7 +18,7 @@
                     <ul class="w3-ul">
                         <li> 
                             <div class="w3-row">
-                                <div class="w3-half">
+                                <div class="w3-half w3-center">
                                     <img style="width: 100%; height: auto; max-width: 200px;" src="/Poster?id=${movie.id}" />
                                 </div>
                                 <ul class="w3-ul w3-half">
@@ -75,7 +75,7 @@
                                 </form>
                             </li>
                             <c:forEach var="list" items="${lists}">
-                                <c:url var="url" value="/AddList?list=${list.name}&title=${movie.title}&year=${movie.year}" />
+                                <c:url var="url" value="/AddList?listname=${list.name}&title=${movie.title}&year=${movie.year}" />
                                 <li class="lists hidden w3-grey">
                                     <a href="${url}"><i class="fa fa-plus"></i> ${list.name}</a>
                                 </li>
