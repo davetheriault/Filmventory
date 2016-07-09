@@ -12,7 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
@@ -93,9 +97,14 @@ public class AddMovie extends HttpServlet {
         urll.write(request.getParameter("img") + "\n");
         urll.flush();
         
-        URL imgurl = new URL(request.getParameter("img"));
-        
-        InputStream poster = imgurl.openStream();
+        URI imgurl = null;
+        try {
+            imgurl = new URI(request.getParameter("img"));
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        File post = new File(imgurl);
+        FileInputStream poster = new FileInputStream(post);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
@@ -140,9 +149,14 @@ public class AddMovie extends HttpServlet {
         urll.write(request.getParameter("img") + "\n");
         urll.flush();
         
-        URL imgurl = new URL(request.getParameter("img"));
-        
-        InputStream poster = imgurl.openStream();
+         URI imgurl = null;
+        try {
+            imgurl = new URI(request.getParameter("img"));
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(AddMovie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        File post = new File(imgurl);
+        FileInputStream poster = new FileInputStream(post);
         
         String fbid = (String) request.getSession().getAttribute("id");
         db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
