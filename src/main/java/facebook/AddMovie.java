@@ -5,7 +5,10 @@
  */
 package facebook;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,8 +83,12 @@ public class AddMovie extends HttpServlet {
         String lang = request.getParameter("lan");
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
+        
+        String imgurl = request.getParameter("img");
+        InputStream poster = new FileInputStream(new File(imgurl));
+        
         String fbid = (String) request.getSession().getAttribute("id");
-        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
         
 
         response.sendRedirect("/MyMovies");
@@ -112,20 +119,23 @@ public class AddMovie extends HttpServlet {
         String writer = request.getParameter("wri");
         
         writer = writer.replaceAll("(\\s\\(.*?\\))", "");
-        String[] writ = writer.split(", "); // CONTINUE
+        String[] writ = writer.split(", "); 
         
         String[] acto = request.getParameter("act").split(", ");
         String plot = request.getParameter("plo");
         String lang = request.getParameter("lan");
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
+        
+        String imgurl = request.getParameter("img");
+        InputStream poster = new FileInputStream(new File(imgurl));
+        
         String fbid = (String) request.getSession().getAttribute("id");
-        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta);
+        db.addMovie(fbid, titl, year, rate, rele, runt, genr, dire, writ, acto, plot, lang, coun, meta, poster);
         
 
         response.sendRedirect("/MyMovies");
 
-    
     }
 
     /**

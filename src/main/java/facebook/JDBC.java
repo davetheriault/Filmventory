@@ -2,6 +2,7 @@ package facebook;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -166,7 +167,7 @@ public class JDBC {
 
     public void addMovie(String fb_id, String title, String year, String rated, String released,
             String runtime, String[] genre, String[] director, String[] writer, String[] actors, String plot,
-            String language, String country, String metascore) throws IOException {
+            String language, String country, String metascore, InputStream poster) throws IOException {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -232,8 +233,9 @@ public class JDBC {
                 logs.write("\n Xmov Not True Checks Out \n");
                 logs.flush();
 
-                sql = "INSERT INTO movie (title, year, rated, released, runtime, plot, language, country, metascore)"
-                        + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "','" + plot + "','" + language + "','" + country + "','" + metascore + "');";
+                sql = "INSERT INTO movie (title, year, rated, released, runtime, plot, language, country, metascore, poster) "
+                        + "VALUES ('" + title + "','" + year + "','" + rated + "','" + released + "','" + runtime + "',"
+                        + "'" + plot + "','" + language + "','" + country + "','" + metascore + "','" + poster + "');";
                 logs.write("\n" + sql);
                 logs.flush();
                 stmt = conn.prepareStatement(sql);

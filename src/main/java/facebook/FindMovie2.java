@@ -205,6 +205,8 @@ public class FindMovie2 extends HttpServlet {
 
         String urltitle = encode(title, "UTF-8");
         String urlyear = encode(year, "UTF-8");
+        
+        String posterURL = null;
 
         URL url = new URL("http://www.omdbapi.com/?t=" + urltitle + "&y=" + urlyear);
 
@@ -233,7 +235,7 @@ public class FindMovie2 extends HttpServlet {
                 postLog.flush();
                 String purl = movres.substring(movres.lastIndexOf("poster_path=") + 12, movres.indexOf(", popularity"));
                 
-                String posterURL = "http://image.tmdb.org/t/p/w500/" + purl;
+                posterURL = "http://image.tmdb.org/t/p/w500/" + purl;
                 request.setAttribute("poster", posterURL);
             } else if (key.equals("Title")) {
                 results += "<li>" + key + ": " + map.get(key) + " ";
@@ -256,6 +258,7 @@ public class FindMovie2 extends HttpServlet {
                             + "<input type=\"hidden\" name=\"cou\" value=\"" + map.get("Country") + "\" />"
                             + "<input type=\"hidden\" name=\"met\" value=\"" + map.get("Metascore") + "\" />"
                             + "<input type=\"hidden\" name=\"imd\" value=\"" + map.get("imdbID") + "\" />"
+                            + "<input type=\"hidden\" name=\"img\" value=\"" + posterURL + "\" />"
                             + "<input type=\"submit\" name=\"sub\" value=\"Add to Collection\" form=\"addFilm\"/>"
                             + "</form>";
                 }
