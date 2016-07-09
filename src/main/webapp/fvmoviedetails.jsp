@@ -67,7 +67,7 @@
                             <li><a href="#" id="add2list">Add to list</a></li>
                             <li class="lists hidden w3-grey" id="newli"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                             <li class="nlist hidden w3-light-grey w3-padding-0">
-                                <form id="newListForm" action="/AddList" method="post">
+                                <form id="newListForm" action="/AddList" method="get">
                                     <input type="hidden" name="title" value="${movie.title}" />
                                     <input type="hidden" name="year" value="${movie.year}" />
                                     <input class="w3-input w3-light-grey" type="text" name="listname" id="listname" placeholder="List Name..." required />
