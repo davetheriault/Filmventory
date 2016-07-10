@@ -24,7 +24,7 @@
                     </div>
                 </c:forEach>
             </div>
-            <div class="w3-col m4 l4">
+            <div class="w3-container w3-padding w3-col m4 l4">
                 <div class="w3-container">
                     <ul class="w3-ul w3-dark-grey">
 
