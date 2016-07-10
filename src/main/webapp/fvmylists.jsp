@@ -19,7 +19,7 @@
                 <c:forEach var="list" items="${lists}">
                     <div class="w3-card w3-margin">
                         <ul class="w3-ul w3-navbar">
-                            <li class="w3-xlarge w3-padding-0" style="width: 100%;"><strong><a href="/ListDetails?listname=${list.name}&user=${list.user_id}" style="width: 100%;" >${list.name}</a></strong> </li>
+                            <li class="w3-xlarge w3-padding-0 w3-center" style="width: 100%;"><strong><a href="/ListDetails?listname=${list.name}&user=${list.user_id}" style="width: 100%;" >${list.name}</a></strong> </li>
                         </ul>
                     </div>
                 </c:forEach>
