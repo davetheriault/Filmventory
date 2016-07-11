@@ -1070,13 +1070,17 @@ public class JDBC {
         return inList;
     }
 
-    List<MovieList> getNotInLists(String fb_id, String movie_id) {
+    List<MovieList> getNotInLists(String fb_id, String movie_id) throws IOException {
         List<MovieList> notInList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql = null;
         ResultSet rs = null;
         int user_id = getUserId(fb_id);
+
+        FileWriter logs = new FileWriter("NotList.txt", true);
+        logs.write("Lists for user: \n");
+        logs.flush();
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -1085,28 +1089,29 @@ public class JDBC {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                sql = "SELECT id FROM movie2list WHERE list_id = " + rs.getInt("id") + " "
+                logs.write(rs.getInt("id") + " - " + rs.getString("name") + "\n");
+                logs.flush();
+
+                boolean not = true;
+                sql = "SELECT * FROM movie2list WHERE list_id = " + rs.getInt("id") + " "
                         + "AND movie_id = " + movie_id + " ;";
                 stmt = conn.prepareStatement(sql);
                 ResultSet rs2 = stmt.executeQuery();
                 while (rs2.next()) {
-                    if (rs2.getInt("id") == 0 || rs2.getInt("id") < 1) {
-                        int list_id = rs.getInt("id");
-                        String list_name = rs.getString("name");
-                        int u_id = rs.getInt("user_id");
-                        MovieList mL = new MovieList(list_id, list_name, u_id);
-                        notInList.add(mL);
+                    if (rs2.getInt("list_id") == rs.getInt("id")) {
+                        not = false;
                     }
+                }
+                if (not == true) {
+                    int list_id = rs.getInt("id");
+                    String list_name = rs.getString("name");
+                    int u_id = rs.getInt("user_id");
+                    MovieList mL = new MovieList(list_id, list_name, u_id);
+                    notInList.add(mL);
                 }
             }
 
-            while (rs.next()) {
-                int list_id = rs.getInt("id");
-                String list_name = rs.getString("name");
-                int u_id = rs.getInt("user_id");
-                MovieList mL = new MovieList(list_id, list_name, u_id);
-                notInList.add(mL);
-            }
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
@@ -1131,21 +1136,21 @@ public class JDBC {
     }
 
     List<Movie> getListMovies(String fb_id, String listname) {
-        
+
         List<Movie> listMovies = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         String sql;
         ResultSet rs;
         int list_id = getId("list", "name", listname);
-        
+
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             sql = "SELECT * FROM movie m INNER JOIN movie2list m2l ON m.id = m2l.movie_id "
-                + "WHERE m2l.list_id = " + list_id + " ;";
+                    + "WHERE m2l.list_id = " + list_id + " ;";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 Movie mov = new Movie();
                 mov.setId(rs.getString("id"));
@@ -1153,7 +1158,7 @@ public class JDBC {
                 mov.setYear(rs.getString("year"));
                 listMovies.add(mov);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -1172,9 +1177,9 @@ public class JDBC {
                 Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return listMovies;
-        
+
     }
 
 }
