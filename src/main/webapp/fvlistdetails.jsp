@@ -25,11 +25,11 @@
                 </c:forEach>
             </div>
             <div class="w3-third">
-                    <div class="w3-container">
-                        <ul class="w3-ul w3-dark-grey">
-                            <li><a href="/RemoveList?name=${listname}" id="deleteList" data-title="${listname}" >Delete <em>${listname}</em> List</a></li>
-                        </ul>
-                    </div>
+                <div class="w3-container w3-padding">
+                    <ul class="w3-ul w3-dark-grey w3-margin">
+                        <li><a href="#" id="deleteList" data-title="${listname}" >Delete <em>${listname}</em> List</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -40,40 +40,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#genreList").change(function () {
-            if ($(this).val() !== null) {
-                sort();
-            }
-        });
-        $("#sortList").change(function () {
-            if ($(this).val() !== null) {
-                sort();
+        $("#deleteList").click(function (event) {
+            event.preventDefault();
+            var t = $("#removeClick").attr("data-title");
+            var c = confirm("Delete " + t + " List? Are you sure?");
+            if (c) {
+                var t2 = encodeURI(t);
+                var link = "/RemoveList?name=" + t2 ;
+                window.location = link;
             }
         });
     });
-    function sort() {
-        var genre = $("#genreList").val();
-        var sort = $("#sortList").val();
 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
 
-        xmlhttp.open("GET", "SortGenre?genre=" + genre + "&sort=" + sort, true);
 
-        xmlhttp.send();
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4) {
-                var inner = document.getElementById("results");
-                inner.innerHTML = xmlhttp.responseText;
-
-            }
-        };
-
-    }
 </script>
 </html>

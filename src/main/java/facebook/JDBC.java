@@ -1191,7 +1191,7 @@ public class JDBC {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             sql = "SELECT id FROM " + table + " WHERE " + col1 + " = '" + value1 + "' "
-                + "AND " + col2 + " = '" + value2 + "' LIMIT 1";
+                    + "AND " + col2 + " = '" + value2 + "' LIMIT 1";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
@@ -1218,6 +1218,40 @@ public class JDBC {
             }
         }
         return id;
+    }
+
+    void deleteList(String fb_id, String listname) {
+
+        int user_id = getUserId(fb_id);
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        String sql = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            sql = "DELETE FROM list WHERE name = '" + listname + "' AND user_id = " + user_id + " ;";
+            stmt = conn.prepareStatement(sql);
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }
