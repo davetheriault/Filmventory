@@ -70,6 +70,7 @@
                                 <form id="newListForm" action="/AddList" method="get">
                                     <input type="hidden" name="title" value="${movie.title}" />
                                     <input type="hidden" name="year" value="${movie.year}" />
+                                    <input type="hidden" name="page" value="moviedetails"
                                     <input class="w3-input w3-light-grey" type="text" name="listname" id="listname" placeholder="List Name..." required />
                                     <input class="w3-input w3-text-black" type="submit" value="Create List" form="newListForm"/>
                                 </form>
