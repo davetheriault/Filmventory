@@ -1,7 +1,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:set var="title" scope="request" value="${listname} | filmventory"/>
+<c:set var="title" scope="request" value="${listname} List | filmventory"/>
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
 <%@include file="includes/sidenav.html" %>
