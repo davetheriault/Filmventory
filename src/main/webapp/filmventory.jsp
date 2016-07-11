@@ -9,7 +9,7 @@
         <h3 class="w3-red w3-padding w3-margin-0 w3-roboto">Log In To Filmventory</h3>
         <div class="w3-container w3-center w3-padding-0">
             <form action="SignIn" id="fblogin" class="w3-center">
-                <button class="w3-blue" form="fblogin" type="submit" style="width: 100%; height: 100%;"><i class="fa fa-facebook"></i> | Log In With Facebook</button>
+                <button class="w3-blue w3-xlarge" form="fblogin" type="submit" style="width: 100%; height: 100%;"><i class="fa fa-facebook"></i> | Log In With Facebook</button>
             </form>
         </div>
     </div>
