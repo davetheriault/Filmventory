@@ -6,7 +6,7 @@
 <%@include file="includes/fbsdk.html" %>
 <%@include file="includes/sidenav.html" %>
 
-<main class="w3-main w3-roboto" style="margin-left:200px">
+<main class="w3-main w3-roboto" >
 
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
