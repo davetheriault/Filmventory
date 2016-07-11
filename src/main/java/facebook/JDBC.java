@@ -1130,4 +1130,51 @@ public class JDBC {
         return notInList;
     }
 
+    List<Movie> getListMovies(String fb_id, String listname) {
+        
+        List<Movie> listMovies = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        String sql;
+        ResultSet rs;
+        int list_id = getId("list", "name", listname);
+        
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            sql = "SELECT * FROM movie m INNER JOIN movie2list m2l ON m.id = m2l.movie_id "
+                + "WHERE m2l.list_id = " + list_id + " ;";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Movie mov = new Movie();
+                mov.setId(rs.getString("id"));
+                mov.setTitle(rs.getString("title"));
+                mov.setYear(rs.getString("year"));
+                listMovies.add(mov);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return listMovies;
+        
+    }
+
 }
