@@ -4,7 +4,7 @@
 <c:set var="title" scope="request" value="filmventory"/>
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
-<main class="w3-container w3-roboto w3-center w3-padding">
+<main class="w3-container w3-roboto w3-center w3-padding" style="margin-left: 0;">
     <div style="border: grey thin solid; display: inline-block; width: 400px;">
         <h3 class="w3-red w3-padding w3-margin-0 w3-roboto">Log In To Filmventory</h3>
         <div class="w3-container w3-center w3-padding-0">
