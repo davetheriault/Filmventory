@@ -71,6 +71,7 @@ public class ListDetails extends HttpServlet {
         List<Movie> listmovies = db.getListMovies(user_id, listname);
         
         request.setAttribute("listmovies", listmovies);
+        request.setAttribute("listname", listname);
         
         request.getRequestDispatcher("fvlistdetails.jsp").forward(request, response);
         
