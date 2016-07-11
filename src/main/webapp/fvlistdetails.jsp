@@ -14,7 +14,7 @@
             <em>${listname}</em> Movies</h3>
 
         <div class="w3-container w3-row w3-padding-0 w3-row">
-            <div class="w3-container w3-padding w3-col m9 l9" id="results">
+            <div class="w3-container w3-padding w3-twothird" id="results">
 
                 <c:forEach var="movie" items="${listmovies}">
                     <div class="w3-card w3-margin">
@@ -24,42 +24,12 @@
                     </div>
                 </c:forEach>
             </div>
-            <div class="w3-quarter">
-                <ul class="w3-navbar">
-
-                    <li class="w3-right w3-padding">
-                        <form id="bygenre" action="MyMovies" method="get">
-                            <input value="${movies}" type="hidden" name="movies" />
-
-                            <label class="w3-label" for="genreList" style="display: inline-block">Genre:</label>
-
-                            <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block">
-                                <option selected>All </option>
-                                
-                                    <c:forEach var="genre" items="${genres}">
-                                        <option value="${genre}">${genre}</option>
-                                    </c:forEach>
-                                
-                            </select>
-
-                        </form>
-                    </li>
-                    <li class="w3-right w3-padding">
-                        <form id="sortby" action="MyMovies" method="get">
-                            <input value="${movies}" type="hidden" name="movies" />
-
-                            <label class="w3-label" for="sortList" style="display: inline-block">Sort By:</label>
-                            <select name="sort" class="w3-select w3-dark-grey" id="sortList" style="display: inline-block">
-
-                                <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
-                                <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
-                                <option value="y09">Date &nbsp;&nbsp;&nbsp;&nbsp; &uarr;</option>
-                                <option value="y90">Date &nbsp;&nbsp;&nbsp;&nbsp; &darr;</option>
-                            </select>
-
-                        </form>
-                    </li>
-                </ul>
+            <div class="w3-third">
+                    <div class="w3-container">
+                        <ul class="w3-ul w3-dark-grey">
+                            <li><a href="/RemoveList?name=${listname}" id="deleteList" data-title="${listname}" >Delete <em>${listname}</em> List</a></li>
+                        </ul>
+                    </div>
             </div>
         </div>
     </div>

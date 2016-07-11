@@ -38,7 +38,7 @@ public class ListDetails extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListDetails</title>");            
+            out.println("<title>Servlet ListDetails</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ListDetails at " + request.getContextPath() + "</h1>");
@@ -61,20 +61,18 @@ public class ListDetails extends HttpServlet {
             throws ServletException, IOException {
 
         String fb_id = (String) request.getSession().getAttribute("id");
-        
-        String user_id = request.getParameter("user");
-        
+
         JDBC db = new JDBC();
-        
+
         String listname = request.getParameter("listname");
-        
-        List<Movie> listmovies = db.getListMovies(user_id, listname);
-        
+
+        List<Movie> listmovies = db.getListMovies(fb_id, listname);
+
         request.setAttribute("listmovies", listmovies);
         request.setAttribute("listname", listname);
-        
+
         request.getRequestDispatcher("fvlistdetails.jsp").forward(request, response);
-        
+
     }
 
     /**
@@ -89,17 +87,17 @@ public class ListDetails extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String user_id = request.getParameter("user");
-        
+        String fb_id = (String) request.getSession().getAttribute("id");
+
         JDBC db = new JDBC();
-        
+
         String listname = request.getParameter("listname");
-        
-        List<Movie> listmovies = db.getListMovies(user_id, listname);
-        
+
+        List<Movie> listmovies = db.getListMovies(fb_id, listname);
+
         request.setAttribute("listmovies", listmovies);
         request.setAttribute("listname", listname);
-        
+
         request.getRequestDispatcher("fvlistdetails.jsp").forward(request, response);
     }
 

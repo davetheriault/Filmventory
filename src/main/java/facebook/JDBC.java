@@ -1111,8 +1111,6 @@ public class JDBC {
                 }
             }
 
-            
-
         } catch (SQLException ex) {
             Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -1142,7 +1140,8 @@ public class JDBC {
         PreparedStatement stmt = null;
         String sql;
         ResultSet rs;
-        int list_id = getId("list", "name", listname);
+        String user_id = Integer.toString(getUserId(fb_id));
+        int list_id = getId2("list", "name", "user_id", listname, user_id);
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -1180,6 +1179,45 @@ public class JDBC {
 
         return listMovies;
 
+    }
+
+    private int getId2(String table, String col1, String col2, String value1, String value2) {
+        int id = 0;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            sql = "SELECT id FROM " + table + " WHERE " + col1 + " = '" + value1 + "' "
+                + "AND " + col2 + " = '" + value2 + "' LIMIT 1";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return id;
     }
 
 }
