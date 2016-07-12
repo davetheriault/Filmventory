@@ -23,12 +23,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     </head>
     <body style="background-color: #1a1a1a">
-        <c:when test="${title != 'filmventory'}" >
+        <c:if test="${title != 'filmventory'}" >
             <%@include file="sidenav.html" %>
-        </c:when>
-        <c:otherwise>
+        </c:if>
+        <c:if test="${title == 'filmventory'}">
             <style scoped>header { margin-left: 0px !important; }</style>
-        </c:otherwise>
+        </c:if>
 
         <header class="w3-topbar w3-red w3-main">
             <nav class="w3-roboto w3-xlarge">
