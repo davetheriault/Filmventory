@@ -14,7 +14,7 @@
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
 
         <div class="w3-container w3-row w3-padding w3-row">
-            <div class="w3-container w3-col m9 l9" id="results">
+            <div class="w3-container w3-twothird" id="results">
 
                 <c:forEach var="movie" items="${movies}">
                     <div class="w3-card w3-margin">
@@ -24,8 +24,8 @@
                     </div>
                 </c:forEach>
             </div>
-            <div class="w3-quarter">
-                <ul class="w3-navbar">
+            <div class="w3-third">
+                <ul class="w3-ul">
 
                     <li class="w3-right w3-padding">
                         <form id="bygenre" action="MyMovies" method="get">
