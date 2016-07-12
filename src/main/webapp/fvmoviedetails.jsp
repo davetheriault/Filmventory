@@ -35,7 +35,7 @@
 
                         <li> <strong>Director:</strong><br> 
                             <c:forEach var="dir" items="${movie.director}">
-                                &nbsp;<a href="">${dir}</a>&nbsp;
+                                &nbsp;<a href="http://www.imdb.com/find?q=${movie.director}&s=nm&exact=true&ref_=fn_nm_ex">${dir}</a>&nbsp;
                             </c:forEach> 
                         </li>
 
