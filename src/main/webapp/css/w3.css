@@ -89,7 +89,7 @@ img.w3-image,.w3-image img{max-width:100%;height:auto}
 .w3-opennav:hover,.w3-closenav:hover{cursor:pointer;opacity:0.8}
 .w3-navbar a,.w3-topnav a,.w3-sidenav a,.w3-dropnav a,.w3-pagination li a,.w3-hoverable tbody tr,.w3-btn,.w3-btn-floating,.w3-btn-floating-large
 {-webkit-transition:all 0.3s ease;transition:all 0.3s ease}
-.w3-sidenav{height:100%;width:300px;background-color:#fff;position:fixed !important;z-index:1;overflow:auto}
+.w3-sidenav{height:100%;width:250px;background-color:#fff;position:fixed !important;z-index:1;overflow:auto}
 .w3-sidenav a{padding:4px 2px 4px 16px}
 .w3-sidenav a:hover{background-color:#ccc}
 .w3-sidenav a,.w3-dropnav a{display:block}
@@ -350,5 +350,5 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
         }
         
         main {
-            margin-left: 300px;
+            margin-left: 250px;
         }
