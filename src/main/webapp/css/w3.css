@@ -353,8 +353,6 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             margin-left: 250px;
         }
         
-        body > header {
-            border: none;
-            border-top: none !important;
-            border-top-width: 0;
+        @media screen and (max-width:991px) {
+            header.w3-main{margin-left:63px !important};
         }
