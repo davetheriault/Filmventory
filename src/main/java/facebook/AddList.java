@@ -63,10 +63,8 @@ public class AddList extends HttpServlet {
         String year = request.getParameter("year");
         String listname = request.getParameter("listname");
         String fb_id = (String) request.getSession().getAttribute("id");
-        String page;
-        if(request.getParameter("page") != null) {
-            page = request.getParameter("page");
-        }
+        String page = request.getParameter("page");
+        
 
         JDBC db = new JDBC();
 

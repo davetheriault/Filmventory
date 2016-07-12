@@ -76,7 +76,7 @@
                                 </form>
                             </li>
                             <c:forEach var="list" items="${notinlist}">
-                                <c:url var="url" value="/AddList?listname=${list.name}&title=${movie.title}&year=${movie.year}" />
+                                <c:url var="url" value="/AddList?listname=${list.name}&title=${movie.title}&year=${movie.year}&page=moviedetails" />
                                 <li class="lists hidden w3-grey">
                                     <a href="${url}"><i class="fa fa-plus"></i> ${list.name}</a>
                                 </li>
