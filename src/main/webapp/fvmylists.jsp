@@ -19,14 +19,14 @@
                 <c:forEach var="list" items="${lists}">
                     <div class="w3-card w3-margin">
                         <ul class="w3-ul w3-navbar w3-light-grey">
-                            <li class="w3-xlarge w3-padding-0 w3-center" style="width: 100%;"><strong><a href="/ListDetails?listname=${list.name}&user=${list.user_id}" style="width: 100%;" >${list.name}</a></strong> </li>
+                            <li class="w3-padding-0 w3-center" style="width: 100%;"><strong><a href="/ListDetails?listname=${list.name}&user=${list.user_id}" style="width: 100%;" >${list.name}</a></strong> </li>
                         </ul>
                     </div>
                 </c:forEach>
             </div>
             <div class="w3-container w3-padding w3-col m5 l5">
                 <div class="w3-container">
-                    <ul class="w3-ul w3-margin w3-dark-grey w3-large">
+                    <ul class="w3-ul w3-margin w3-dark-grey">
 
                         <li class="lists w3-grey" id="newli"><a href="" id="newList"><i class="fa fa-plus"></i> Create New List</a></li>
                         <li class="nlist hidden w3-light-grey w3-padding-0">

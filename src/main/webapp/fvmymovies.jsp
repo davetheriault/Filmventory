@@ -31,7 +31,7 @@
                         <form id="bygenre" action="MyMovies" method="get">
                             <input value="${movies}" type="hidden" name="movies" />
 
-                            <label class="w3-label" for="genreList" style="display: inline-block">Genre:</label>
+                            <label class="w3-label w3-text-red" for="genreList" style="display: inline-block">Genre:</label>
 
                             <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block; width: 100%;">
                                 <option selected>All </option>
@@ -48,7 +48,7 @@
                         <form id="sortby" action="MyMovies" method="get">
                             <input value="${movies}" type="hidden" name="movies" />
 
-                            <label class="w3-label" for="sortList" style="display: inline-block">Sort By:</label>
+                            <label class="w3-label w3-text-red" for="sortList" style="display: inline-block">Sort By:</label>
                             <select name="sort" class="w3-select w3-dark-grey" id="sortList" style="display: inline-block; width: 100%;">
 
                                 <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
