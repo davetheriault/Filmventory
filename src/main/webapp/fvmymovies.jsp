@@ -13,8 +13,8 @@
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
             <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
 
-        <div class="w3-container w3-row w3-padding-0 w3-row">
-            <div class="w3-container w3-padding w3-col m9 l9" id="results">
+        <div class="w3-container w3-row w3-padding w3-row">
+            <div class="w3-container w3-col m9 l9" id="results">
 
                 <c:forEach var="movie" items="${movies}">
                     <div class="w3-card w3-margin">
@@ -33,7 +33,7 @@
 
                             <label class="w3-label" for="genreList" style="display: inline-block">Genre:</label>
 
-                            <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block">
+                            <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block; width: 100%;">
                                 <option selected>All </option>
                                 
                                     <c:forEach var="genre" items="${genres}">
@@ -49,7 +49,7 @@
                             <input value="${movies}" type="hidden" name="movies" />
 
                             <label class="w3-label" for="sortList" style="display: inline-block">Sort By:</label>
-                            <select name="sort" class="w3-select w3-dark-grey" id="sortList" style="display: inline-block">
+                            <select name="sort" class="w3-select w3-dark-grey" id="sortList" style="display: inline-block; width: 100%;">
 
                                 <option selected value="az">A to Z &nbsp;&nbsp; &uarr;</option>
                                 <option value="za">Z to A &nbsp;&nbsp; &darr;</option>
