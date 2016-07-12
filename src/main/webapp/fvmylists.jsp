@@ -4,7 +4,7 @@
 <c:set var="title" scope="request" value="Lists | filmventory"/>
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
-<%@include file="includes/sidenav.html" %>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <main class="w3-main w3-roboto" >

@@ -6,8 +6,8 @@
         }
     } else {
         if (request.getAttribute("title") == "filmventory") {
-        response.sendRedirect("fvhome.jsp");
-    }
+            response.sendRedirect("fvhome.jsp");
+        }
     }
 %>
 <!DOCTYPE html>
@@ -23,7 +23,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     </head>
     <body style="background-color: #1a1a1a">
-        <%@include file="sidenav.html" %>
+        <c:if scope="session" test="${title != 'filmventory'}" >
+            <%@include file="sidenav.html" %>
+        </c:if>
 
         <header class="w3-topbar w3-red">
             <nav class="w3-roboto w3-xlarge">

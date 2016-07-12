@@ -3,7 +3,7 @@
 <c:set var="title" scope="request" value="Search Results | filmventory"/>
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
-<%@include file="includes/sidenav.html" %>
+
 
 <main class="w3-main w3-roboto" >
 
