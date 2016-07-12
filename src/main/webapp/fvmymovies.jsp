@@ -27,7 +27,7 @@
             <div class="w3-third">
                 <ul class="w3-ul">
 
-                    <li class="w3-right w3-padding">
+                    <li class="w3-padding">
                         <form id="bygenre" action="MyMovies" method="get">
                             <input value="${movies}" type="hidden" name="movies" />
 
@@ -44,7 +44,7 @@
 
                         </form>
                     </li>
-                    <li class="w3-right w3-padding">
+                    <li class="w3-padding">
                         <form id="sortby" action="MyMovies" method="get">
                             <input value="${movies}" type="hidden" name="movies" />
 
