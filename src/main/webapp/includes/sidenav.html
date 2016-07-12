@@ -20,9 +20,9 @@
     }
     function signOut() {
         logOut();
-        document.location.href="/LogOut";
+        document.location.href = "/LogOut";
     }
-    
+
     // This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
         console.log('statusChangeCallback');
@@ -110,4 +110,14 @@
             statusChangeCallback(response);
         });
     }
+
+    $(window).click(function () {
+        if($(".w3-sidenav").css("display") === "block") {
+            $(".w3-sidenav").css("display", "none");
+        }
+    });
+
+    $(".w3-sidenav").click(function (event) {
+        event.stopPropagation();
+    });
 </script>
