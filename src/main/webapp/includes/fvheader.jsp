@@ -27,7 +27,7 @@
             <%@include file="sidenav.html" %>
         </c:if>
 
-        <header class="w3-topbar w3-red">
+        <header class="w3-topbar w3-red w3-main">
             <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
                     <li class="w3-white"><a href="filmventory.jsp" style="padding: 8px 13px"><img src="images/filmventory300.png" width="274" alt="filmventory home" /></a></li>
