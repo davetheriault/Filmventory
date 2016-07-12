@@ -23,6 +23,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     </head>
     <body style="background-color: #1a1a1a">
+        <%@include file="includes/sidenav.html" %>
+
         <header class="w3-topbar w3-red">
             <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
