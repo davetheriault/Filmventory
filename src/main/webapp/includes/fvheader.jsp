@@ -23,7 +23,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     </head>
     <body style="background-color: #1a1a1a">
-        <c:if scope="session" test="${title != 'filmventory'}" >
+        <c:if test="${title != 'filmventory'}" >
             <%@include file="sidenav.html" %>
         </c:if>
 
