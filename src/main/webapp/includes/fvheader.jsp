@@ -25,6 +25,7 @@
     <body style="background-color: #1a1a1a">
         <c:if test="${title != 'filmventory'}" >
             <%@include file="sidenav.html" %>
+            <style scoped>header { margin-left: 0px !important; }</style>
         </c:if>
 
         <header class="w3-topbar w3-red w3-main">
