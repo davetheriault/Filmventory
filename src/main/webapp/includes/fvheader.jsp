@@ -27,7 +27,8 @@
             <%@include file="sidenav.html" %>
         </c:if>
         <c:if test="${title == 'filmventory'}">
-            <style scoped>header { margin-left: 0px !important; }</style>
+            <style scoped>header { margin-left: 0px !important; } 
+                @media screen and (max-width:991px) { header.w3-main{margin-left:0px !important}; }</style>
         </c:if>
 
         <header class="w3-red w3-main">
