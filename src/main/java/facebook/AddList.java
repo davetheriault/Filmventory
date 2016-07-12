@@ -63,18 +63,20 @@ public class AddList extends HttpServlet {
         String year = request.getParameter("year");
         String listname = request.getParameter("listname");
         String fb_id = (String) request.getSession().getAttribute("id");
-        String page = request.getParameter("page");
+        String page;
+        if(request.getParameter("page") != null) {
+            page = request.getParameter("page");
+        }
 
         JDBC db = new JDBC();
 
         db.addList(fb_id, title, year, listname);
 
-        if (page.equals("moviedetails")) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("MovieDetails");
-            dispatcher.forward(request, response);
-        }
         if (page.equals("mylists")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("MyLists");
+            dispatcher.forward(request, response);
+        } else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("MovieDetails");
             dispatcher.forward(request, response);
         }
     }
