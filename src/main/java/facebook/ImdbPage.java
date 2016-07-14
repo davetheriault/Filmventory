@@ -52,9 +52,9 @@ public class ImdbPage extends HttpServlet {
         
         Map<String, Object> map2 = (Map<String, Object>) map.get("data");
 
-        List list = (List) map.get("data");
+        //List list = (List) map.get("data");
 
-        request.setAttribute("list", list);
+        //request.setAttribute("list", list);
         
         out.println(map2.get("id"));
         
