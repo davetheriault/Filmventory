@@ -54,9 +54,10 @@ public class ImdbPage extends HttpServlet {
         //request.setAttribute("list", list);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.println(map2.get("id"));
+            for ( String key : map2.keySet() ) {
+                out.println(key + " : " + map2.get(key) + "<br>");
+            }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
