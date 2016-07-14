@@ -37,13 +37,14 @@
                                 <option selected>All </option>
 
                                 <c:forEach var="genre" items="${genres}">
-                                    <c:when test="${genre == genr}" >
-                                        <option value="${genre}" selected>${genre}</option>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="${genre}" >${genre}</option>
-                                    </c:otherwise>
-
+                                    <c:choose>
+                                        <c:when test="${genre == genr}" >
+                                            <option value="${genre}" selected>${genre}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${genre}" >${genre}</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>
 
                             </select>
