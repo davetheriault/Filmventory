@@ -37,11 +37,9 @@ public class ImdbPage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        JDBC db = new JDBC();
-        
+
         String name = request.getParameter("name");
-        
+
         String urlname = encode(name, "UTF-8");
 
         URL url = new URL("http://imdb.wemakesites.net/api/search?q=" + urlname);
@@ -49,15 +47,16 @@ public class ImdbPage extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 
         Map<String, Object> map = mapper.readValue(url, Map.class);
-        
+
         Map<String, Object> map2 = (Map<String, Object>) map.get("data");
 
         //List list = (List) map.get("data");
-
         //request.setAttribute("list", list);
-        
-        out.println(map2.get("id"));
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            out.println(map2.get("id"));
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
