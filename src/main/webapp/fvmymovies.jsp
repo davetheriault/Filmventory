@@ -11,7 +11,7 @@
 
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
-            <% out.print(session.getAttribute("fname"));%>&apos;s Movies</h3>
+            <% out.print(session.getAttribute("fname"));%>&apos;s Movies ${genr}</h3>
 
         <div class="w3-container w3-row w3-padding w3-row">
             <div class="w3-container w3-twothird" id="results">
