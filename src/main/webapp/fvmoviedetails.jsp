@@ -52,7 +52,7 @@
 
                         <li> <strong>Genre:</strong><br> 
                             <c:forEach var="genre" items="${movie.genre}">
-                                &nbsp;<a href="">${genre}</a>&nbsp;
+                                &nbsp;<a href="MyMovies?sort=az&genre=${genre}">${genre}</a>&nbsp;
                             </c:forEach> 
                         </li>
 
