@@ -38,15 +38,22 @@ public class MyMovies extends HttpServlet {
 
         String fb_id = (String) request.getSession().getAttribute("id");
 
+        String genr = "";
         String sort = "";
 
-        String sortAttr = (String) request.getParameter("sort");
-
-        if (sortAttr != null) {
-            if (sortAttr.equals("az") || sortAttr.equals("za") || sortAttr.equals("y09") || sortAttr.equals("y90")) {
-                sort = sortAttr;
-            }
+        String sortParam = (String) request.getParameter("sort");
+        String genrParam = (String) request.getParameter("genre");
+        
+        if (genrParam != null) {
+            request.setAttribute("genr", genrParam);
         }
+
+        if (sortParam != null) {
+            if (sortParam.equals("az") || sortParam.equals("za") || sortParam.equals("y09") || sortParam.equals("y90")) {
+                sort = sortParam;
+            }
+        }        
+        
         List<Movie> movies = db.getInventory(fb_id, sort);
         
         List<String> gnrs = new ArrayList<>();

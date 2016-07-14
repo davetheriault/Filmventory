@@ -41,13 +41,13 @@
 
                         <li> <strong>Writer:</strong><br> 
                             <c:forEach var="wri" items="${movie.writer}">
-                                &nbsp;<a href="">${wri}</a>&nbsp;
+                                &nbsp;<a href="http://www.imdb.com/find?q=${wri}&s=nm&exact=true&ref_=fn_nm_ex">${wri}</a>&nbsp;
                             </c:forEach> 
                         </li>
 
                         <li> <strong>Actors:</strong><br> 
                             <c:forEach var="act" items="${movie.actors}">
-                                &nbsp;<a href="">${act}</a>&nbsp;
+                                &nbsp;<a href="http://www.imdb.com/find?q=${act}&s=nm&exact=true&ref_=fn_nm_ex">${act}</a>&nbsp;
                             </c:forEach> </li>
 
                         <li> <strong>Genre:</strong><br> 

@@ -35,11 +35,17 @@
 
                             <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block; width: 100%;">
                                 <option selected>All </option>
-                                
-                                    <c:forEach var="genre" items="${genres}">
-                                        <option value="${genre}">${genre}</option>
-                                    </c:forEach>
-                                
+
+                                <c:forEach var="genre" items="${genres}">
+                                    <c:when test="${genre == genr}" >
+                                        <option value="${genre}" selected>${genre}</option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${genre}" >${genre}</option>
+                                    </c:otherwise>
+
+                                </c:forEach>
+
                             </select>
 
                         </form>
@@ -80,6 +86,8 @@
                 sort();
             }
         });
+
+        sort();
     });
     function sort() {
         var genre = $("#genreList").val();
