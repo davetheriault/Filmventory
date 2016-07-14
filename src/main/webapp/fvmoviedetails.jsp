@@ -47,7 +47,7 @@
 
                         <li> <strong>Actors:</strong><br> 
                             <c:forEach var="act" items="${movie.actors}">
-                                &nbsp;<a href="http://www.imdb.com/find?q=${act}&s=nm&exact=true&ref_=fn_nm_ex">${act}</a>&nbsp;
+                                &nbsp;<a href="/ImdbPage?name=${act}">${act}</a>&nbsp;
                             </c:forEach> </li>
 
                         <li> <strong>Genre:</strong><br> 
