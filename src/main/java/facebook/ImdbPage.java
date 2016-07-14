@@ -40,7 +40,7 @@ public class ImdbPage extends HttpServlet {
 
         String name = request.getParameter("name");
 
-        String urlname = encode(name, "UTF-8");
+        String urlname = name.replaceAll(" ", "+");
 
         URL url = new URL("http://imdb.wemakesites.net/api/search?q=" + urlname);
 
