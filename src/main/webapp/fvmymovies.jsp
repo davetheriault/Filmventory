@@ -34,7 +34,14 @@
                             <label class="w3-label w3-text-red" for="genreList" style="display: inline-block">Genre:</label>
 
                             <select id="genreList" name="genre" class="w3-select w3-dark-grey" style="display: inline-block; width: 100%;">
-                                <option selected>All </option>
+                                <c:choose>
+                                    <c:when test="${empty genr}">
+                                        <option selected>All </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option>All</option>
+                                    </c:otherwise>
+                                </c:choose>
 
                                 <c:forEach var="genre" items="${genres}">
                                     <c:choose>
