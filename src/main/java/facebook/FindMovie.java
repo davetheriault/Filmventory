@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import static java.net.URLEncoder.encode;
+import java.text.Normalizer;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -113,7 +114,8 @@ public class FindMovie extends HttpServlet {
                 for (String key : innerMap.keySet()) {
 
                     if (key.equals("Title")) {
-                        results += "<li>" + key + ": <a href='FindMovie2?title=" + encode((String) innerMap.get(key), "UTF-8") + "'>" + innerMap.get(key) + "</a></li>";
+                        String titl =  Normalizer.normalize((String)innerMap.get(key), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+                        results += "<li>" + key + ": <a href='FindMovie2?title=" + encode(titl, "UTF-8") + "'>" + innerMap.get(key) + "</a></li>";
                     }
                     if (key.equals("Year")) {
                         results += "<li>" + key + ": " + innerMap.get(key) + "</li>";
