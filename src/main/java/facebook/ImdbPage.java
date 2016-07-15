@@ -41,6 +41,7 @@ public class ImdbPage extends HttpServlet {
         String name = request.getParameter("name");
 
         String urlname = name.replaceAll(" ", "+");
+        urlname = urlname.replaceAll("%20", "+");
 
         URL url = new URL("http://imdb.wemakesites.net/api/search?q=" + urlname);
 
