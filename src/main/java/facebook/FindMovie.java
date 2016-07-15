@@ -114,7 +114,8 @@ public class FindMovie extends HttpServlet {
                 for (String key : innerMap.keySet()) {
 
                     if (key.equals("Title")) {
-                        String titl =  Normalizer.normalize((String)innerMap.get(key), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+                        String titl = Normalizer.normalize((String) innerMap.get(key), Normalizer.Form.NFD);
+                        titl = titl.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
                         results += "<li>" + key + ": <a href='FindMovie2?title=" + encode(titl, "UTF-8") + "'>" + innerMap.get(key) + "</a></li>";
                     }
                     if (key.equals("Year")) {
@@ -142,7 +143,7 @@ public class FindMovie extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-request.setAttribute("title", request.getAttribute("title"));
+        request.setAttribute("title", request.getAttribute("title"));
 
         String title = request.getParameter("title");
 
@@ -176,9 +177,9 @@ request.setAttribute("title", request.getAttribute("title"));
             results += "</ul></div>";
 
         }
-        
+
         request.setAttribute("results", results);
-        
+
         request.getRequestDispatcher("fvfind1.jsp").forward(request, response);
     }
 
@@ -228,9 +229,9 @@ request.setAttribute("title", request.getAttribute("title"));
             results += "</ul></div>";
 
         }
-        
+
         request.setAttribute("results", results);
-        
+
         request.getRequestDispatcher("fvfind1.jsp").forward(request, response);
 
     }
