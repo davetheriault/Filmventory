@@ -18,7 +18,7 @@
             <div
                 class="w3-card w3-padding w3-center fb-like"
                 data-share="true"
-                data-width="50%"
+                data-width="100"
                 data-show-faces="true">
             </div>
         </div>

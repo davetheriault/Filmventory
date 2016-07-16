@@ -18,7 +18,7 @@
     <div
         class="fb-like"
         data-share="true"
-        data-width="30%"
+        data-width="100"
         data-show-faces="true">
     </div>
 </main>
