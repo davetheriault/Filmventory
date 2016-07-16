@@ -49,7 +49,7 @@
             if (c) {
                 var t2 = encodeURI(t);
                 alert(t2);
-                var link = "/RemoveList?name=" + t2 ;
+                var link = "/RemoveList?listname=" + t2 ;
                 alert(link);
                 window.location = link;
             }
