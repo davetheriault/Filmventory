@@ -64,7 +64,7 @@ public class SortGenre extends HttpServlet {
 
         response.setContentType("text/html");
         
-        FileWriter sortlog = new FileWriter("sort.txt", true);
+        FileWriter sortlog = new FileWriter("sort.txt", false);
 
         String genre = (String) request.getParameter("genre");
         String sort = (String) request.getParameter("sort");

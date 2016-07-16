@@ -89,7 +89,7 @@ public class AddMovie extends HttpServlet {
         String coun = request.getParameter("cou");
         String meta = request.getParameter("met");
         
-        FileWriter urll = new FileWriter("URL.txt", true);
+        FileWriter urll = new FileWriter("URL.txt", false);
         urll.write(request.getParameter("img") + "\n");
         urll.flush();
         

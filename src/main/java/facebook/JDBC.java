@@ -185,7 +185,7 @@ public class JDBC {
             dir = dir.replace("'", "\\'");
             dirs.add(dir);
         }
-        FileWriter logs = new FileWriter("logs.txt", true);
+        FileWriter logs = new FileWriter("logs.txt", false);
         logs.write("\nJDBC Line 181 \n List<string> dirs: \n");
         for (String dirlog : dirs) {
             logs.write(dirlog + "\n");
@@ -639,7 +639,7 @@ public class JDBC {
             sort = "movie.year DESC";
         }
         try {
-            FileWriter logs = new FileWriter("inventory.txt", true);
+            FileWriter logs = new FileWriter("inventory.txt", false);
 
             int user_id = this.getUserId(fb_id);
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -1078,7 +1078,7 @@ public class JDBC {
         ResultSet rs = null;
         int user_id = getUserId(fb_id);
 
-        FileWriter logs = new FileWriter("NotList.txt", true);
+        FileWriter logs = new FileWriter("NotList.txt", false);
         logs.write("Lists for user: \n");
         logs.flush();
 
