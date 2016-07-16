@@ -381,3 +381,6 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             font-size: 2.35vw;
         }
         
+        .fb-like {
+            width: 100% !important;
+        }
