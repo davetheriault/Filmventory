@@ -328,45 +328,48 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
         .w3-roboto {
             font-family: 'Roboto', sans-serif;
         }
-        
+
         .w3-card {
             background-color: white;
         }
-        
+
         .vertcenter {
             display: table;
             vertical-align: middle;
         }
-        
+
         .hidden {
             visibility: hidden;
             display: none;
             height: 0;
             transition: all 2s ease;
         }
-        
+
         #newListForm input {
             padding: 6px 2px 6px 17px;
         }
-        
+
         main, header {
             margin-left: 250px;
         }
-        
+
         @media screen and (max-width:991px) {
             header.w3-main{margin-left:63px !important};
         }
-        
+
         .trash {
             color: gray;
         }
-        
+
         .trash:hover {
             color: black;
         }
-        
+
         @media screen and (max-width:600px) {
             .w3-sidenav {
-                width: 75%;
+                width: 75% !important;
+            }
+            #tag {
+                display: none;
             }
         }

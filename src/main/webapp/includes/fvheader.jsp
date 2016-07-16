@@ -35,7 +35,7 @@
             <nav class="w3-roboto w3-xlarge">
                 <ul class="w3-navbar">
                     <li class="w3-white"><a href="filmventory.jsp" style="padding: 8px 13px"><img src="images/filmventory300.png" width="274" alt="filmventory home" /></a></li>
-                    <li class="vertcenter" style="padding: 8px 16px; line-height: 42px;">The Movie Inventory Web App</li>
+                    <li class="vertcenter" id="tag" style="padding: 8px 16px; line-height: 42px;">The Movie Inventory Web App</li>
 
                 </ul>
             </nav>
