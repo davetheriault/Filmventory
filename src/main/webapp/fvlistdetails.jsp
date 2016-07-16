@@ -19,7 +19,8 @@
                 <c:forEach var="movie" items="${listmovies}">
                     <div class="w3-card w3-margin">
                         <ul class="w3-ul">
-                            <li><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) </li>
+                            <li><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) 
+                                <a href="#" class="w3-right"><i class="fa fa-trash"></i></a></li>
                         </ul>
                     </div>
                 </c:forEach>
@@ -27,7 +28,7 @@
             <div class="w3-third">
                 <div class="w3-container w3-padding">
                     <ul class="w3-ul w3-dark-grey w3-margin">
-                        <li><a href="#" id="deleteList" data-title="${listname}" >Delete <em>${listname}</em> List</a></li>
+                        <li><a href="#" id="deleteList" data-title="${listname}" ><i class="fa fa-trash"></i>&nbsp; Delete <em>${listname}</em>&nbsp; List</a></li>
                     </ul>
                 </div>
             </div>
