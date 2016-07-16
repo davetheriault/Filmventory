@@ -21,9 +21,9 @@
                         <ul class="w3-ul w3-navbar w3-light-grey">
                             <li class="w3-padding-0 w3-center" style="width: 100%;" ><strong>
                                     <a href="/ListDetails?listname=${list.name}&user=${list.user_id}" class="w3-left w3-col s11 m11 l11" >${list.name}</a></strong> 
-                                <span class="w3-right w3-col s1 m1 l1"><a href="#"><i class="fa fa-trash"></i></a></span>
+                                <span class="w3-right w3-col s1 m1 l1"><a href="#" class="trash" data-name="${list.name}"><i class="fa fa-trash"></i></a></span>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </c:forEach>
@@ -58,7 +58,17 @@
             event.preventDefault();
             $(".nlist").toggleClass("hidden");
         });
+
+        $(".trash").click(function (event) {
+            event.preventDefault();
+            var name = $(this).attr("data-name");
+            if (confirm("Delete " + name + " List? Are you sure?")) {
+                name = encodeURI(name);
+                var url = "/RemoveList?listname=" + name;
+                window.location = url;
+            } 
+        });
     });
-    
+
 </script>
 </html>
