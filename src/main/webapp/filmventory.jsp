@@ -5,7 +5,7 @@
 <%@include file="includes/fvheader.jsp" %>
 <%@include file="includes/fbsdk.html" %>
 <main class="w3-container w3-roboto w3-center w3-padding" style="margin-left: 0;">
-    <div style="border: grey thin solid; display: inline-block; width: 400px;">
+    <div class="w3-half" style="border: grey thin solid; display: inline-block;">
         <h3 class="w3-red w3-padding w3-margin-0 w3-roboto">Log In To Filmventory</h3>
         <div class="w3-container w3-center w3-padding-0">
             <form action="SignIn" id="fblogin" class="w3-center">
@@ -18,7 +18,7 @@
     <div
         class="fb-like"
         data-share="true"
-        data-width="300"
+        data-width="30%"
         data-show-faces="true">
     </div>
 </main>
