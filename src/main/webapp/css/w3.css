@@ -372,8 +372,12 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
             #tag {
                 display: none;
             }
+            #logCTNR {
+                width: 100% !important;
+            }
         }
         
         #tag {
             font-size: 2.35vw;
         }
+        
