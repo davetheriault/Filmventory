@@ -43,7 +43,7 @@
     $(document).ready(function () {
         $("#deleteList").click(function (event) {
             event.preventDefault();
-            var t = $("#removeClick").attr("data-name");
+            var t = $("#deleteList").attr("data-name");
             var c = confirm("Delete " + t + " List? Are you sure?");
             if (c) {
                 var t2 = encodeURI(t);
@@ -55,7 +55,7 @@
             event.preventDefault();
             var t = $(this).attr("data-title");
             var id = $(this).attr("data-id");
-            var n = $("#removeClick").attr("data-name");
+            var n = $("#deleteList").attr("data-name");
             var c = confirm("Remove '" + t + "' from " + n + " list? Are you sure?");
             if (c){
                 n = encodeURI(n);
