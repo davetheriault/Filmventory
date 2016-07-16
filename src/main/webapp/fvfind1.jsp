@@ -9,7 +9,7 @@
 
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
-            Results for &quot;${title}&quot;</h3>
+            Results for &quot;${query}&quot;</h3>
         <div class="w3-container">
 
             ${results}

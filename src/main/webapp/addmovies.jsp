@@ -13,7 +13,7 @@
             Add Movies</h3>
         <div class="w3-container">
             <form class="w3-form" id="findmov" action="FindMovie" method="get">
-                <input class="w3-input" type="text" name="title" placeholder="Search Movies by Title..." required />
+                <input class="w3-input" type="text" name="search" placeholder="Search Movies by Title..." required />
                 <input type="submit" value="Search" form="findmov" name="movSubmit" />
             </form>
             
