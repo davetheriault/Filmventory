@@ -20,7 +20,7 @@
                     <div class="w3-card w3-margin">
                         <ul class="w3-ul">
                             <li class="w3-padding"><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) 
-                                <a href="#" class="w3-right"><i class="fa fa-trash"></i></a></li>
+                                <a href="#" class="w3-right trash" data-title="${movie.title}" data-id="${movie.id}"><i class="fa fa-trash"></i></a></li>
                         </ul>
                     </div>
                 </c:forEach>
@@ -28,7 +28,7 @@
             <div class="w3-third">
                 <div class="w3-container w3-padding">
                     <ul class="w3-ul w3-dark-grey w3-margin">
-                        <li><a href="#" id="deleteList" data-title="${listname}" ><i class="fa fa-trash"></i>&nbsp; Delete <em>${listname}</em>&nbsp; List</a></li>
+                        <li><a href="#" id="deleteList" data-name="${listname}" ><i class="fa fa-trash"></i>&nbsp; Delete <em>${listname}</em>&nbsp; List</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,11 +43,23 @@
     $(document).ready(function () {
         $("#deleteList").click(function (event) {
             event.preventDefault();
-            var t = $("#removeClick").attr("data-title");
+            var t = $("#removeClick").attr("data-name");
             var c = confirm("Delete " + t + " List? Are you sure?");
             if (c) {
                 var t2 = encodeURI(t);
                 var link = "/RemoveList?name=" + t2 ;
+                window.location = link;
+            }
+        });
+        $(".trash").click(function(event){
+            event.preventDefault();
+            var t = $(this).attr("data-title");
+            var id = $(this).attr("data-id");
+            var n = $("#removeClick").attr("data-name");
+            var c = confirm("Remove '" + t + "' from " + n + " list? Are you sure?");
+            if (c){
+                n = encodeURI(n);
+                var link = "/RemoveListMovie?mid=" + id + "&listname=" + n;
                 window.location = link;
             }
         });
