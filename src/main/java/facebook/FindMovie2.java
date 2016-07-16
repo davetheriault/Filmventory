@@ -236,7 +236,7 @@ public class FindMovie2 extends HttpServlet {
 
             if (map2 == null) {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
-
+                return;
             }
 
             for (String keyP : map2.keySet()) {
