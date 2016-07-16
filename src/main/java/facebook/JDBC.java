@@ -1225,7 +1225,7 @@ public class JDBC {
         int user_id = getUserId(fb_id);
         Connection conn = null;
         PreparedStatement stmt = null;
-        String sql = null;
+        String sql;
 
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);

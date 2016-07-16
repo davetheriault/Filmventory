@@ -44,10 +44,13 @@
         $("#deleteList").click(function (event) {
             event.preventDefault();
             var t = $("#deleteList").attr("data-name");
+            alert(t);
             var c = confirm("Delete " + t + " List? Are you sure?");
             if (c) {
                 var t2 = encodeURI(t);
+                alert(t2);
                 var link = "/RemoveList?name=" + t2 ;
+                alert(link);
                 window.location = link;
             }
         });
