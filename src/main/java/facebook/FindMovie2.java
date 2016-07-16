@@ -232,6 +232,7 @@ public class FindMovie2 extends HttpServlet {
             } catch (IOException e) {
                 postLog.write(e.getMessage());
                 postLog.flush();
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
             for (String keyP : map2.keySet()) {
                 postLog.write(keyP + ": " + map2.get(keyP) + "\n");
