@@ -11,7 +11,7 @@
 
     <div class="w3-card w3-margin">
         <h3 class="w3-red w3-padding-left w3-margin-0 w3-roboto">
-            <em>${listname}</em> Movies</h3>
+            <em>${listname}</em>&nbsp; Movies</h3>
 
         <div class="w3-container w3-row w3-padding-0 w3-row">
             <div class="w3-container w3-padding w3-twothird" id="results">
@@ -19,7 +19,7 @@
                 <c:forEach var="movie" items="${listmovies}">
                     <div class="w3-card w3-margin">
                         <ul class="w3-ul">
-                            <li><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) 
+                            <li class="w3-padding"><strong><a href="/MovieDetails?title=${movie.title}&year=${movie.year}" >${movie.title}</a></strong> (${movie.year}) 
                                 <a href="#" class="w3-right"><i class="fa fa-trash"></i></a></li>
                         </ul>
                     </div>
