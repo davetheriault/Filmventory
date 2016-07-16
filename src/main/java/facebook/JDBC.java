@@ -1254,4 +1254,40 @@ public class JDBC {
         }
     }
 
+    void removeListMovie(String fb_id, String listname, String movie_id) {
+
+        int user_id = getUserId(fb_id);
+        int list_id = getId2("list", "name", "user_id", listname, Integer.toString(user_id));
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        String sql;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            sql = "DELETE FROM movie2list WHERE list_id = " + list_id + " AND movie_id = " + movie_id + " ;";
+            stmt = conn.prepareStatement(sql);
+            stmt.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(JDBC.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    
+    }
+
 }
