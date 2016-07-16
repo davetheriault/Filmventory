@@ -224,8 +224,15 @@ public class FindMovie2 extends HttpServlet {
             postLog.write("\nImdb ID: " + map.get("imdbID"));
             postLog.flush();
 
-            ObjectMapper postmap = new ObjectMapper();
-            Map<String, Object> map2 = postmap.readValue(url2, Map.class);
+            ObjectMapper postmap = null;
+            Map<String, Object> map2 = null;
+            try {
+                postmap = new ObjectMapper();
+                map2 = postmap.readValue(url2, Map.class);
+            } catch (IOException e) {
+                postLog.write(e.getMessage());
+                postLog.flush();
+            }
             for (String keyP : map2.keySet()) {
                 postLog.write(keyP + ": " + map2.get(keyP) + "\n");
                 postLog.flush();
@@ -289,7 +296,7 @@ public class FindMovie2 extends HttpServlet {
         results += "</ul>";
         request.setAttribute("results", results);
         request.setAttribute("mtitle", title);
-        
+
         request.getRequestDispatcher("fvfind2.jsp").forward(request, response);
 
     }
